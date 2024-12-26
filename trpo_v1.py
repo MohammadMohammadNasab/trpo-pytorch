@@ -138,7 +138,7 @@ class TRPO:
                 vf_iters=1, vf_l2_reg_coef=1e-3, discount=0.995, lam=0.98, cg_damping=1e-3,
                 cg_max_iters=10, line_search_coef=0.9, line_search_max_iter=10,
                 line_search_accept_ratio=0.1, model_name=None, continue_from_file=False,
-                save_every=20):
+                save_every=20, low_t=-0.7, high_t=0.4, damp_factor= 0.9):
         '''
         Parameters
         ----------
@@ -210,10 +210,13 @@ class TRPO:
         self.value_fun = value_fun
         self.simulator = simulator
         self.max_kl_div = max_kl_div
+        self.damp_factor = damp_factor
         self.max_value_step = max_value_step
         self.vf_iters = vf_iters
         self.vf_l2_reg_coef = vf_l2_reg_coef
         self.discount = discount
+        self.low_t= low_t
+        self.high_t = high_t
         self.lam = lam
         self.cg_damping = cg_damping
         self.cg_max_iters = cg_max_iters
@@ -372,7 +375,7 @@ class TRPO:
         action_dists = self.policy(states)
         log_action_probs = action_dists.log_prob(actions)
 
-        loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
+        loss,  _ = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
         loss_grad = flat_grad(loss, self.policy.parameters(), retain_graph=True)
 
         mean_kl = mean_kl_first_fixed(action_dists, action_dists)
@@ -382,7 +385,7 @@ class TRPO:
         search_dir = cg_solver(Fvp_fun, loss_grad, self.cg_max_iters)
 
         expected_improvement = torch.matmul(loss_grad, search_dir)
-
+        damped_nums = []
         def constraints_satisfied(step, beta):
             apply_update(self.policy, step)
 
@@ -390,8 +393,8 @@ class TRPO:
                 new_action_dists = self.policy(states)
                 new_log_action_probs = new_action_dists.log_prob(actions)
 
-                new_loss = self.surrogate_loss(new_log_action_probs, log_action_probs, advantages)
-
+                new_loss, damped_samples_count = self.surrogate_loss(new_log_action_probs, log_action_probs, advantages)
+                damped_nums.append(damped_samples_count)
                 mean_kl = mean_kl_first_fixed(action_dists, new_action_dists)
                 self.writer.add_scalar("Policy/MeanKL", mean_kl.item(), self.episode_num)
 
@@ -410,10 +413,33 @@ class TRPO:
 
         opt_step = step_len * search_dir
         apply_update(self.policy, opt_step)
+        self.writer.add_scalar("Max samples damped", max(damped_nums), self.episode_num)
 
     def surrogate_loss(self, log_action_probs, imp_sample_probs, advantages):
-        return torch.mean(torch.exp(log_action_probs - imp_sample_probs) * advantages)
+        """
+        log_action_probs: Log action probabilities from the policy
+        imp_sample_probs: Importance sampling probabilities for the samples
+        advantages: Advantage values for the samples
+        """
+        # Compute the difference (log_action_probs - imp_sample_probs)
+        diff = log_action_probs - imp_sample_probs
+        
+        # Initialize damping factor (e.g., 1 means no damping, < 1 means damping)
+        damp_mat = torch.ones_like(diff)  # Default is no damping (factor = 1)
 
+        # Apply damping if the condition is not satisfied
+        mask = (diff < self.low_t) | (diff > self.high_t)
+        non_zero_count = torch.count_nonzero(mask).item() / mask.numel()
+        damp_mat[(diff < self.low_t) | (diff > self.high_t)] = torch.tensor(self.damp_factor, dtype=torch.float32, device=self.device)
+
+        # Compute the surrogate loss as before
+        surrogate_loss = torch.exp(diff) * advantages
+
+        # Apply the damping factor to the surrogate loss
+        weighted_surrogate_loss = surrogate_loss * damp_mat
+
+        # Return the mean of the weighted surrogate loss
+        return torch.mean(weighted_surrogate_loss), non_zero_count
     def get_max_step_len(self, search_dir, Hvp_fun, max_step, retain_graph=False):
         num = 2 * max_step
         denom = torch.matmul(search_dir, Hvp_fun(search_dir, retain_graph))

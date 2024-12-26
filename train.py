@@ -1,18 +1,41 @@
 from argparse import ArgumentParser
+from datetime import datetime
 import os
+import random
 import uuid
 from gym import make
 from gym.spaces import Box, Discrete
 # import roboschool
 from yaml import load
 import yaml
-
+import os
 from models import build_diag_gauss_policy, build_mlp, build_multinomial_policy
 from simulators import *
 from transforms import *
 from torch_utils import get_device
-from trpo import TRPO
+from trpo import TRPO as TRPOBase
+from trpo_v1 import TRPO as TRPOV1
 
+
+# Set the seed for all relevant components
+seed = 42
+
+# Set the seed for Python's random module
+random.seed(seed)
+
+# Set the seed for NumPy
+np.random.seed(seed)
+
+# Set the seed for PyTorch
+torch.manual_seed(seed)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)  # If using multiple GPUs
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+
+# Optional: Set the seed for other libraries
+os.environ['PYTHONHASHSEED'] = str(seed)
 config_filename = 'config.yaml'
 
 parser = ArgumentParser(prog='train.py',
@@ -24,14 +47,21 @@ parser.add_argument('--continue', dest='continue_from_file', action='store_true'
                     'saved session. Session will be overwritten if this flag is ' \
                     'not set and a saved file associated with model-name already ' \
                     'exists.')
+parser.add_argument('--ver', type=str, required=True)
 parser.add_argument('--model-name', type=str, dest='model_name', required=True,
                     help='The entry in config.yaml from which settings' \
                     'should be loaded.')
+
+parser.add_argument('--high_t', type=float)
+parser.add_argument('--damp_f', type=float)
+parser.add_argument('--low_t', type=float)
 parser.add_argument('--simulator', dest='simulator_type', type=str, default='single-path',
                     choices=['single-path', 'vine'], help='The type of simulator' \
                     ' to use when collecting training experiences.')
 
 args = parser.parse_args()
+version = args.ver
+damp_factor = args.damp_f
 continue_from_file = args.continue_from_file
 model_name = args.model_name
 simulator_type = args.simulator_type
@@ -40,6 +70,9 @@ all_configs = load(open(config_filename, 'r'), yaml.FullLoader)
 config = all_configs[model_name]
 
 device = get_device()
+low_t = torch.tensor(args.low_t).to(device)
+high_t = torch.tensor(args.high_t).to(device)
+
 
 # Find the input size, hidden dim sizes, and output size
 env_name = config['env_name']
@@ -64,7 +97,6 @@ else:
 value_fun = build_mlp(*vf_args)
 policy.to(device)
 value_fun.to(device)
-
 # Initialize the state transformation
 z_filter = ZFilter()
 state_bound = Bound(-5, 5)
@@ -89,11 +121,25 @@ try:
 except:
     trpo_args = {}
 
-exp_dir = os.path.join('experiments', str(uuid.uuid4()))
-os.makedirs(exp_dir)
-trpo = TRPO(policy, value_fun, simulator, model_name=model_name,
-            continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args)
 
+# Get the current timestamp (current time with timezone)
+timestamp = datetime.now()
+
+# If you need the timestamp in a specific format:
+timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+print(f'Version is : {version}')
+if version == 'base':
+    exp_dir = os.path.join('experiments', f'{timestamp}_seed_{seed}_ver_{version}')
+    os.makedirs(exp_dir)
+    trpo = TRPOBase(policy, value_fun, simulator, model_name=model_name,
+                    continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50)
+elif version == 'filtering':
+    exp_dir = os.path.join('experiments', f'{timestamp}_seed_{seed}_ver_{version}_high_t_{high_t:.2f}_low_t_{low_t:.2f}_damp_f_{damp_factor:.2f}')
+    os.makedirs(exp_dir)
+    trpo = TRPOV1(policy, value_fun, simulator, model_name=model_name,
+                  continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50 ,low_t=low_t, high_t=high_t, damp_factor = damp_factor) 
+else:
+    raise NotImplementedError()
 
 
 print(f'Training policy {model_name} on {env_name} environment...\n')

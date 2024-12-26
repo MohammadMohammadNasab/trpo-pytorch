@@ -11,3 +11,113 @@ Traceback (most recent call last):
   File "/home/bamdad/rl/trpo-pytorch/train.py", line 7, in <module>
     from train import TRPO, get_device
 ImportError: cannot import name 'TRPO' from partially initialized module 'train' (most likely due to a circular import) (/home/bamdad/rl/trpo-pytorch/train.py)
+usage: train.py [-h] [--continue] --ver VER --model-name MODEL_NAME
+                [--high_t HIGH_T] [--damp_f DAMP_F] [--low_t LOW_T]
+                [--simulator {single-path,vine}]
+train.py: error: unrecognized arguments: damp_f 0.9
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : with_filtering
+Training policy hopper on Hopper-v3 environment...
+
+[EPISODE]: 1	[AVG. REWARD]: 16.4301	 [ELAPSED TIME]: 0:00:02
+[EPISODE]: 2	[AVG. REWARD]: 18.1350	 [ELAPSED TIME]: 0:00:04
+[EPISODE]: 3	[AVG. REWARD]: 16.2561	 [ELAPSED TIME]: 0:00:06
+[EPISODE]: 4	[AVG. REWARD]: 27.9830	 [ELAPSED TIME]: 0:00:08
+[EPISODE]: 5	[AVG. REWARD]: 49.0194	 [ELAPSED TIME]: 0:00:11
+[EPISODE]: 6	[AVG. REWARD]: 72.1612	 [ELAPSED TIME]: 0:00:14
+[EPISODE]: 7	[AVG. REWARD]: 106.7246	 [ELAPSED TIME]: 0:00:19
+[EPISODE]: 8	[AVG. REWARD]: 131.4727	 [ELAPSED TIME]: 0:00:24
+[EPISODE]: 9	[AVG. REWARD]: 158.4980	 [ELAPSED TIME]: 0:00:30
+[EPISODE]: 10	[AVG. REWARD]: 175.6643	 [ELAPSED TIME]: 0:00:36
+[EPISODE]: 11	[AVG. REWARD]: 202.6480	 [ELAPSED TIME]: 0:00:43
+[EPISODE]: 12	[AVG. REWARD]: 215.0383	 [ELAPSED TIME]: 0:00:50
+[EPISODE]: 13	[AVG. REWARD]: 206.6709	 [ELAPSED TIME]: 0:00:57
+[EPISODE]: 14	[AVG. REWARD]: 206.0222	 [ELAPSED TIME]: 0:01:04
+[EPISODE]: 15	[AVG. REWARD]: 206.0967	 [ELAPSED TIME]: 0:01:11
+[EPISODE]: 16	[AVG. REWARD]: 203.2891	 [ELAPSED TIME]: 0:01:18
+[EPISODE]: 17	[AVG. REWARD]: 207.6632	 [ELAPSED TIME]: 0:01:25
+[EPISODE]: 18	[AVG. REWARD]: 213.2693	 [ELAPSED TIME]: 0:01:33
+[EPISODE]: 19	[AVG. REWARD]: 220.4957	 [ELAPSED TIME]: 0:01:40
+[EPISODE]: 20	[AVG. REWARD]: 228.2121	 [ELAPSED TIME]: 0:01:48
+[EPISODE]: 21	[AVG. REWARD]: 248.7498	 [ELAPSED TIME]: 0:01:56
+[EPISODE]: 22	[AVG. REWARD]: 264.9095	 [ELAPSED TIME]: 0:02:05
+[EPISODE]: 23	[AVG. REWARD]: 302.1639	 [ELAPSED TIME]: 0:02:14
+[EPISODE]: 24	[AVG. REWARD]: 334.6330	 [ELAPSED TIME]: 0:02:24
+[EPISODE]: 25	[AVG. REWARD]: 371.9718	 [ELAPSED TIME]: 0:02:34
+[EPISODE]: 26	[AVG. REWARD]: 408.6689	 [ELAPSED TIME]: 0:02:45
+[EPISODE]: 27	[AVG. REWARD]: 460.9291	 [ELAPSED TIME]: 0:02:57
+[EPISODE]: 28	[AVG. REWARD]: 438.9620	 [ELAPSED TIME]: 0:03:08
+[EPISODE]: 29	[AVG. REWARD]: 452.2196	 [ELAPSED TIME]: 0:03:20
+[EPISODE]: 30	[AVG. REWARD]: 421.6089	 [ELAPSED TIME]: 0:03:30
+[EPISODE]: 31	[AVG. REWARD]: 428.6725	 [ELAPSED TIME]: 0:03:41
+[EPISODE]: 32	[AVG. REWARD]: 454.9192	 [ELAPSED TIME]: 0:03:53
+[EPISODE]: 33	[AVG. REWARD]: 473.3073	 [ELAPSED TIME]: 0:04:04
+[EPISODE]: 34	[AVG. REWARD]: 553.4717	 [ELAPSED TIME]: 0:04:18
+[EPISODE]: 35	[AVG. REWARD]: 550.2734	 [ELAPSED TIME]: 0:04:31
+[EPISODE]: 36	[AVG. REWARD]: 646.6595	 [ELAPSED TIME]: 0:04:47
+[EPISODE]: 37	[AVG. REWARD]: 811.7567	 [ELAPSED TIME]: 0:05:05
+[EPISODE]: 38	[AVG. REWARD]: 873.0941	 [ELAPSED TIME]: 0:05:25
+[EPISODE]: 39	[AVG. REWARD]: 969.7445	 [ELAPSED TIME]: 0:05:47
+[EPISODE]: 40	[AVG. REWARD]: 1180.3274	 [ELAPSED TIME]: 0:06:12
+[EPISODE]: 41	[AVG. REWARD]: 1287.2490	 [ELAPSED TIME]: 0:06:41
+[EPISODE]: 42	[AVG. REWARD]: 1497.3542	 [ELAPSED TIME]: 0:07:14
+[EPISODE]: 43	[AVG. REWARD]: 1621.0419	 [ELAPSED TIME]: 0:07:53
+[EPISODE]: 44	[AVG. REWARD]: 1783.4510	 [ELAPSED TIME]: 0:08:35
+[EPISODE]: 45	[AVG. REWARD]: 2118.9553	 [ELAPSED TIME]: 0:09:26
+[EPISODE]: 46	[AVG. REWARD]: 2295.1658	 [ELAPSED TIME]: 0:10:25
+[EPISODE]: 47	[AVG. REWARD]: 2289.7524	 [ELAPSED TIME]: 0:11:26
+[EPISODE]: 48	[AVG. REWARD]: 2282.7212	 [ELAPSED TIME]: 0:12:27
+[EPISODE]: 49	[AVG. REWARD]: 2161.7202	 [ELAPSED TIME]: 0:13:25
+[EPISODE]: 50	[AVG. REWARD]: 2198.4673	 [ELAPSED TIME]: 0:14:25
+[EPISODE]: 51	[AVG. REWARD]: 2355.7922	 [ELAPSED TIME]: 0:15:28
+[EPISODE]: 52	[AVG. REWARD]: 2326.2710	 [ELAPSED TIME]: 0:16:27
+[EPISODE]: 53	[AVG. REWARD]: 2405.3293	 [ELAPSED TIME]: 0:17:26
+[EPISODE]: 54	[AVG. REWARD]: 2315.8540	 [ELAPSED TIME]: 0:18:19
+[EPISODE]: 55	[AVG. REWARD]: 2420.5586	 [ELAPSED TIME]: 0:19:17
+[EPISODE]: 56	[AVG. REWARD]: 2407.6389	 [ELAPSED TIME]: 0:20:13
+[EPISODE]: 57	[AVG. REWARD]: 2441.7734	 [ELAPSED TIME]: 0:21:10
+[EPISODE]: 58	[AVG. REWARD]: 2487.7173	 [ELAPSED TIME]: 0:22:08
+[EPISODE]: 59	[AVG. REWARD]: 2652.3757	 [ELAPSED TIME]: 0:23:08
+[EPISODE]: 60	[AVG. REWARD]: 2595.5237	 [ELAPSED TIME]: 0:24:13
+[EPISODE]: 61	[AVG. REWARD]: 2647.9451	 [ELAPSED TIME]: 0:25:18
+[EPISODE]: 62	[AVG. REWARD]: 2651.6912	 [ELAPSED TIME]: 0:26:22
+[EPISODE]: 63	[AVG. REWARD]: 2647.5212	 [ELAPSED TIME]: 0:27:27
+[EPISODE]: 64	[AVG. REWARD]: 2629.8127	 [ELAPSED TIME]: 0:28:31
+[EPISODE]: 65	[AVG. REWARD]: 2480.4495	 [ELAPSED TIME]: 0:29:33
+[EPISODE]: 66	[AVG. REWARD]: 2689.0020	 [ELAPSED TIME]: 0:30:37
+[EPISODE]: 67	[AVG. REWARD]: 2832.3281	 [ELAPSED TIME]: 0:31:44
+[EPISODE]: 68	[AVG. REWARD]: 2853.0762	 [ELAPSED TIME]: 0:32:50
+[EPISODE]: 69	[AVG. REWARD]: 2994.2668	 [ELAPSED TIME]: 0:34:02
+[EPISODE]: 70	[AVG. REWARD]: 2900.1450	 [ELAPSED TIME]: 0:35:11
+[EPISODE]: 71	[AVG. REWARD]: 3052.7581	 [ELAPSED TIME]: 0:36:21
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 147, in <module>
+    
+  File "/home/bamdad/rl/trpo-pytorch/trpo_v1.py", line 269, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_v1.py", line 385, in update_policy
+    search_dir = cg_solver(Fvp_fun, loss_grad, self.cg_max_iters)
+  File "/home/bamdad/rl/trpo-pytorch/conjugate_gradient.py", line 33, in cg_solver
+    Avp = Avp_fun(p, retain_graph=True)
+  File "/home/bamdad/rl/trpo-pytorch/hvp.py", line 28, in Hvp_fun
+    Hvp = flat_grad(gvp, inputs, retain_graph=retain_graph)
+  File "/home/bamdad/rl/trpo-pytorch/torch_utils.py", line 85, in flat_grad
+    grads = grad(functional_output, inputs, retain_graph=retain_graph, create_graph=create_graph)
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 303, in grad
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 48.00 MiB (GPU 0; 23.56 GiB total capacity; 3.72 GiB already allocated; 28.00 MiB free; 3.90 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 73, in <module>
+    low_t = torch.tensor(args.low_t).to(device)
+RuntimeError: CUDA error: out of memory
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
