@@ -2,20 +2,19 @@ from datetime import datetime as dt
 from datetime import timedelta
 import numpy as np
 import os
+import yaml
 import torch
 from torch.nn import MSELoss
 from torch.optim import LBFGS
 from yaml import load
-
 from conjugate_gradient import cg_solver
 from distribution_utils import mean_kl_first_fixed
 from hvp import get_Hvp_fun
+from torch.utils.tensorboard import SummaryWriter
 from line_search import line_search
 from torch_utils import apply_update, flat_grad, get_device, get_flat_params
 
-config = load(open('config.yaml', 'r'))
-save_dir = config['session_save_dir']
-
+config = load(open('config.yaml', 'r'), yaml.FullLoader)
 # TO DO: Model name issue
 
 class TRPO:
@@ -136,11 +135,11 @@ class TRPO:
         print an update message that displays statistics about the most recent
         training iteration
     '''
-    def __init__(self, policy, value_fun, simulator, max_kl_div=0.01, max_value_step=0.01,
+    def __init__(self, policy, value_fun, simulator, experiment_dir, max_kl_div=0.01, max_value_step=0.01,
                 vf_iters=1, vf_l2_reg_coef=1e-3, discount=0.995, lam=0.98, cg_damping=1e-3,
                 cg_max_iters=10, line_search_coef=0.9, line_search_max_iter=10,
                 line_search_accept_ratio=0.1, model_name=None, continue_from_file=False,
-                save_every=1):
+                save_every=20):
         '''
         Parameters
         ----------
@@ -231,7 +230,13 @@ class TRPO:
         self.elapsed_time = timedelta(0)
         self.device = get_device()
         self.mean_rewards = []
-
+        log_dir = os.path.join(experiment_dir, 'logs')
+        os.makedirs(log_dir)
+        self.save_dir = os.path.join(experiment_dir, 'saved_sessions')
+        os.makedirs(self.save_dir)
+        # TensorBoard SummaryWriter
+        self.writer = SummaryWriter(log_dir=log_dir)
+        self.log_dir = log_dir
         if not model_name and continue_from_file:
             raise Exception('Argument continue_from_file to __init__ method of ' \
                             'TRPO case was set to True but model_name was not ' \
@@ -274,6 +279,9 @@ class TRPO:
             self.mean_rewards.append(mean_reward_np)
             self.elapsed_time += dt.now() - start_time
             self.print_update()
+            # Log metrics to TensorBoard
+            self.writer.add_scalar("Reward/MeanReward", mean_reward, self.episode_num)
+            self.writer.add_scalar("Time/ElapsedTime", self.elapsed_time.total_seconds(), self.episode_num)
 
             if self.save_every and not self.episode_num % self.save_every:
                 self.save_session()
@@ -352,6 +360,8 @@ class TRPO:
 
             self.value_optimizer.step(mse)
 
+            # Log value function loss
+            self.writer.add_scalar("ValueFunction/Loss", mse().item(), self.episode_num)
 
     def update_policy(self, states, actions, advantages):
         self.policy.train()
@@ -367,6 +377,7 @@ class TRPO:
         loss_grad = flat_grad(loss, self.policy.parameters(), retain_graph=True)
 
         mean_kl = mean_kl_first_fixed(action_dists, action_dists)
+        # Log KL divergence
 
         Fvp_fun = get_Hvp_fun(mean_kl, self.policy.parameters())
         search_dir = cg_solver(Fvp_fun, loss_grad, self.cg_max_iters)
@@ -383,6 +394,7 @@ class TRPO:
                 new_loss = self.surrogate_loss(new_log_action_probs, log_action_probs, advantages)
 
                 mean_kl = mean_kl_first_fixed(action_dists, new_action_dists)
+                self.writer.add_scalar("Policy/MeanKL", mean_kl.item(), self.episode_num)
 
             actual_improvement = new_loss - loss
             improvement_ratio = actual_improvement / (expected_improvement * beta)
@@ -411,10 +423,10 @@ class TRPO:
         return max_step_len
 
     def save_session(self):
-        if not os.path.exists(save_dir):
-            os.mkdir(save_dir)
+        if not os.path.exists(self.save_dir):
+            os.mkdir(self.save_dir)
 
-        save_path = os.path.join(save_dir, self.model_name + '.pt')
+        save_path = os.path.join(self.save_dir, self.model_name + '.pt')
 
         ckpt = {'policy_state_dict': self.policy.state_dict(),
                 'value_state_dict': self.value_fun.state_dict(),
@@ -427,8 +439,11 @@ class TRPO:
 
         torch.save(ckpt, save_path)
 
+        # Log checkpoint
+        self.writer.add_scalar("Checkpoint/Episode", self.episode_num, self.episode_num)
+
     def load_session(self):
-        load_path = os.path.join(save_dir, self.model_name + '.pt')
+        load_path = os.path.join(self.save_dir, self.model_name + '.pt')
         ckpt = torch.load(load_path)
 
         self.policy.load_state_dict(ckpt['policy_state_dict'])

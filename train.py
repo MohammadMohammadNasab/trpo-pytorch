@@ -1,8 +1,11 @@
 from argparse import ArgumentParser
+import os
+import uuid
 from gym import make
 from gym.spaces import Box, Discrete
 # import roboschool
 from yaml import load
+import yaml
 
 from models import build_diag_gauss_policy, build_mlp, build_multinomial_policy
 from simulators import *
@@ -33,7 +36,7 @@ continue_from_file = args.continue_from_file
 model_name = args.model_name
 simulator_type = args.simulator_type
 
-all_configs = load(open(config_filename, 'r'))
+all_configs = load(open(config_filename, 'r'), yaml.FullLoader)
 config = all_configs[model_name]
 
 device = get_device()
@@ -81,17 +84,22 @@ if simulator_type == 'single-path':
                                     **env_args)
 elif simulator_type == 'vine':
     raise NotImplementedError
-
 try:
     trpo_args = config['trpo_args']
 except:
     trpo_args = {}
 
+exp_dir = os.path.join('experiments', str(uuid.uuid4()))
+os.makedirs(exp_dir)
 trpo = TRPO(policy, value_fun, simulator, model_name=model_name,
-            continue_from_file=continue_from_file, **trpo_args)
+            continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args)
+
+
 
 print(f'Training policy {model_name} on {env_name} environment...\n')
 
-trpo.train(config['n_episodes'])
 
+
+trpo.train(config['n_episodes'])
+trpo.writer.close()
 print('\nTraining complete.\n')

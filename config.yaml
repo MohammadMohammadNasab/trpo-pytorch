@@ -10,7 +10,7 @@ mujoco_defaults: &mujoco_defaults
 
     max_timesteps: 1000
     n_episodes: 200
-    n_trajectories: 100
+    n_trajectories: 500
 
 swimmer:
     env_name: Swimmer-v3

@@ -6,7 +6,4 @@ __pycache__/
 *.ipynb
 
 
-MUJOCO_LOG.TXT
-
-saved-session
-saved-results
+MUJOCO_LOG.TXTs
