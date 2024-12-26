@@ -10,7 +10,7 @@ mujoco_defaults: &mujoco_defaults
 
     max_timesteps: 1000
     n_episodes: 200
-    n_trajectories: 500
+    n_trajectories: 200
 
 swimmer:
     env_name: Swimmer-v3
@@ -43,7 +43,7 @@ cartpole:
 
     max_timesteps: 500
     n_episodes: 100
-    n_trajectories: 10
+    n_trajectories: 100
 
     trpo_args:
         max_value_step: 0.001

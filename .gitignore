@@ -4,6 +4,4 @@
 __pycache__/
 
 *.ipynb
-
-
-MUJOCO_LOG.TXTs
+experiments

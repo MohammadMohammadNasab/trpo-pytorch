@@ -4,7 +4,6 @@ from gym.wrappers import Monitor
 from gym.spaces import Box, Discrete
 import numpy as np
 import os
-import roboschool
 import torch
 from yaml import load
 

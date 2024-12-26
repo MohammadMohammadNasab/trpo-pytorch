@@ -11,7 +11,6 @@ from conjugate_gradient import cg_solver
 from distribution_utils import mean_kl_first_fixed
 from hvp import get_Hvp_fun
 from torch.utils.tensorboard import SummaryWriter
-from line_search import line_search
 from torch_utils import apply_update, flat_grad, get_device, get_flat_params
 
 config = load(open('config.yaml', 'r'), yaml.FullLoader)
@@ -405,9 +404,9 @@ class TRPO:
             kl_cond = mean_kl <= self.max_kl_div
 
             return surrogate_cond and kl_cond
-
+    
         max_step_len = self.get_max_step_len(search_dir, Fvp_fun, self.max_kl_div, retain_graph=True)
-        step_len = line_search(search_dir, max_step_len, constraints_satisfied)
+        step_len = self.line_search(search_dir, max_step_len, constraints_satisfied)
 
         opt_step = step_len * search_dir
         apply_update(self.policy, opt_step)
@@ -441,6 +440,46 @@ class TRPO:
 
         # Log checkpoint
         self.writer.add_scalar("Checkpoint/Episode", self.episode_num, self.episode_num)
+    
+    def line_search(self, search_dir, max_step_len, constraints_satisfied, line_search_coef=0.9,
+                    max_iter=10):
+            '''
+            Perform a backtracking line search that terminates when constraints_satisfied
+            return True and return the calculated step length. Return 0.0 if no step
+            length can be found for which constraints_satisfied returns True
+
+            Parameters
+            ----------
+            search_dir : torch.FloatTensor
+                the search direction along which the line search is done
+
+            max_step_len : torch.FloatTensor
+                the maximum step length to consider in the line search
+
+            constraints_satisfied : callable
+                a function that returns a boolean indicating whether the constraints
+                are met by the current step length
+
+            line_search_coef : float
+                the proportion by which to reduce the step length after each iteration
+
+            max_iter : int
+                the maximum number of backtracks to do before return 0.0
+
+            Returns
+            -------
+            the maximum step length coefficient for which constraints_satisfied evaluates
+            to True
+            '''
+            step_len = max_step_len / line_search_coef
+
+            for i in range(max_iter):
+                step_len *= line_search_coef
+
+                if constraints_satisfied(step_len * search_dir, step_len):
+                    return step_len
+
+            return torch.tensor(0.0).to(self.device)
 
     def load_session(self):
         load_path = os.path.join(self.save_dir, self.model_name + '.pt')
