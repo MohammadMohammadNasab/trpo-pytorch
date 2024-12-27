@@ -70,8 +70,9 @@ all_configs = load(open(config_filename, 'r'), yaml.FullLoader)
 config = all_configs[model_name]
 
 device = get_device()
-low_t = torch.tensor(args.low_t).to(device)
-high_t = torch.tensor(args.high_t).to(device)
+if args.low_t and args.high_t:
+    low_t = torch.tensor(args.low_t).to(device)
+    high_t = torch.tensor(args.high_t).to(device)
 
 
 # Find the input size, hidden dim sizes, and output size
@@ -129,12 +130,12 @@ timestamp = datetime.now()
 timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
 print(f'Version is : {version}')
 if version == 'base':
-    exp_dir = os.path.join('experiments', f'{timestamp}_seed_{seed}_ver_{version}')
+    exp_dir = os.path.join('experiments', f'{model_name}_{timestamp}_seed_{seed}_ver_{version}')
     os.makedirs(exp_dir)
     trpo = TRPOBase(policy, value_fun, simulator, model_name=model_name,
                     continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50)
 elif version == 'filtering':
-    exp_dir = os.path.join('experiments', f'{timestamp}_seed_{seed}_ver_{version}_high_t_{high_t:.2f}_low_t_{low_t:.2f}_damp_f_{damp_factor:.2f}')
+    exp_dir = os.path.join('experiments', f'{model_name}_{timestamp}_seed_{seed}_ver_{version}_high_t_{high_t:.2f}_low_t_{low_t:.2f}_damp_f_{damp_factor:.2f}')
     os.makedirs(exp_dir)
     trpo = TRPOV1(policy, value_fun, simulator, model_name=model_name,
                   continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50 ,low_t=low_t, high_t=high_t, damp_factor = damp_factor) 
