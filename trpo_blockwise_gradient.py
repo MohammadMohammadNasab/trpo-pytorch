@@ -13,6 +13,8 @@ from distribution_utils import mean_kl_first_fixed
 from torch.utils.tensorboard import SummaryWriter
 from torch_utils import apply_update, flat_grad, get_device, get_flat_params
 
+torch.autograd.set_detect_anomaly(True)
+
 config = load(open('config.yaml', 'r'), yaml.FullLoader)
 # TO DO: Model name issue
 
@@ -364,100 +366,50 @@ class TRPO:
     def surrogate_loss(self, log_action_probs, imp_sample_probs, advantages):
         return torch.mean(torch.exp(log_action_probs - imp_sample_probs) * advantages)
 
+    
     def update_policy(self, states, actions, advantages):
         self.policy.train()
 
+        # Move data to the device
         states = states.to(self.device)
         actions = actions.to(self.device)
         advantages = advantages.to(self.device)
 
-        # Compute action distributions and log probabilities
+        # Compute initial action distributions and log probabilities
         action_dists = self.policy(states)
         log_action_probs = action_dists.log_prob(actions)
+
+        # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
-        natural_gradient = self.calculate_blockwise_FIM(self.policy, loss)
-        loss_grad = flat_grad(loss, self.policy.parameters(), retain_graph=True)
-        # Scale the natural gradient to satisfy the KL constraint
-        predicted_kl = 0.5 * torch.sum(loss_grad * natural_gradient)
-        scaling_factor = torch.sqrt(2 * self.max_kl_div / predicted_kl)
-        # Perform line search to adaptively scale the natural gradient
-        def line_search(policy, states, natural_gradient, max_kl_div, max_iterations=10):
-            step_size = scaling_factor # Start with a max proposed step_size
-            min_step_size = 1e-5
-            decrease_factor = 0.9
-            iteration = max_iterations
-            while step_size >= min_step_size:
-                iteration-=1
-                apply_update(policy, step_size * natural_gradient)
-                with torch.no_grad():
-                    new_action_dists = policy(states)
-                    new_action_log_probs = new_action_dists.log_prob(actions)
-                    actual_kl = mean_kl_first_fixed(action_dists, new_action_dists)
-                    new_loss = self.surrogate_loss(new_action_log_probs, log_action_probs, advantages)
-                    loss_improvement = (new_loss - loss).item()
-                apply_update(policy, -step_size * natural_gradient)  # Revert update
-                if actual_kl <= max_kl_div and loss_improvement > 0:
-                    return step_size  # Return the step size if KL is within bounds
-                else:
-                    step_size *= decrease_factor  # Reduce step size if KL exceeds max
-            return 0.0  # No acceptable step size found
 
-        # Use line search to find the optimal scaling factor
-        scaling_factor = line_search(self.policy, states, natural_gradient, self.max_kl_div)
-        print(f'scaling factor: {scaling_factor}')
-        natural_gradient_scaled = scaling_factor * natural_gradient
+        # Loop through layers for blockwise updates
+        for layer in self.policy.children():
+            # Ensure the layer has parameters that require gradients
+            layer_params = [p for p in layer.parameters() if p.requires_grad]
+            if not layer_params:
+                continue  # Skip layers without trainable parameters
 
-        # Apply the scaled natural gradient update to the policy
-        apply_update(self.policy, natural_gradient_scaled)
+            # Compute gradients for the current layer
+            grad_vector = torch.cat([
+                grad.view(-1) for grad in torch.autograd.grad(
+                    loss, layer_params, retain_graph=True, create_graph=False
+                )
+            ])
 
-        # Log the KL divergence
-        with torch.no_grad():
-            new_action_dists = self.policy(states)
-            actual_kl = mean_kl_first_fixed(action_dists, new_action_dists)
-            self.writer.add_scalar("Policy/MeanKL", actual_kl.item(), self.episode_num)
+            # Compute FIM block
+            fim_block = torch.ger(grad_vector, grad_vector)
+            damping_factor = 1e-5 * torch.eye(fim_block.size(0), device=self.device)
+            fim_block = fim_block + damping_factor  # Add damping
 
-    def calculate_blockwise_FIM(self, policy:torch.nn.Sequential, loss, cg_damping=1e-3):
-        """
-        Computes the natural gradient using a layerwise block approximation of the Fisher Information Matrix (FIM).
+            # Compute inverse FIM block and natural gradient
+            inv_fim_block = torch.linalg.inv(fim_block)
+            natural_gradient = inv_fim_block @ grad_vector
 
-        Parameters
-        ----------
-        policy : torch.nn.Module
-            The policy network (torch model).
-        loss : torch.Tensor
-            The surrogate loss to maximize.
-        cg_damping : float
-            A small damping factor to stabilize matrix inversion.
-
-        Returns
-        -------
-        natural_gradient : torch.Tensor
-            The natural gradient computed using layerwise blockwise FIM.
-        """
-        natural_gradient_blocks = []
-
-        for layer in policy.children():
-            if layer.requires_grad:
-                # Compute gradient for the current parameter block
-                param_grad = grad(loss, param, retain_graph=True, create_graph=True)[0]
-                param_grad_flat = param_grad.view(-1)
-
-                # Compute the Fisher block as the outer product of the gradient
-                fisher_block = torch.ger(param_grad_flat, param_grad_flat)
-
-                # Add damping term to ensure numerical stability
-                fisher_block += cg_damping * torch.eye(fisher_block.size(0), device=fisher_block.device)
-
-                # Solve the linear system F * x = g to compute the natural gradient
-                natural_gradient_block = solve(fisher_block, param_grad_flat)
-
-                # Reshape natural gradient to the original parameter shape
-                natural_gradient_blocks.append(natural_gradient_block.view(param.size()))
-
-        # Concatenate natural gradients across all layers
-        natural_gradient = torch.cat([ng.view(-1) for ng in natural_gradient_blocks])
-
-        return natural_gradient
+            # Update parameters for the current layer
+            learning_rate = 0.01
+            with torch.no_grad():
+                for param, ng in zip(layer_params, torch.split(natural_gradient, [p.numel() for p in layer_params])):
+                    param += learning_rate * ng.view(param.size())
 
     def save_session(self):
         if not os.path.exists(self.save_dir):
