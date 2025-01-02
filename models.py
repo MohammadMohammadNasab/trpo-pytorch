@@ -5,7 +5,6 @@ from torch.distributions import Independent
 from torch.distributions.categorical import Categorical
 from torch.distributions.normal import Normal
 from torch.distributions.kl import kl_divergence
-
 from torch_utils import get_device
 
 
@@ -55,6 +54,7 @@ class DiagGaussianLayer(Module):
 
     def __call__(self, mean):
         std = torch.exp(self.log_std)
+        std = torch.clamp(std, min=1e-6)  # Ensure std is positive and non-zero
         normal_dist = Independent(Normal(loc=mean, scale=std), 1)
 
         return normal_dist

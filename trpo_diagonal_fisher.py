@@ -380,7 +380,6 @@ class TRPO:
         
         # Compute flattened gradients of the loss
         loss_grad = flat_grad(loss, self.policy.parameters(), retain_graph=True)
-
         # Compute Fisher diagonal approximation using squared loss gradients
         fisher_diag = loss_grad**2 + self.cg_damping
 

@@ -15,27 +15,14 @@ from transforms import *
 from torch_utils import get_device
 from trpo import TRPO as TRPOBase
 from trpo_v1 import TRPO as TRPOV1
+from trpo_diagonal_fisher import TRPO as TRPO_Fisher
+from trpo_blockwise_gradient import TRPO as TRPO_Blockwise_NG
 
 
 # Set the seed for all relevant components
-seed = 42
 
 # Set the seed for Python's random module
-random.seed(seed)
 
-# Set the seed for NumPy
-np.random.seed(seed)
-
-# Set the seed for PyTorch
-torch.manual_seed(seed)
-if torch.cuda.is_available():
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)  # If using multiple GPUs
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
-
-# Optional: Set the seed for other libraries
-os.environ['PYTHONHASHSEED'] = str(seed)
 config_filename = 'config.yaml'
 
 parser = ArgumentParser(prog='train.py',
@@ -53,6 +40,7 @@ parser.add_argument('--model-name', type=str, dest='model_name', required=True,
                     'should be loaded.')
 
 parser.add_argument('--high_t', type=float)
+parser.add_argument('--seed', type=int)
 parser.add_argument('--damp_f', type=float)
 parser.add_argument('--low_t', type=float)
 parser.add_argument('--simulator', dest='simulator_type', type=str, default='single-path',
@@ -60,6 +48,22 @@ parser.add_argument('--simulator', dest='simulator_type', type=str, default='sin
                     ' to use when collecting training experiences.')
 
 args = parser.parse_args()
+seed= args.seed
+random.seed(seed)
+
+# Set the seed for NumPy
+np.random.seed(seed)
+
+# Set the seed for PyTorch
+torch.manual_seed(seed)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)  # If using multiple GPUs
+torch.backends.cudnn.deterministic = True
+torch.backends.cudnn.benchmark = False
+
+# Optional: Set the seed for other libraries
+os.environ['PYTHONHASHSEED'] = str(seed)
 version = args.ver
 damp_factor = args.damp_f
 continue_from_file = args.continue_from_file
@@ -139,6 +143,17 @@ elif version == 'filtering':
     os.makedirs(exp_dir)
     trpo = TRPOV1(policy, value_fun, simulator, model_name=model_name,
                   continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50 ,low_t=low_t, high_t=high_t, damp_factor = damp_factor) 
+elif version == 'blockwise_ng':
+    exp_dir = os.path.join('experiments', f'{model_name}_{timestamp}_seed_{seed}_ver_{version}')
+    os.makedirs(exp_dir)
+    trpo = TRPO_Blockwise_NG(policy, value_fun, simulator, model_name=model_name,
+                  continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50) 
+elif version == 'diagonal_fisher':
+    exp_dir = os.path.join('experiments', f'{model_name}_{timestamp}_seed_{seed}_ver_{version}')
+    os.makedirs(exp_dir)
+    trpo = TRPO_Fisher(policy, value_fun, simulator, model_name=model_name,
+                    continue_from_file=continue_from_file, experiment_dir=exp_dir, **trpo_args, save_every=50)
+
 else:
     raise NotImplementedError()
 

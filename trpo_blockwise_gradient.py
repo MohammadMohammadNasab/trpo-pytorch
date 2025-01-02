@@ -281,7 +281,7 @@ class TRPO:
             self.elapsed_time += dt.now() - start_time
             self.print_update()
             # Log metrics to TensorBoard
-            self.writer.add_scalar("Reward/MeanReward", mean_reward, self.episode_num)
+            self.writer.add_scalar("Reward/MeanReward", self.mean_rewards[-1], self.episode_num)
             self.writer.add_scalar("Time/ElapsedTime", self.elapsed_time.total_seconds(), self.episode_num)
             self.writer.flush()
             if self.save_every and not self.episode_num % self.save_every:
@@ -382,6 +382,9 @@ class TRPO:
         # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
 
+        # Save the current parameters
+        old_params = get_flat_params(self.policy).detach()
+        layers_info = []
         # Loop through layers for blockwise updates
         for layer in self.policy.children():
             # Ensure the layer has parameters that require gradients
@@ -398,19 +401,54 @@ class TRPO:
 
             # Compute FIM block
             fim_block = torch.ger(grad_vector, grad_vector)
-            damping_factor = 1e-5 * torch.eye(fim_block.size(0), device=self.device)
+            damping_factor = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor  # Add damping
 
             # Compute inverse FIM block and natural gradient
             inv_fim_block = torch.linalg.inv(fim_block)
             natural_gradient = inv_fim_block @ grad_vector
+            learning_rate = ((2 * self.max_kl_div) / (grad_vector @ natural_gradient)).sqrt()
+            layers_info.append({
+                'params': layer_params,
+                'natural_gradient': natural_gradient,
+                'learning_rate': learning_rate,
+            })
 
-            # Update parameters for the current layer
-            learning_rate = 0.01
+        # Update parameters
+        # Check KL divergence
+        max_updates = 100
+        flag = False
+        while max_updates > 0:
+            max_updates -= 1
+            self.layerwise_update(layers_info=layers_info)
+            new_action_dists = self.policy(states)
+            kl_div = mean_kl_first_fixed(action_dists, new_action_dists).item()
+            if kl_div < self.max_kl_div:
+                mean_learning_rate = np.mean([layer_info['learning_rate'].item() for layer_info in layers_info])
+                self.writer.add_scalar("Policy/MeanLearningRate", mean_learning_rate, self.episode_num)
+                flag = True
+                break
+            self.layerwise_update(layers_info=layers_info, revert=True)
+            for layer_info in layers_info:
+                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.4
+        if not flag:
+            self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
+        self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
+        self.writer.add_scalar("Policy/Max Tries", max_updates, self.episode_num)
+
+
+    def layerwise_update(self, layers_info, revert=False):
+
+        for layer_info in layers_info:
+            params = layer_info['params']
+            natural_gradient = layer_info['natural_gradient']
+            learning_rate = layer_info['learning_rate']
+            if revert:
+                learning_rate =  -learning_rate
             with torch.no_grad():
-                for param, ng in zip(layer_params, torch.split(natural_gradient, [p.numel() for p in layer_params])):
+                
+                for param, ng in zip(params, torch.split(natural_gradient, [p.numel() for p in params])):
                     param += learning_rate * ng.view(param.size())
-
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
