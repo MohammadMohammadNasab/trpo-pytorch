@@ -1,5 +1,5 @@
 gym==0.12.1
 numpy==1.15.4
 roboschool
-torch==1.1.0
+torch==2.0.1+cu117
 pyyaml==4.2b1
