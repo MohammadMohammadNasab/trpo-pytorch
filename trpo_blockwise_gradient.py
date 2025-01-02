@@ -418,19 +418,26 @@ class TRPO:
         # Check KL divergence
         max_updates = 100
         flag = False
+        print(self.max_kl_div)
         while max_updates > 0:
             max_updates -= 1
             self.layerwise_update(layers_info=layers_info)
             new_action_dists = self.policy(states)
             kl_div = mean_kl_first_fixed(action_dists, new_action_dists).item()
+            
             if kl_div < self.max_kl_div:
+                if kl_div < 0.5 * self.max_kl_div:
+                    self.layerwise_update(layers_info=layers_info, revert=True)
+                    for layer_info in layers_info:
+                        layer_info['learning_rate'] = layer_info['learning_rate'] * 1.5  # Increase by 50%
+                    continue
                 mean_learning_rate = np.mean([layer_info['learning_rate'].item() for layer_info in layers_info])
                 self.writer.add_scalar("Policy/MeanLearningRate", mean_learning_rate, self.episode_num)
                 flag = True
                 break
             self.layerwise_update(layers_info=layers_info, revert=True)
             for layer_info in layers_info:
-                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.4
+                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.9
         if not flag:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
         self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
