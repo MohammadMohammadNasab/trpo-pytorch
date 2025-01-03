@@ -384,9 +384,8 @@ class TRPO:
 
         # Initialize lists to store layer-wise gradients and natural gradients
         full_grad_vector = []
-        full_natural_gradient = []
         params_info = []
-
+        inv_fim_blocks = []
         # Loop through layers for blockwise computation
         for layer in self.policy.children():
             layer_params = [p for p in layer.parameters() if p.requires_grad]
@@ -407,11 +406,9 @@ class TRPO:
             inv_fim_block = torch.linalg.inv(fim_block)
             
             # Compute natural gradient for this block
-            natural_gradient = inv_fim_block @ grad_vector
-
             # Store info
+            inv_fim_blocks.append(inv_fim_block)
             full_grad_vector.append(grad_vector)
-            full_natural_gradient.append(natural_gradient)
             params_info.append({
                 'params': layer_params,
                 'sizes': [p.numel() for p in layer_params]
@@ -419,10 +416,10 @@ class TRPO:
 
         # Concatenate all gradients and natural gradients
         full_grad_vector = torch.cat(full_grad_vector)
-        full_natural_gradient = torch.cat(full_natural_gradient)
-
+        full_inv_fim = torch.block_diag(*inv_fim_blocks)
+        full_natural_gradient = torch.matmul(full_inv_fim, full_grad_vector)
         # Compute scaling factor based on predicted KL divergence
-        predicted_kl = 0.5 * torch.sum(full_grad_vector * full_natural_gradient)
+        predicted_kl = 0.5 * torch.dot(full_grad_vector, full_natural_gradient)
         scaling_factor = torch.sqrt(2 * self.max_kl_div / predicted_kl)
         
         # Scale natural gradient
@@ -472,7 +469,7 @@ class TRPO:
                     layer_natural_grad = layer_natural_grad[size:]
                     start_idx += layer_size
                 
-                scaling_factor *= 0.5
+                scaling_factor *= 0.8
                 scaled_natural_gradient = scaling_factor * full_natural_gradient
             else:
                 success = True
