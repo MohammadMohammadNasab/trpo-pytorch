@@ -397,13 +397,13 @@ class TRPO:
             # Compute gradients for the current layer
             grad_vector = torch.cat([
                 grad.view(-1) for grad in torch.autograd.grad(
-                    loss, layer_params, retain_graph=True, create_graph=False
+                    loss, layer_params, retain_graph=True
                 )
             ])
             grads.append(grad_vector)
 
             # Compute FIM block
-            fim_block = torch.ger(grad_vector, grad_vector)
+            fim_block = torch.outer(grad_vector, grad_vector)
             damping_factor = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor  # Add damping
 
@@ -425,7 +425,7 @@ class TRPO:
         learning_rate = (2 * self.max_kl_div / (grad_vector_concat @ natural_gradient)).sqrt()
         # Update parameters
         # Check KL divergence
-        max_updates = 100
+        max_updates = 500
         update_successful = False
         while max_updates > 0:
             max_updates -= 1
