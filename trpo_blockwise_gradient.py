@@ -431,16 +431,10 @@ class TRPO:
             fim_block = torch.outer(grad_vector, grad_vector)
             damping_factor = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor  # Add damping
-            condition_number = torch.linalg.cond(fim_block)
-            if condition_number > 1e6:
-                damping_factor *= 10
-                fim_block = fim_block + damping_factor
-    
             # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
             if torch.isnan(inv_fim_block).any():
                 raise Exception("Warning: NaN detected in FIM inverse")
-                return False
             inv_fim_blocks.append(inv_fim_block)
 
             layers_info.append({
@@ -455,7 +449,6 @@ class TRPO:
         # Compute natural gradient
         natural_gradient = torch.mv(inv_fim_matrix,grad_vector_concat)
         learning_rate = torch.sqrt(2 * self.max_kl_div / (grad_vector_concat @ natural_gradient + 1e-8))
-        learning_rate = torch.clamp(learning_rate, 0.0, 2.0)# Update parameters
         # Check KL divergence
         max_updates = 500
         update_successful = False
