@@ -488,19 +488,6 @@ class TRPO:
         self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
         self.writer.add_scalar("Policy/Max Tries", max_updates, self.episode_num)
 
-
-    def layerwise_update(self, layers_info, revert=False):
-
-        for layer_info in layers_info:
-            params = layer_info['params']
-            natural_gradient = layer_info['natural_gradient']
-            learning_rate = layer_info['learning_rate']
-            if revert:
-                learning_rate =  -learning_rate
-            with torch.no_grad():
-                
-                for param, ng in zip(params, torch.split(natural_gradient, [p.numel() for p in params])):
-                    param += learning_rate * ng.view(param.size())
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
