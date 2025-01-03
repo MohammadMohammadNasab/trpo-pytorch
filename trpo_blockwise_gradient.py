@@ -423,16 +423,14 @@ class TRPO:
             ])
             grads.append(loss_grad)
 
-            # Compute KL for FIM
-            kl = mean_kl_first_fixed(action_dists, self.policy(states))
             
             # Compute FIM block using KL gradients
-            kl_grads = torch.autograd.grad(kl, layer_params, create_graph=True)
+            kl_grads = torch.autograd.grad(loss, layer_params, create_graph=True)
             flat_kl_grad = torch.cat([g.view(-1) for g in kl_grads])
             
             # Compute FIM block
             fim_block = torch.outer(flat_kl_grad, flat_kl_grad)
-            damping = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
+            damping = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
             fim_block += damping
             condition_number = torch.linalg.cond(fim_block)
             
@@ -451,12 +449,10 @@ class TRPO:
         # Build block diagonal FIM and compute natural gradient
         inv_fim_matrix = torch.block_diag(*inv_fim_blocks)
         loss_grad_concat = torch.cat(grads)
-        natural_gradient = torch.mv(inv_fim_matrix, loss_grad_concat)
-    
-        natural_gradient = torch.mv(inv_fim_matrix,loss_grad_concat)
-        learning_rate = 10 * torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
+        natural_gradient = inv_fim_matrix @ loss_grad_concat
+        learning_rate = torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
         # Check KL divergence
-        max_updates = 500
+        max_updates = 20
         update_successful = False
         while max_updates > 0:
             max_updates -= 1
