@@ -434,7 +434,11 @@ class TRPO:
             fim_block = torch.outer(flat_kl_grad, flat_kl_grad)
             damping = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
             fim_block += damping
+            condition_number = torch.linalg.cond(fim_block)
             
+            if condition_number > 1e6:
+                damping_factor *= 10
+                fim_block = fim_block + damping_factor
             # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
             
@@ -450,7 +454,7 @@ class TRPO:
         natural_gradient = torch.mv(inv_fim_matrix, loss_grad_concat)
     
         natural_gradient = torch.mv(inv_fim_matrix,loss_grad_concat)
-        learning_rate = torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
+        learning_rate = 2 * torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
         # Check KL divergence
         max_updates = 500
         update_successful = False
@@ -487,7 +491,7 @@ class TRPO:
                 with torch.no_grad():
                     for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
                         param -= learning_rate * ng.view(param.size())
-            learning_rate *= 0.6
+            learning_rate *= 0.8
 
         if not update_successful:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
