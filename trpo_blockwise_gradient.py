@@ -429,10 +429,11 @@ class TRPO:
         scaled_natural_gradient = scaling_factor * full_natural_gradient
 
         # Perform line search
-        max_attempts = 15
+        max_attempts = 50
         success = False
-        while max_attempts > 0 and not success:
-            max_attempts -= 1
+        attemps = 0
+        while attemps <= max_attempts and not success:
+            attemps += 1
             
             # Apply update
             start_idx = 0
@@ -480,7 +481,7 @@ class TRPO:
         self.writer.add_scalar("Policy/ScalingFactor", scaling_factor.item(), self.episode_num)
         self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
         self.writer.add_scalar("Policy/Loss", new_loss.item(), self.episode_num)
-        self.writer.add_scalar("Policy/LineSearchSteps", 10 - max_attempts, self.episode_num)
+        self.writer.add_scalar("Policy/LineSearchSteps", attemps, self.episode_num)
 
     def save_session(self):
         if not os.path.exists(self.save_dir):
