@@ -438,6 +438,9 @@ class TRPO:
     
             # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
+            if torch.isnan(inv_fim_block).any():
+                raise Exception("Warning: NaN detected in FIM inverse")
+                return False
             inv_fim_blocks.append(inv_fim_block)
 
             layers_info.append({
