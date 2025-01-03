@@ -411,44 +411,46 @@ class TRPO:
         mean_kl = mean_kl_first_fixed(action_dists, action_dists)
         # Loop through layers for blockwise updates
         for layer in self.policy.children():
-            # Ensure the layer has parameters that require gradients
             layer_params = [p for p in layer.parameters() if p.requires_grad]
             if not layer_params:
-                continue  # Skip layers without trainable parameters
+                continue
 
-            # Compute gradients for the current layer
-            grad_vector = torch.cat([
+            # Compute loss gradient
+            loss_grad = torch.cat([
                 grad.view(-1) for grad in torch.autograd.grad(
-                    mean_kl, layer_params, retain_graph=True
+                    loss, layer_params, retain_graph=True
                 )
             ])
-            if torch.isnan(grad_vector).any():
-                raise Exception("Warning: NaN detected in gradients")
-                
-            grads.append(grad_vector)
+            grads.append(loss_grad)
 
+            # Compute KL for FIM
+            kl = mean_kl_first_fixed(action_dists, self.policy(states))
+            
+            # Compute FIM block using KL gradients
+            kl_grads = torch.autograd.grad(kl, layer_params, create_graph=True)
+            flat_kl_grad = torch.cat([g.view(-1) for g in kl_grads])
+            
             # Compute FIM block
-            fim_block = torch.outer(grad_vector, grad_vector)
-            damping_factor = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
-            fim_block = fim_block + damping_factor  # Add damping
+            fim_block = torch.outer(flat_kl_grad, flat_kl_grad)
+            damping = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
+            fim_block += damping
+            
             # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
-            if torch.isnan(inv_fim_block).any():
-                raise Exception("Warning: NaN detected in FIM inverse")
+            
             inv_fim_blocks.append(inv_fim_block)
-
             layers_info.append({
                 'params': layer_params,
-                'grad_vector': grad_vector,
+                'loss_grad': loss_grad,
             })
 
-        # Build a matrix of inverse FIM with those smaller blocks
+        # Build block diagonal FIM and compute natural gradient
         inv_fim_matrix = torch.block_diag(*inv_fim_blocks)
-        grad_vector_concat = torch.cat(grads)
-
-        # Compute natural gradient
-        natural_gradient = torch.mv(inv_fim_matrix,grad_vector_concat)
-        learning_rate = torch.sqrt(2 * self.max_kl_div / (grad_vector_concat @ natural_gradient + 1e-8))
+        loss_grad_concat = torch.cat(grads)
+        natural_gradient = torch.mv(inv_fim_matrix, loss_grad_concat)
+    
+        natural_gradient = torch.mv(inv_fim_matrix,loss_grad_concat)
+        learning_rate = torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
         # Check KL divergence
         max_updates = 500
         update_successful = False
