@@ -422,6 +422,9 @@ class TRPO:
                     mean_kl, layer_params, retain_graph=True
                 )
             ])
+            if torch.isnan(grad_vector).any():
+                raise Exception("Warning: NaN detected in gradients")
+                
             grads.append(grad_vector)
 
             # Compute FIM block
