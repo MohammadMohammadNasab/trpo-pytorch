@@ -26,7 +26,8 @@ def detach_dist(dist):
     elif type(dist) is Independent:
         detached_dist = Normal(loc=dist.mean.detach(), scale=dist.stddev.detach())
         detached_dist = Independent(detached_dist, 1)
-
+    else:
+        raise ValueError(f'Unsupported distribution type., {type(dist)}')
     return detached_dist
 
 def mean_kl_first_fixed(dist_1, dist_2):
