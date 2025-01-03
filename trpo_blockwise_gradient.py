@@ -420,15 +420,14 @@ class TRPO:
                 'size': g.numel()
             })
         # Line search
-        full_natural_gradient = torch.cat([block['nat_grad'] for block in blocks_info])
         max_step = self.get_max_step_len(blocks_info)
         success = self.line_search(blocks_info, max_step, states, action_dists)
-        
-        if not success:
-            print("Line search failed! Using default step size")
-            step_size = 0.5 * max_step
-            apply_update(self.policy, step_size * full_natural_gradient)
-        
+        if success:
+            new_dists = self.policy(states)
+            actions = new_dists.sample()
+            new_log_action_probs = new_dists.log_prob(actions)
+            loss = self.surrogate_loss(new_log_action_probs, log_action_probs.detach(), advantages)
+            self.writer.add_scalar("Policy/Loss", loss.item(), self.episode_num)
         return success
     def get_max_step_len(self, blocks_info):
         """Compute maximum step length satisfying KL constraint for each block separately"""
