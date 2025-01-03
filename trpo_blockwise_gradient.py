@@ -409,18 +409,23 @@ class TRPO:
             
             # Compute inverse
             inv_fim_block = torch.linalg.inv(fim_block)
-            
+            nat_grad = inv_fim_block @ g
             inv_fim_blocks.append(inv_fim_block)
-            nat_grad = torch.mv(inv_fim_block, g)
             blocks_info.append({
                 'nat_grad': nat_grad,
                 'inv_fim': inv_fim_block,
                 'loss_grad': g,
                 'layer': layer,
-                'size': g.numel()
             })
         # Line search
-        max_step = self.get_max_step_len(blocks_info)
+        #make full matrix of inverse fim
+        inv_fim = torch.block_diag(*inv_fim_blocks)
+        #make full matrix of layerwise gradients
+        layerwise_grads = torch.cat(layerwise_gradients)
+        #make full matrix of natural gradients
+        natural_grad = inv_fim @ layerwise_grads
+        #comput max step size with natural grad and layerwise grads
+        max_step = torch.sqrt(2 * self.max_kl_div / (layerwise_grads @ natural_grad + 1e-8))
         success = self.line_search(blocks_info, max_step, states, action_dists)
         if success:
             new_dists = self.policy(states)
@@ -429,18 +434,6 @@ class TRPO:
             loss = self.surrogate_loss(new_log_action_probs, log_action_probs.detach(), advantages)
             self.writer.add_scalar("Policy/Loss", loss.item(), self.episode_num)
         return success
-    def get_max_step_len(self, blocks_info):
-        """Compute maximum step length satisfying KL constraint for each block separately"""
-        max_steps = []
-        
-        for block_info in blocks_info:
-            natural_gradient = block_info['nat_grad']
-            loss_gradient = block_info['loss_grad']
-            denom = loss_gradient @ natural_gradient
-            max_step = torch.sqrt(2 * self.max_kl_div / (denom + 1e-8))
-            max_steps.append(max_step)
-        
-        return max_steps
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
@@ -459,10 +452,12 @@ class TRPO:
         torch.save(ckpt, save_path)
     def line_search(self, blocks_info, max_step, states, old_dists):
         """Perform line search for best step size"""
-        step_sizes = max_step
+        step_size = max_step
         for _ in range(10):
+            proposed_steps = []
             for i, block_info in enumerate(blocks_info):
-                proposed_step = step_sizes[i] * block_info['nat_grad']
+                proposed_step = step_size * block_info['nat_grad']
+                proposed_steps.append(proposed_step)
                 apply_update(block_info['layer'], proposed_step)
             
             # Check KL constraint
@@ -471,15 +466,12 @@ class TRPO:
             
             if kl_div <= self.max_kl_div:
                 self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
-                self.writer.add_scalar("Policy/MeanLearningRate", np.mean(list(map(lambda x : x.cpu(), step_sizes))), self.episode_num)
+                self.writer.add_scalar("Policy/MeanLearningRate", step_size, self.episode_num)
                 return True
             
             for i, block_info in enumerate(blocks_info):
-                proposed_step = step_sizes[i] * block_info['nat_grad']
-                apply_update(block_info['layer'], -proposed_step)  # Revert update
-                
-            for i in range(len(step_sizes)):
-                step_sizes[i] *= 0.5
+                apply_update(block_info['layer'], -proposed_steps[i])  # Revert update
+            step_size *= self.line_search_coef
             
         return False
     def load_session(self):
