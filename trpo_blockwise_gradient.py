@@ -398,9 +398,13 @@ class TRPO:
                     loss, layer_params, retain_graph=True, create_graph=False
                 )
             ])
-
+            log_action_probs_grad = torch.cat([
+                grad.view(-1) for grad in torch.autograd.grad(
+                    log_action_probs.sum(), layer_params, retain_graph=True, create_graph=False
+                )
+            ])
             # Compute FIM block and its inverse
-            fim_block = torch.ger(grad_vector, grad_vector)
+            fim_block = torch.ger(log_action_probs_grad, log_action_probs_grad)
             damping_factor = self.cg_damping * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor
             inv_fim_block = torch.linalg.inv(fim_block)
