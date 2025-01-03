@@ -437,8 +437,8 @@ class TRPO:
             condition_number = torch.linalg.cond(fim_block)
             
             if condition_number > 1e6:
-                damping_factor *= 10
-                fim_block = fim_block + damping_factor
+                damping *= 10
+                fim_block = fim_block + damping
             # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
             
