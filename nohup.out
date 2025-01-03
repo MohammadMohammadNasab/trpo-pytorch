@@ -2,3 +2,59 @@
   return torch._C._cuda_getDeviceCount() > 0
 /home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
   policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Line search failed! Using default step size
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 430, in update_policy
+    apply_update(self.policy, step_size * full_natural_gradient)
+  File "/home/bamdad/rl/trpo-pytorch/torch_utils.py", line 33, in apply_update
+    param_update = update[n:n + numel].view(param.size())
+RuntimeError: shape '[3]' is invalid for input of size 0
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 425, in update_policy
+    success = self.line_search(blocks_info, max_step, states, action_dists)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 465, in line_search
+    for i, block_info in range(blocks_info):
+TypeError: 'list' object cannot be interpreted as an integer
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 425, in update_policy
+    success = self.line_search(blocks_info, max_step, states, action_dists)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 482, in line_search
+    for i in range(step_size):
+TypeError: 'list' object cannot be interpreted as an integer
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)

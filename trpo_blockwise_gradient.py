@@ -431,17 +431,17 @@ class TRPO:
         
         return success
     def get_max_step_len(self, blocks_info):
-        """Compute maximum step length satisfying KL constraint"""
-        hvp = 0
-        start_idx = 0
+        """Compute maximum step length satisfying KL constraint for each block separately"""
+        max_steps = []
         
         for block_info in blocks_info:
-            inv_fim = block_info['inv_fim']
             natural_gradient = block_info['nat_grad']
-            hvp += torch.dot(natural_gradient, torch.mv(inv_fim, natural_gradient))
-            
-        max_step = torch.sqrt(2 * self.max_kl_div / (hvp + 1e-8))
-        return max_step
+            loss_gradient = block_info['loss_grad']
+            denom = loss_gradient @ natural_gradient
+            max_step = torch.sqrt(2 * self.max_kl_div / (denom + 1e-8))
+            max_steps.append(max_step)
+        
+        return max_steps
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
@@ -462,8 +462,8 @@ class TRPO:
         """Perform line search for best step size"""
         step_size = max_step
         for _ in range(10):
-            for block_info in blocks_info:
-                proposed_step = step_size * block_info['nat_grad']
+            for i, block_info in enumerate(blocks_info):
+                proposed_step = step_size[i] * block_info['nat_grad']
                 apply_update(block_info['layer'], proposed_step)
             
             # Check KL constraint
@@ -472,13 +472,15 @@ class TRPO:
             
             if kl_div <= self.max_kl_div:
                 self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
-                self.writer.add_scalar("Policy/MeanLearningRate", step_size, self.episode_num)
+                self.writer.add_scalar("Policy/MeanLearningRate", np.mean(step_size), self.episode_num)
                 return True
             
-            step_size *= 0.5
-            for block_info in blocks_info:
-                proposed_step = step_size * block_info['nat_grad']
+            for i, block_info in enumerate(blocks_info):
+                proposed_step = step_size[i] * block_info['nat_grad']
                 apply_update(block_info['layer'], -proposed_step)  # Revert update
+                
+            for i in range(len(step_size)):
+                step_size[i] *= 0.5
             
         return False
     def load_session(self):
