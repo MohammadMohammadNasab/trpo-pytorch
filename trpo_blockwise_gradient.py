@@ -441,7 +441,7 @@ class TRPO:
             inv_fim_blocks.append(inv_fim_block)
             layers_info.append({
                 'params': layer_params,
-                'loss_grad': loss_grad,
+                'grad_vector': loss_grad,
             })
 
         # Build block diagonal FIM and compute natural gradient
