@@ -460,10 +460,10 @@ class TRPO:
         torch.save(ckpt, save_path)
     def line_search(self, blocks_info, max_step, states, old_dists):
         """Perform line search for best step size"""
-        step_size = max_step
+        step_sizes = max_step
         for _ in range(10):
             for i, block_info in enumerate(blocks_info):
-                proposed_step = step_size[i] * block_info['nat_grad']
+                proposed_step = step_sizes[i] * block_info['nat_grad']
                 apply_update(block_info['layer'], proposed_step)
             
             # Check KL constraint
@@ -472,15 +472,15 @@ class TRPO:
             
             if kl_div <= self.max_kl_div:
                 self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
-                self.writer.add_scalar("Policy/MeanLearningRate", np.mean(step_size), self.episode_num)
+                self.writer.add_scalar("Policy/MeanLearningRate", np.mean(list(map(lambda x : x.cpu(), step_sizes))), self.episode_num)
                 return True
             
             for i, block_info in enumerate(blocks_info):
-                proposed_step = step_size[i] * block_info['nat_grad']
+                proposed_step = step_sizes[i] * block_info['nat_grad']
                 apply_update(block_info['layer'], -proposed_step)  # Revert update
                 
-            for i in range(len(step_size)):
-                step_size[i] *= 0.5
+            for i in range(len(step_sizes)):
+                step_sizes[i] *= 0.5
             
         return False
     def load_session(self):
