@@ -461,7 +461,7 @@ class TRPO:
                 with torch.no_grad():
                     for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
                         param -= learning_rate * ng.view(param.size())
-            learning_rate *= 0.6
+            learning_rate *= 0.8
 
         if not update_successful:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
