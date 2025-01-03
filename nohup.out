@@ -160,3 +160,98 @@ Exception: Stop here
   return torch._C._cuda_getDeviceCount() > 0
 /home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
   policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 402, in update_policy
+    hessian_block = torch.autograd.functional.hessian(
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 800, in hessian
+    is_inputs_tuple, inputs = _as_tuple(inputs, "inputs", "hessian")
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 37, in _as_tuple
+    raise TypeError("The {} given to {} must be either a Tensor or a tuple of Tensors but the"
+TypeError: The inputs given to hessian must be either a Tensor or a tuple of Tensors but the given inputs has type <class 'list'>.
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 402, in update_policy
+    hessian_block = torch.autograd.functional.hessian(
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 800, in hessian
+    is_inputs_tuple, inputs = _as_tuple(inputs, "inputs", "hessian")
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 37, in _as_tuple
+    raise TypeError("The {} given to {} must be either a Tensor or a tuple of Tensors but the"
+TypeError: The inputs given to hessian must be either a Tensor or a tuple of Tensors but the given inputs has type <class 'list'>.
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 402, in update_policy
+    hessian_block = torch.autograd.functional.hessian(
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 800, in hessian
+    is_inputs_tuple, inputs = _as_tuple(inputs, "inputs", "hessian")
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 37, in _as_tuple
+    raise TypeError("The {} given to {} must be either a Tensor or a tuple of Tensors but the"
+TypeError: The inputs given to hessian must be either a Tensor or a tuple of Tensors but the given inputs has type <class 'list'>.
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 402, in update_policy
+    hessian_block = torch.autograd.functional.hessian(
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 800, in hessian
+    is_inputs_tuple, inputs = _as_tuple(inputs, "inputs", "hessian")
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/functional.py", line 37, in _as_tuple
+    raise TypeError("The {} given to {} must be either a Tensor or a tuple of Tensors but the"
+TypeError: The inputs given to hessian must be either a Tensor or a tuple of Tensors but the given inputs has type <class 'list'>.
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 268, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 403, in update_policy
+    loss, torch.Tensor(layer_params).to(self.device), create_graph=False
+ValueError: only one element tensors can be converted to Python scalars
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)

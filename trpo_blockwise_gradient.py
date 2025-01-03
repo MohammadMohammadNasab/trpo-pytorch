@@ -398,13 +398,9 @@ class TRPO:
                     loss, layer_params, retain_graph=True, create_graph=False
                 )
             ])
-            log_action_probs_grad = torch.cat([
-                grad.view(-1) for grad in torch.autograd.grad(
-                    log_action_probs.sum(), layer_params, retain_graph=True, create_graph=False
-                )
-            ])
+            
             # Compute FIM block and its inverse
-            fim_block = torch.ger(log_action_probs_grad, log_action_probs_grad)
+            fim_block = torch.ger(grad_vector, grad_vector)
             damping_factor = self.cg_damping * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor
             inv_fim_block = torch.linalg.inv(fim_block)
@@ -423,8 +419,8 @@ class TRPO:
         full_inv_fim = torch.block_diag(*inv_fim_blocks)
         full_natural_gradient = torch.matmul(full_inv_fim, full_grad_vector)
         # Compute scaling factor based on predicted KL divergence
-        predicted_kl = 0.5 * torch.dot(full_grad_vector, full_natural_gradient)
-        scaling_factor = torch.sqrt(2 * self.max_kl_div / predicted_kl)
+        predicted_kl = torch.dot(full_grad_vector, full_natural_gradient)
+        scaling_factor = torch.sqrt(2 * self.max_kl_div / predicted_kl + 1e-8)
         
         # Scale natural gradient
         scaled_natural_gradient = scaling_factor * full_natural_gradient
