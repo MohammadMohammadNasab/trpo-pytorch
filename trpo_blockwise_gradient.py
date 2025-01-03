@@ -472,7 +472,7 @@ class TRPO:
             
             if kl_div <= self.max_kl_div:
                 self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
-                self.writer.add_scalar("Policy/MeanLearningRate", np.mean(step_size.cpu()), self.episode_num)
+                self.writer.add_scalar("Policy/MeanLearningRate", np.mean(step_size), self.episode_num)
                 return True
             
             for i, block_info in enumerate(blocks_info):
