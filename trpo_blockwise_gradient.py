@@ -403,7 +403,7 @@ class TRPO:
         # Initialize storage
         blocks_info = []
         inv_fim_blocks = []
-        loss_grads = []
+        layerwise_gradients = []
 
         # Compute per-layer quantities
         for layer in self.policy.children():
@@ -412,20 +412,22 @@ class TRPO:
                 continue
 
             # Loss gradient for this layer
-            loss_grad = torch.cat([
+            g = torch.cat([
                 grad.view(-1) for grad in torch.autograd.grad(
                     loss, layer_params, retain_graph=True
                 )
             ])
-            loss_grads.append(loss_grad)
+            
+            layerwise_gradients.append(g)
 
-            # KL gradient for FIM
-            kl = mean_kl_first_fixed(action_dists, self.policy(states))
-            kl_grads = torch.autograd.grad(kl, layer_params, create_graph=True)
-            flat_kl_grad = torch.cat([g.view(-1) for g in kl_grads])
+            grad_log_probs = torch.cat([
+                grad.view(-1) for grad in torch.autograd.grad(
+                    log_action_probs, layer_params, retain_graph=True
+                )
+            ])
             
             # Compute layer's FIM block
-            fim_block = torch.outer(flat_kl_grad, flat_kl_grad)
+            fim_block = torch.outer(grad_log_probs, grad_log_probs)
             damping = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
             fim_block += damping
             
@@ -435,21 +437,21 @@ class TRPO:
             inv_fim_blocks.append(inv_fim_block)
             blocks_info.append({
                 'params': layer_params,
-                'loss_grad': loss_grad,
-                'size': loss_grad.numel()
+                'loss_grad': g,
+                'size': g.numel()
             })
 
         # Assemble full quantities
-        inv_fim = torch.block_diag(*inv_fim_blocks)
-        loss_grad_full = torch.cat(loss_grads)
-        natural_gradient = torch.mv(inv_fim, loss_grad_full)
+        inverse_fim_matrix = torch.block_diag(*inv_fim_blocks)
+        g = torch.cat(layerwise_gradients)
+        natural_gradient = torch.mv(inverse_fim_matrix, g)
 
         # Compute max step size
-        step_size = torch.sqrt(2 * self.max_kl_div / (loss_grad_full @ natural_gradient + 1e-8))
+        step_size = torch.sqrt(2 * self.max_kl_div / (g @ natural_gradient + 1e-8))
 
         # Line search
         success = False
-        for beta in [step_size * (0.8 ** i) for i in range(100)]:
+        for beta in [step_size * (0.8 ** i) for i in range(10)]:
             # Try update
             start_idx = 0
             for block in blocks_info:
