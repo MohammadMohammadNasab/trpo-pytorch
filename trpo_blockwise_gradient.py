@@ -454,7 +454,7 @@ class TRPO:
         natural_gradient = torch.mv(inv_fim_matrix, loss_grad_concat)
     
         natural_gradient = torch.mv(inv_fim_matrix,loss_grad_concat)
-        learning_rate = 2 * torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
+        learning_rate = 10 * torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
         # Check KL divergence
         max_updates = 500
         update_successful = False
