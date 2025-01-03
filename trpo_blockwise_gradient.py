@@ -382,15 +382,16 @@ class TRPO:
         # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
 
-        # Save the current parameters
-        old_params = get_flat_params(self.policy).detach()
-        layers_info = []
-        # Loop through layers for blockwise updates
+        # Initialize lists to store layer-wise gradients and natural gradients
+        full_grad_vector = []
+        full_natural_gradient = []
+        params_info = []
+
+        # Loop through layers for blockwise computation
         for layer in self.policy.children():
-            # Ensure the layer has parameters that require gradients
             layer_params = [p for p in layer.parameters() if p.requires_grad]
             if not layer_params:
-                continue  # Skip layers without trainable parameters
+                continue
 
             # Compute gradients for the current layer
             grad_vector = torch.cat([
@@ -399,56 +400,88 @@ class TRPO:
                 )
             ])
 
-            # Compute FIM block
+            # Compute FIM block and its inverse
             fim_block = torch.ger(grad_vector, grad_vector)
-            damping_factor = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
-            fim_block = fim_block + damping_factor  # Add damping
-
-            # Compute inverse FIM block and natural gradient
+            damping_factor = self.cg_damping * torch.eye(fim_block.size(0), device=self.device)
+            fim_block = fim_block + damping_factor
             inv_fim_block = torch.linalg.inv(fim_block)
+            
+            # Compute natural gradient for this block
             natural_gradient = inv_fim_block @ grad_vector
-            learning_rate = ((2 * self.max_kl_div) / (grad_vector @ natural_gradient)).sqrt()
-            layers_info.append({
+
+            # Store info
+            full_grad_vector.append(grad_vector)
+            full_natural_gradient.append(natural_gradient)
+            params_info.append({
                 'params': layer_params,
-                'natural_gradient': natural_gradient,
-                'learning_rate': learning_rate,
+                'sizes': [p.numel() for p in layer_params]
             })
 
-        # Update parameters
-        # Check KL divergence
-        max_updates = 100
-        flag = False
-        while max_updates > 0:
-            max_updates -= 1
-            self.layerwise_update(layers_info=layers_info)
-            new_action_dists = self.policy(states)
-            kl_div = mean_kl_first_fixed(action_dists, new_action_dists).item()
-            if kl_div < self.max_kl_div:
-                mean_learning_rate = np.mean([layer_info['learning_rate'].item() for layer_info in layers_info])
-                self.writer.add_scalar("Policy/MeanLearningRate", mean_learning_rate, self.episode_num)
-                flag = True
-                break
-            self.layerwise_update(layers_info=layers_info, revert=True)
-            for layer_info in layers_info:
-                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.4
-        if not flag:
-            self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
-        self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
-        self.writer.add_scalar("Policy/Max Tries", max_updates, self.episode_num)
+        # Concatenate all gradients and natural gradients
+        full_grad_vector = torch.cat(full_grad_vector)
+        full_natural_gradient = torch.cat(full_natural_gradient)
 
+        # Compute scaling factor based on predicted KL divergence
+        predicted_kl = 0.5 * torch.sum(full_grad_vector * full_natural_gradient)
+        scaling_factor = torch.sqrt(2 * self.max_kl_div / predicted_kl)
+        
+        # Scale natural gradient
+        scaled_natural_gradient = scaling_factor * full_natural_gradient
 
-    def layerwise_update(self, layers_info, revert=False):
-
-        for layer_info in layers_info:
-            params = layer_info['params']
-            natural_gradient = layer_info['natural_gradient']
-            learning_rate = layer_info['learning_rate']
-            if revert:
-                learning_rate =  -learning_rate
-            with torch.no_grad():
+        # Perform line search
+        max_attempts = 15
+        success = False
+        while max_attempts > 0 and not success:
+            max_attempts -= 1
+            
+            # Apply update
+            start_idx = 0
+            for info in params_info:
+                layer_size = sum(info['sizes'])
+                layer_natural_grad = scaled_natural_gradient[start_idx:start_idx + layer_size]
                 
-                for param, ng in zip(params, torch.split(natural_gradient, [p.numel() for p in params])):
-                    param += learning_rate * ng.view(param.size())
+                for param, size in zip(info['params'], info['sizes']):
+                    with torch.no_grad():
+                        param_natural_grad = layer_natural_grad[:size].view(param.shape)
+                        param.add_(param_natural_grad)
+                    layer_natural_grad = layer_natural_grad[size:]
+                start_idx += layer_size
+
+            # Check KL constraint
+            with torch.no_grad():
+                new_action_dists = self.policy(states)
+                kl_div = mean_kl_first_fixed(action_dists, new_action_dists)
+                new_loss = self.surrogate_loss(
+                    new_action_dists.log_prob(actions), 
+                    log_action_probs, 
+                    advantages
+                )
+
+            # Revert update if constraint violated
+            if kl_div > self.max_kl_div or new_loss < loss:
+                start_idx = 0
+                for info in params_info:
+                    layer_size = sum(info['sizes'])
+                    layer_natural_grad = scaled_natural_gradient[start_idx:start_idx + layer_size]
+                    
+                    for param, size in zip(info['params'], info['sizes']):
+                        with torch.no_grad():
+                            param_natural_grad = layer_natural_grad[:size].view(param.shape)
+                            param.add_(-param_natural_grad)
+                    layer_natural_grad = layer_natural_grad[size:]
+                    start_idx += layer_size
+                
+                scaling_factor *= 0.5
+                scaled_natural_gradient = scaling_factor * full_natural_gradient
+            else:
+                success = True
+
+        # Log metrics
+        self.writer.add_scalar("Policy/ScalingFactor", scaling_factor.item(), self.episode_num)
+        self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
+        self.writer.add_scalar("Policy/Loss", new_loss.item(), self.episode_num)
+        self.writer.add_scalar("Policy/LineSearchSteps", 10 - max_attempts, self.episode_num)
+
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
