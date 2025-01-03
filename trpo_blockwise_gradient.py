@@ -387,6 +387,7 @@ class TRPO:
         # Average and add damping
         fim_block /= batch_size
         damping = 1e-3 * torch.eye(n_params, device=self.device)
+        
         return fim_block + damping
     def update_policy(self, states, actions, advantages):
         self.policy.train()
@@ -425,9 +426,13 @@ class TRPO:
 
             # Compute FIM block
             fim_block = torch.outer(grad_vector, grad_vector)
-            damping_factor = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
+            damping_factor = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor  # Add damping
-
+            condition_number = torch.linalg.cond(fim_block)
+            if condition_number > 1e6:
+                damping_factor *= 10
+                fim_block = fim_block + damping_factor
+    
             # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
             inv_fim_blocks.append(inv_fim_block)
