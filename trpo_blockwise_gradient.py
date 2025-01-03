@@ -391,109 +391,101 @@ class TRPO:
         return fim_block + damping
     def update_policy(self, states, actions, advantages):
         self.policy.train()
-
-        # Move data to the device
         states = states.to(self.device)
         actions = actions.to(self.device)
         advantages = advantages.to(self.device)
 
-        # Compute initial action distributions and log probabilities
+        # Get initial distributions
         action_dists = self.policy(states)
         log_action_probs = action_dists.log_prob(actions)
-
-        # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
 
-        # Save the current parameters
-        layers_info = []
+        # Initialize storage
+        blocks_info = []
         inv_fim_blocks = []
-        grads = []
-        mean_kl = mean_kl_first_fixed(action_dists, action_dists)
-        # Loop through layers for blockwise updates
+        loss_grads = []
+
+        # Compute per-layer quantities
         for layer in self.policy.children():
             layer_params = [p for p in layer.parameters() if p.requires_grad]
             if not layer_params:
                 continue
 
-            # Compute loss gradient
+            # Loss gradient for this layer
             loss_grad = torch.cat([
                 grad.view(-1) for grad in torch.autograd.grad(
                     loss, layer_params, retain_graph=True
                 )
             ])
-            grads.append(loss_grad)
+            loss_grads.append(loss_grad)
 
-            
-            # Compute FIM block using KL gradients
-            kl_grads = torch.autograd.grad(loss, layer_params, create_graph=True)
+            # KL gradient for FIM
+            kl = mean_kl_first_fixed(action_dists, self.policy(states))
+            kl_grads = torch.autograd.grad(kl, layer_params, create_graph=True)
             flat_kl_grad = torch.cat([g.view(-1) for g in kl_grads])
             
-            # Compute FIM block
+            # Compute layer's FIM block
             fim_block = torch.outer(flat_kl_grad, flat_kl_grad)
-            damping = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
+            damping = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
             fim_block += damping
-            condition_number = torch.linalg.cond(fim_block)
             
-            if condition_number > 1e6:
-                damping *= 10
-                fim_block = fim_block + damping
-            # Compute inverse FIM block
+            # Compute inverse
             inv_fim_block = torch.linalg.inv(fim_block)
             
             inv_fim_blocks.append(inv_fim_block)
-            layers_info.append({
+            blocks_info.append({
                 'params': layer_params,
-                'grad_vector': loss_grad,
+                'loss_grad': loss_grad,
+                'size': loss_grad.numel()
             })
 
-        # Build block diagonal FIM and compute natural gradient
-        inv_fim_matrix = torch.block_diag(*inv_fim_blocks)
-        loss_grad_concat = torch.cat(grads)
-        natural_gradient = inv_fim_matrix @ loss_grad_concat
-        learning_rate = torch.sqrt(2 * self.max_kl_div / (loss_grad_concat @ natural_gradient + 1e-8))
-        # Check KL divergence
-        max_updates = 20
-        update_successful = False
-        while max_updates > 0:
-            max_updates -= 1
+        # Assemble full quantities
+        inv_fim = torch.block_diag(*inv_fim_blocks)
+        loss_grad_full = torch.cat(loss_grads)
+        natural_gradient = torch.mv(inv_fim, loss_grad_full)
+
+        # Compute max step size
+        step_size = torch.sqrt(2 * self.max_kl_div / (loss_grad_full @ natural_gradient + 1e-8))
+
+        # Line search
+        success = False
+        for beta in [step_size * (0.8 ** i) for i in range(10)]:
+            # Try update
             start_idx = 0
-            for layer_info in layers_info:
-                params = layer_info['params']
-                grad_vector = layer_info['grad_vector']
-                end_idx = start_idx + grad_vector.numel()
-                layer_natural_gradient = natural_gradient[start_idx:end_idx]
+            for block in blocks_info:
+                end_idx = start_idx + block['size']
+                block_natural_grad = natural_gradient[start_idx:end_idx]
+                
+                for param, ng in zip(block['params'], 
+                                torch.split(block_natural_grad, [p.numel() for p in block['params']])):
+                    param.data.add_(beta * ng.view(param.size()))
                 start_idx = end_idx
-                with torch.no_grad():
-                    for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
-                        param += learning_rate * ng.view(param.size())
 
-            new_action_dists = self.policy(states)
-            kl_div = mean_kl_first_fixed(action_dists, new_action_dists).item()
-            if kl_div <= self.max_kl_div:
-                new_loss = self.surrogate_loss(new_action_dists.log_prob(actions), log_action_probs.detach(), advantages)
-                if new_loss >= loss:
+            # Evaluate update
+            new_dists = self.policy(states)
+            new_log_probs = new_dists.log_prob(actions)
+            new_loss = self.surrogate_loss(new_log_probs, log_action_probs.detach(), advantages)
+            kl_div = mean_kl_first_fixed(action_dists, new_dists)
 
-                    self.writer.add_scalar("Policy/MeanLearningRate", learning_rate, self.episode_num)
-                    update_successful = True
-                    break
+            if kl_div <= self.max_kl_div and new_loss > loss:
+                success = True
+                self.writer.add_scalar("Policy/MeanLearningRate", beta.item(), self.episode_num)
+                self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
+                return success
 
+            # Revert if failed
             start_idx = 0
-            for layer_info in layers_info:
-                params = layer_info['params']
-                grad_vector = layer_info['grad_vector']
-                end_idx = start_idx + grad_vector.numel()
-                layer_natural_gradient = natural_gradient[start_idx:end_idx]
+            for block in blocks_info:
+                end_idx = start_idx + block['size']
+                block_natural_grad = natural_gradient[start_idx:end_idx]
+                
+                for param, ng in zip(block['params'],
+                                torch.split(block_natural_grad, [p.numel() for p in block['params']])):
+                    param.data.add_(-beta * ng.view(param.size()))
                 start_idx = end_idx
-                with torch.no_grad():
-                    for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
-                        param -= learning_rate * ng.view(param.size())
-            learning_rate *= 0.8
-
-        if not update_successful:
-            self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
-        self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
-        self.writer.add_scalar("Policy/Max Tries", max_updates, self.episode_num)
-
+        # Log update failure
+        self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
+        return success
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
