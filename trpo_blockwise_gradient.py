@@ -383,7 +383,6 @@ class TRPO:
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
 
         # Save the current parameters
-        old_params = get_flat_params(self.policy).detach()
         layers_info = []
         # Loop through layers for blockwise updates
         for layer in self.policy.children():
@@ -407,7 +406,8 @@ class TRPO:
             # Compute inverse FIM block and natural gradient
             inv_fim_block = torch.linalg.inv(fim_block)
             natural_gradient = inv_fim_block @ grad_vector
-            learning_rate = ((2 * self.max_kl_div) / (grad_vector @ natural_gradient)).sqrt()
+            # learning_rate = ((2 * self.max_kl_div) / (grad_vector @ natural_gradient)).sqrt()
+            learning_rate = 2.0
             layers_info.append({
                 'params': layer_params,
                 'natural_gradient': natural_gradient,
@@ -417,7 +417,7 @@ class TRPO:
         # Update parameters
         # Check KL divergence
         max_updates = 100
-        flag = False
+        update_successful = False
         print(self.max_kl_div)
         while max_updates > 0:
             max_updates -= 1
@@ -425,20 +425,17 @@ class TRPO:
             new_action_dists = self.policy(states)
             kl_div = mean_kl_first_fixed(action_dists, new_action_dists).item()
             
-            if kl_div < self.max_kl_div:
-                if kl_div < 0.5 * self.max_kl_div:
-                    self.layerwise_update(layers_info=layers_info, revert=True)
-                    for layer_info in layers_info:
-                        layer_info['learning_rate'] = layer_info['learning_rate'] * 1.5  # Increase by 50%
-                    continue
-                mean_learning_rate = np.mean([layer_info['learning_rate'].item() for layer_info in layers_info])
-                self.writer.add_scalar("Policy/MeanLearningRate", mean_learning_rate, self.episode_num)
-                flag = True
-                break
+            if kl_div <= self.max_kl_div:
+                new_loss = self.surrogate_loss(new_action_dists.log_prob(actions), log_action_probs.detach(), advantages)
+                if new_loss >= loss:
+                    mean_learning_rate = torch.mean(torch.tensor([layer_info['learning_rate'] for layer_info in layers_info]))
+                    self.writer.add_scalar("Policy/MeanLearningRate", mean_learning_rate, self.episode_num)
+                    update_successful = True
+                    break
             self.layerwise_update(layers_info=layers_info, revert=True)
             for layer_info in layers_info:
-                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.9
-        if not flag:
+                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.6
+        if not update_successful:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
         self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
         self.writer.add_scalar("Policy/Max Tries", max_updates, self.episode_num)
