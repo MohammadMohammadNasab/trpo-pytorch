@@ -384,6 +384,9 @@ class TRPO:
 
         # Save the current parameters
         layers_info = []
+        inv_fim_blocks = []
+        grads = []
+
         # Loop through layers for blockwise updates
         for layer in self.policy.children():
             # Ensure the layer has parameters that require gradients
@@ -397,44 +400,68 @@ class TRPO:
                     loss, layer_params, retain_graph=True, create_graph=False
                 )
             ])
+            grads.append(grad_vector)
 
             # Compute FIM block
             fim_block = torch.ger(grad_vector, grad_vector)
             damping_factor = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
             fim_block = fim_block + damping_factor  # Add damping
 
-            # Compute inverse FIM block and natural gradient
+            # Compute inverse FIM block
             inv_fim_block = torch.linalg.inv(fim_block)
-            natural_gradient = inv_fim_block @ grad_vector
-            # learning_rate = ((2 * self.max_kl_div) / (grad_vector @ natural_gradient)).sqrt()
-            learning_rate = 2.0
+            inv_fim_blocks.append(inv_fim_block)
+
             layers_info.append({
                 'params': layer_params,
-                'natural_gradient': natural_gradient,
-                'learning_rate': learning_rate,
+                'grad_vector': grad_vector,
             })
 
+        # Build a matrix of inverse FIM with those smaller blocks
+        inv_fim_matrix = torch.block_diag(*inv_fim_blocks)
+        grad_vector_concat = torch.cat(grads)
+
+        # Compute natural gradient
+        natural_gradient = torch.mv(inv_fim_matrix,grad_vector_concat)
+        learning_rate = (2 * self.max_kl_div / (grad_vector_concat @ natural_gradient)).sqrt()
         # Update parameters
         # Check KL divergence
         max_updates = 100
         update_successful = False
-        print(self.max_kl_div)
         while max_updates > 0:
             max_updates -= 1
-            self.layerwise_update(layers_info=layers_info)
+            start_idx = 0
+            for layer_info in layers_info:
+                params = layer_info['params']
+                grad_vector = layer_info['grad_vector']
+                end_idx = start_idx + grad_vector.numel()
+                layer_natural_gradient = natural_gradient[start_idx:end_idx]
+                start_idx = end_idx
+                with torch.no_grad():
+                    for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
+                        param += learning_rate * ng.view(param.size())
+
             new_action_dists = self.policy(states)
             kl_div = mean_kl_first_fixed(action_dists, new_action_dists).item()
-            
             if kl_div <= self.max_kl_div:
                 new_loss = self.surrogate_loss(new_action_dists.log_prob(actions), log_action_probs.detach(), advantages)
                 if new_loss >= loss:
-                    mean_learning_rate = torch.mean(torch.tensor([layer_info['learning_rate'] for layer_info in layers_info]))
-                    self.writer.add_scalar("Policy/MeanLearningRate", mean_learning_rate, self.episode_num)
+
+                    self.writer.add_scalar("Policy/MeanLearningRate", learning_rate, self.episode_num)
                     update_successful = True
                     break
-            self.layerwise_update(layers_info=layers_info, revert=True)
+
+            start_idx = 0
             for layer_info in layers_info:
-                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.6
+                params = layer_info['params']
+                grad_vector = layer_info['grad_vector']
+                end_idx = start_idx + grad_vector.numel()
+                layer_natural_gradient = natural_gradient[start_idx:end_idx]
+                start_idx = end_idx
+                with torch.no_grad():
+                    for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
+                        param -= learning_rate * ng.view(param.size())
+            learning_rate *= 0.6
+
         if not update_successful:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
         self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)

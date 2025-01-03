@@ -13890,3 +13890,1960 @@ Training complete.
 
 Training complete.
 
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+[EPISODE]: 1	[AVG. REWARD]: 14.9536	 [ELAPSED TIME]: 0:00:01
+[EPISODE]: 2	[AVG. REWARD]: 17.4190	 [ELAPSED TIME]: 0:00:02
+[EPISODE]: 3	[AVG. REWARD]: 17.2878	 [ELAPSED TIME]: 0:00:04
+[EPISODE]: 4	[AVG. REWARD]: 23.6186	 [ELAPSED TIME]: 0:00:05
+[EPISODE]: 5	[AVG. REWARD]: 23.3616	 [ELAPSED TIME]: 0:00:07
+[EPISODE]: 6	[AVG. REWARD]: 31.8836	 [ELAPSED TIME]: 0:00:09
+[EPISODE]: 7	[AVG. REWARD]: 35.1244	 [ELAPSED TIME]: 0:00:10
+[EPISODE]: 8	[AVG. REWARD]: 38.4640	 [ELAPSED TIME]: 0:00:12
+[EPISODE]: 9	[AVG. REWARD]: 49.1072	 [ELAPSED TIME]: 0:00:14
+[EPISODE]: 10	[AVG. REWARD]: 58.3541	 [ELAPSED TIME]: 0:00:17
+[EPISODE]: 11	[AVG. REWARD]: 61.2666	 [ELAPSED TIME]: 0:00:19
+[EPISODE]: 12	[AVG. REWARD]: 83.7988	 [ELAPSED TIME]: 0:00:22
+[EPISODE]: 13	[AVG. REWARD]: 81.4485	 [ELAPSED TIME]: 0:00:24
+[EPISODE]: 14	[AVG. REWARD]: 101.7692	 [ELAPSED TIME]: 0:00:27
+[EPISODE]: 15	[AVG. REWARD]: 100.6704	 [ELAPSED TIME]: 0:00:30
+[EPISODE]: 16	[AVG. REWARD]: 101.8962	 [ELAPSED TIME]: 0:00:33
+[EPISODE]: 17	[AVG. REWARD]: 114.8911	 [ELAPSED TIME]: 0:00:36
+[EPISODE]: 18	[AVG. REWARD]: 141.6674	 [ELAPSED TIME]: 0:00:40
+[EPISODE]: 19	[AVG. REWARD]: 162.3878	 [ELAPSED TIME]: 0:00:43
+[EPISODE]: 20	[AVG. REWARD]: 183.9134	 [ELAPSED TIME]: 0:00:47
+[EPISODE]: 21	[AVG. REWARD]: 207.2749	 [ELAPSED TIME]: 0:00:52
+[EPISODE]: 22	[AVG. REWARD]: 207.7016	 [ELAPSED TIME]: 0:00:56
+[EPISODE]: 23	[AVG. REWARD]: 215.0417	 [ELAPSED TIME]: 0:01:01
+[EPISODE]: 24	[AVG. REWARD]: 228.9970	 [ELAPSED TIME]: 0:01:05
+[EPISODE]: 25	[AVG. REWARD]: 230.5599	 [ELAPSED TIME]: 0:01:10
+[EPISODE]: 26	[AVG. REWARD]: 228.1332	 [ELAPSED TIME]: 0:01:14
+[EPISODE]: 27	[AVG. REWARD]: 225.5258	 [ELAPSED TIME]: 0:01:19
+[EPISODE]: 28	[AVG. REWARD]: 232.0308	 [ELAPSED TIME]: 0:01:24
+[EPISODE]: 29	[AVG. REWARD]: 236.6475	 [ELAPSED TIME]: 0:01:28
+[EPISODE]: 30	[AVG. REWARD]: 239.8625	 [ELAPSED TIME]: 0:01:33
+[EPISODE]: 31	[AVG. REWARD]: 249.1059	 [ELAPSED TIME]: 0:01:38
+[EPISODE]: 32	[AVG. REWARD]: 246.9266	 [ELAPSED TIME]: 0:01:43
+[EPISODE]: 33	[AVG. REWARD]: 247.9365	 [ELAPSED TIME]: 0:01:48
+[EPISODE]: 34	[AVG. REWARD]: 255.7215	 [ELAPSED TIME]: 0:01:53
+[EPISODE]: 35	[AVG. REWARD]: 255.1965	 [ELAPSED TIME]: 0:01:58
+[EPISODE]: 36	[AVG. REWARD]: 257.4706	 [ELAPSED TIME]: 0:02:02
+[EPISODE]: 37	[AVG. REWARD]: 270.6965	 [ELAPSED TIME]: 0:02:08
+[EPISODE]: 38	[AVG. REWARD]: 273.0038	 [ELAPSED TIME]: 0:02:13
+[EPISODE]: 39	[AVG. REWARD]: 277.0520	 [ELAPSED TIME]: 0:02:18
+[EPISODE]: 40	[AVG. REWARD]: 278.0274	 [ELAPSED TIME]: 0:02:23
+[EPISODE]: 41	[AVG. REWARD]: 292.7882	 [ELAPSED TIME]: 0:02:28
+[EPISODE]: 42	[AVG. REWARD]: 303.0645	 [ELAPSED TIME]: 0:02:34
+[EPISODE]: 43	[AVG. REWARD]: 305.9760	 [ELAPSED TIME]: 0:02:39
+[EPISODE]: 44	[AVG. REWARD]: 325.8348	 [ELAPSED TIME]: 0:02:45
+[EPISODE]: 45	[AVG. REWARD]: 329.7342	 [ELAPSED TIME]: 0:02:50
+[EPISODE]: 46	[AVG. REWARD]: 349.1368	 [ELAPSED TIME]: 0:02:56
+[EPISODE]: 47	[AVG. REWARD]: 367.7376	 [ELAPSED TIME]: 0:03:02
+[EPISODE]: 48	[AVG. REWARD]: 394.6665	 [ELAPSED TIME]: 0:03:08
+[EPISODE]: 49	[AVG. REWARD]: 401.2917	 [ELAPSED TIME]: 0:03:15
+[EPISODE]: 50	[AVG. REWARD]: 469.8224	 [ELAPSED TIME]: 0:03:22
+[EPISODE]: 51	[AVG. REWARD]: 552.2735	 [ELAPSED TIME]: 0:03:30
+[EPISODE]: 52	[AVG. REWARD]: 648.9356	 [ELAPSED TIME]: 0:03:40
+[EPISODE]: 53	[AVG. REWARD]: 809.2051	 [ELAPSED TIME]: 0:03:52
+[EPISODE]: 54	[AVG. REWARD]: 946.6209	 [ELAPSED TIME]: 0:04:05
+[EPISODE]: 55	[AVG. REWARD]: 917.4963	 [ELAPSED TIME]: 0:04:18
+[EPISODE]: 56	[AVG. REWARD]: 1020.5938	 [ELAPSED TIME]: 0:04:33
+[EPISODE]: 57	[AVG. REWARD]: 1085.4176	 [ELAPSED TIME]: 0:04:49
+[EPISODE]: 58	[AVG. REWARD]: 1132.8484	 [ELAPSED TIME]: 0:05:05
+[EPISODE]: 59	[AVG. REWARD]: 1135.5348	 [ELAPSED TIME]: 0:05:21
+[EPISODE]: 60	[AVG. REWARD]: 1237.0841	 [ELAPSED TIME]: 0:05:39
+[EPISODE]: 61	[AVG. REWARD]: 1125.4934	 [ELAPSED TIME]: 0:05:54
+[EPISODE]: 62	[AVG. REWARD]: 1201.9578	 [ELAPSED TIME]: 0:06:10
+[EPISODE]: 63	[AVG. REWARD]: 1215.3805	 [ELAPSED TIME]: 0:06:27
+[EPISODE]: 64	[AVG. REWARD]: 1174.8973	 [ELAPSED TIME]: 0:06:42
+[EPISODE]: 65	[AVG. REWARD]: 1390.3260	 [ELAPSED TIME]: 0:07:01
+[EPISODE]: 66	[AVG. REWARD]: 1532.1392	 [ELAPSED TIME]: 0:07:21
+[EPISODE]: 67	[AVG. REWARD]: 1388.3756	 [ELAPSED TIME]: 0:07:39
+[EPISODE]: 68	[AVG. REWARD]: 1374.6714	 [ELAPSED TIME]: 0:07:57
+[EPISODE]: 69	[AVG. REWARD]: 1554.8118	 [ELAPSED TIME]: 0:08:18
+[EPISODE]: 70	[AVG. REWARD]: 1514.4950	 [ELAPSED TIME]: 0:08:38
+[EPISODE]: 71	[AVG. REWARD]: 1673.6851	 [ELAPSED TIME]: 0:09:00
+[EPISODE]: 72	[AVG. REWARD]: 1743.5591	 [ELAPSED TIME]: 0:09:23
+[EPISODE]: 73	[AVG. REWARD]: 1644.4185	 [ELAPSED TIME]: 0:09:45
+[EPISODE]: 74	[AVG. REWARD]: 1557.3276	 [ELAPSED TIME]: 0:10:06
+[EPISODE]: 75	[AVG. REWARD]: 1652.0959	 [ELAPSED TIME]: 0:10:28
+[EPISODE]: 76	[AVG. REWARD]: 1660.3058	 [ELAPSED TIME]: 0:10:50
+[EPISODE]: 77	[AVG. REWARD]: 1636.1147	 [ELAPSED TIME]: 0:11:12
+[EPISODE]: 78	[AVG. REWARD]: 1535.1390	 [ELAPSED TIME]: 0:11:32
+[EPISODE]: 79	[AVG. REWARD]: 1547.6924	 [ELAPSED TIME]: 0:11:51
+[EPISODE]: 80	[AVG. REWARD]: 1679.8945	 [ELAPSED TIME]: 0:12:13
+[EPISODE]: 81	[AVG. REWARD]: 1573.7595	 [ELAPSED TIME]: 0:12:33
+[EPISODE]: 82	[AVG. REWARD]: 1554.9988	 [ELAPSED TIME]: 0:12:53
+[EPISODE]: 83	[AVG. REWARD]: 1664.7560	 [ELAPSED TIME]: 0:13:13
+[EPISODE]: 84	[AVG. REWARD]: 1742.9520	 [ELAPSED TIME]: 0:13:36
+[EPISODE]: 85	[AVG. REWARD]: 1741.8169	 [ELAPSED TIME]: 0:13:58
+[EPISODE]: 86	[AVG. REWARD]: 1712.2987	 [ELAPSED TIME]: 0:14:20
+[EPISODE]: 87	[AVG. REWARD]: 1878.4949	 [ELAPSED TIME]: 0:14:45
+[EPISODE]: 88	[AVG. REWARD]: 1956.5347	 [ELAPSED TIME]: 0:15:11
+[EPISODE]: 89	[AVG. REWARD]: 2140.2578	 [ELAPSED TIME]: 0:15:41
+[EPISODE]: 90	[AVG. REWARD]: 2124.1936	 [ELAPSED TIME]: 0:16:10
+[EPISODE]: 91	[AVG. REWARD]: 2041.9744	 [ELAPSED TIME]: 0:16:39
+[EPISODE]: 92	[AVG. REWARD]: 2069.6465	 [ELAPSED TIME]: 0:17:06
+[EPISODE]: 93	[AVG. REWARD]: 1919.6904	 [ELAPSED TIME]: 0:17:32
+[EPISODE]: 94	[AVG. REWARD]: 1809.2678	 [ELAPSED TIME]: 0:17:56
+[EPISODE]: 95	[AVG. REWARD]: 1981.3727	 [ELAPSED TIME]: 0:18:21
+[EPISODE]: 96	[AVG. REWARD]: 1938.9658	 [ELAPSED TIME]: 0:18:47
+[EPISODE]: 97	[AVG. REWARD]: 2062.6804	 [ELAPSED TIME]: 0:19:14
+[EPISODE]: 98	[AVG. REWARD]: 2001.5302	 [ELAPSED TIME]: 0:19:41
+[EPISODE]: 99	[AVG. REWARD]: 2181.1995	 [ELAPSED TIME]: 0:20:10
+[EPISODE]: 100	[AVG. REWARD]: 2233.3848	 [ELAPSED TIME]: 0:20:40
+[EPISODE]: 101	[AVG. REWARD]: 2283.5903	 [ELAPSED TIME]: 0:21:11
+[EPISODE]: 102	[AVG. REWARD]: 2259.6326	 [ELAPSED TIME]: 0:21:41
+[EPISODE]: 103	[AVG. REWARD]: 2058.0425	 [ELAPSED TIME]: 0:22:08
+[EPISODE]: 104	[AVG. REWARD]: 2244.7703	 [ELAPSED TIME]: 0:22:38
+[EPISODE]: 105	[AVG. REWARD]: 2234.1323	 [ELAPSED TIME]: 0:23:09
+[EPISODE]: 106	[AVG. REWARD]: 2380.5679	 [ELAPSED TIME]: 0:23:41
+[EPISODE]: 107	[AVG. REWARD]: 2272.0957	 [ELAPSED TIME]: 0:24:10
+[EPISODE]: 108	[AVG. REWARD]: 2320.5422	 [ELAPSED TIME]: 0:24:41
+[EPISODE]: 109	[AVG. REWARD]: 2430.9287	 [ELAPSED TIME]: 0:25:14
+[EPISODE]: 110	[AVG. REWARD]: 2477.3584	 [ELAPSED TIME]: 0:25:46
+[EPISODE]: 111	[AVG. REWARD]: 2343.2671	 [ELAPSED TIME]: 0:26:17
+[EPISODE]: 112	[AVG. REWARD]: 2302.8389	 [ELAPSED TIME]: 0:26:47
+[EPISODE]: 113	[AVG. REWARD]: 2255.7178	 [ELAPSED TIME]: 0:27:17
+[EPISODE]: 114	[AVG. REWARD]: 2378.9482	 [ELAPSED TIME]: 0:27:49
+[EPISODE]: 115	[AVG. REWARD]: 2416.7100	 [ELAPSED TIME]: 0:28:21
+[EPISODE]: 116	[AVG. REWARD]: 2408.5093	 [ELAPSED TIME]: 0:28:53
+[EPISODE]: 117	[AVG. REWARD]: 2324.8530	 [ELAPSED TIME]: 0:29:24
+[EPISODE]: 118	[AVG. REWARD]: 2454.1282	 [ELAPSED TIME]: 0:29:57
+[EPISODE]: 119	[AVG. REWARD]: 2553.6057	 [ELAPSED TIME]: 0:30:29
+[EPISODE]: 120	[AVG. REWARD]: 2506.0247	 [ELAPSED TIME]: 0:31:03
+[EPISODE]: 121	[AVG. REWARD]: 2690.3313	 [ELAPSED TIME]: 0:31:37
+[EPISODE]: 122	[AVG. REWARD]: 2495.0735	 [ELAPSED TIME]: 0:32:11
+[EPISODE]: 123	[AVG. REWARD]: 2537.8730	 [ELAPSED TIME]: 0:32:44
+[EPISODE]: 124	[AVG. REWARD]: 2472.8154	 [ELAPSED TIME]: 0:33:16
+[EPISODE]: 125	[AVG. REWARD]: 2625.5991	 [ELAPSED TIME]: 0:33:51
+[EPISODE]: 126	[AVG. REWARD]: 2698.5327	 [ELAPSED TIME]: 0:34:26
+[EPISODE]: 127	[AVG. REWARD]: 2572.4563	 [ELAPSED TIME]: 0:35:01
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+0.01
+[EPISODE]: 1	[AVG. REWARD]: 14.9700	 [ELAPSED TIME]: 0:01:04
+0.01
+[EPISODE]: 2	[AVG. REWARD]: 18.0376	 [ELAPSED TIME]: 0:02:19
+0.01
+[EPISODE]: 3	[AVG. REWARD]: 16.1041	 [ELAPSED TIME]: 0:03:33
+0.01
+[EPISODE]: 4	[AVG. REWARD]: 35.8211	 [ELAPSED TIME]: 0:04:49
+0.01
+[EPISODE]: 5	[AVG. REWARD]: 43.4076	 [ELAPSED TIME]: 0:06:07
+0.01
+[EPISODE]: 6	[AVG. REWARD]: 49.0344	 [ELAPSED TIME]: 0:07:33
+0.01
+[EPISODE]: 7	[AVG. REWARD]: 48.5182	 [ELAPSED TIME]: 0:08:57
+0.01
+[EPISODE]: 8	[AVG. REWARD]: 60.5367	 [ELAPSED TIME]: 0:10:16
+0.01
+[EPISODE]: 9	[AVG. REWARD]: 71.5086	 [ELAPSED TIME]: 0:11:41
+0.01
+[EPISODE]: 10	[AVG. REWARD]: 82.7948	 [ELAPSED TIME]: 0:13:08
+0.01
+[EPISODE]: 11	[AVG. REWARD]: 95.8890	 [ELAPSED TIME]: 0:14:45
+0.01
+[EPISODE]: 12	[AVG. REWARD]: 104.2490	 [ELAPSED TIME]: 0:16:17
+0.01
+[EPISODE]: 13	[AVG. REWARD]: 110.3102	 [ELAPSED TIME]: 0:17:46
+0.01
+[EPISODE]: 14	[AVG. REWARD]: 129.6840	 [ELAPSED TIME]: 0:19:19
+0.01
+[EPISODE]: 15	[AVG. REWARD]: 156.1476	 [ELAPSED TIME]: 0:20:48
+0.01
+[EPISODE]: 16	[AVG. REWARD]: 155.5536	 [ELAPSED TIME]: 0:22:22
+0.01
+[EPISODE]: 17	[AVG. REWARD]: 158.6719	 [ELAPSED TIME]: 0:23:53
+0.01
+[EPISODE]: 18	[AVG. REWARD]: 180.9936	 [ELAPSED TIME]: 0:25:26
+0.01
+[EPISODE]: 19	[AVG. REWARD]: 201.7823	 [ELAPSED TIME]: 0:27:04
+0.01
+[EPISODE]: 20	[AVG. REWARD]: 204.2066	 [ELAPSED TIME]: 0:28:38
+0.01
+[EPISODE]: 21	[AVG. REWARD]: 212.1897	 [ELAPSED TIME]: 0:30:10
+0.01
+[EPISODE]: 22	[AVG. REWARD]: 214.6449	 [ELAPSED TIME]: 0:31:51
+0.01
+[EPISODE]: 23	[AVG. REWARD]: 217.6263	 [ELAPSED TIME]: 0:33:31
+0.01
+[EPISODE]: 24	[AVG. REWARD]: 220.4442	 [ELAPSED TIME]: 0:35:04
+0.01
+[EPISODE]: 25	[AVG. REWARD]: 219.1296	 [ELAPSED TIME]: 0:36:44
+0.01
+[EPISODE]: 26	[AVG. REWARD]: 222.4603	 [ELAPSED TIME]: 0:38:24
+0.01
+[EPISODE]: 27	[AVG. REWARD]: 230.9054	 [ELAPSED TIME]: 0:40:29
+0.01
+[EPISODE]: 28	[AVG. REWARD]: 238.3467	 [ELAPSED TIME]: 0:42:32
+0.01
+[EPISODE]: 29	[AVG. REWARD]: 251.4245	 [ELAPSED TIME]: 0:44:32
+0.01
+[EPISODE]: 30	[AVG. REWARD]: 259.2532	 [ELAPSED TIME]: 0:46:34
+0.01
+[EPISODE]: 31	[AVG. REWARD]: 263.4769	 [ELAPSED TIME]: 0:49:00
+0.01
+[EPISODE]: 32	[AVG. REWARD]: 277.2287	 [ELAPSED TIME]: 0:51:05
+0.01
+[EPISODE]: 33	[AVG. REWARD]: 290.3128	 [ELAPSED TIME]: 0:53:21
+0.01
+[EPISODE]: 34	[AVG. REWARD]: 311.3683	 [ELAPSED TIME]: 0:55:44
+0.01
+[EPISODE]: 35	[AVG. REWARD]: 306.8874	 [ELAPSED TIME]: 0:57:48
+0.01
+[EPISODE]: 36	[AVG. REWARD]: 321.2655	 [ELAPSED TIME]: 1:00:05
+0.01
+[EPISODE]: 37	[AVG. REWARD]: 329.4263	 [ELAPSED TIME]: 1:02:34
+0.01
+[EPISODE]: 38	[AVG. REWARD]: 341.5774	 [ELAPSED TIME]: 1:04:58
+0.01
+[EPISODE]: 39	[AVG. REWARD]: 350.4634	 [ELAPSED TIME]: 1:07:11
+0.01
+[EPISODE]: 40	[AVG. REWARD]: 369.3004	 [ELAPSED TIME]: 1:09:40
+0.01
+[EPISODE]: 41	[AVG. REWARD]: 383.3224	 [ELAPSED TIME]: 1:12:24
+0.01
+[EPISODE]: 42	[AVG. REWARD]: 399.6729	 [ELAPSED TIME]: 1:15:09
+0.01
+[EPISODE]: 43	[AVG. REWARD]: 426.6949	 [ELAPSED TIME]: 1:17:44
+0.01
+[EPISODE]: 44	[AVG. REWARD]: 448.0695	 [ELAPSED TIME]: 1:20:30
+0.01
+[EPISODE]: 45	[AVG. REWARD]: 527.2088	 [ELAPSED TIME]: 1:23:56
+0.01
+[EPISODE]: 46	[AVG. REWARD]: 559.4894	 [ELAPSED TIME]: 1:27:23
+0.01
+[EPISODE]: 47	[AVG. REWARD]: 803.6376	 [ELAPSED TIME]: 1:32:01
+0.01
+[EPISODE]: 48	[AVG. REWARD]: 1110.0107	 [ELAPSED TIME]: 1:37:41
+0.01
+[EPISODE]: 49	[AVG. REWARD]: 1347.3921	 [ELAPSED TIME]: 1:43:34
+0.01
+[EPISODE]: 50	[AVG. REWARD]: 1495.8668	 [ELAPSED TIME]: 1:49:55
+0.01
+[EPISODE]: 51	[AVG. REWARD]: 1511.3174	 [ELAPSED TIME]: 1:51:09
+0.01
+[EPISODE]: 52	[AVG. REWARD]: 1519.3717	 [ELAPSED TIME]: 1:51:34
+0.01
+[EPISODE]: 53	[AVG. REWARD]: 1557.3265	 [ELAPSED TIME]: 1:51:59
+0.01
+[EPISODE]: 54	[AVG. REWARD]: 1395.7372	 [ELAPSED TIME]: 1:52:21
+0.01
+[EPISODE]: 55	[AVG. REWARD]: 1557.2214	 [ELAPSED TIME]: 1:52:45
+0.01
+[EPISODE]: 56	[AVG. REWARD]: 1422.4106	 [ELAPSED TIME]: 1:53:06
+0.01
+[EPISODE]: 57	[AVG. REWARD]: 1438.6814	 [ELAPSED TIME]: 1:53:26
+0.01
+[EPISODE]: 58	[AVG. REWARD]: 1525.5386	 [ELAPSED TIME]: 1:53:48
+0.01
+[EPISODE]: 59	[AVG. REWARD]: 1464.2673	 [ELAPSED TIME]: 1:54:09
+0.01
+[EPISODE]: 60	[AVG. REWARD]: 1415.2675	 [ELAPSED TIME]: 1:54:28
+0.01
+[EPISODE]: 61	[AVG. REWARD]: 1308.0626	 [ELAPSED TIME]: 1:54:47
+0.01
+[EPISODE]: 62	[AVG. REWARD]: 1329.6893	 [ELAPSED TIME]: 1:55:05
+0.01
+[EPISODE]: 63	[AVG. REWARD]: 1338.3018	 [ELAPSED TIME]: 1:55:22
+0.01
+[EPISODE]: 64	[AVG. REWARD]: 1322.1846	 [ELAPSED TIME]: 1:55:40
+0.01
+[EPISODE]: 65	[AVG. REWARD]: 1530.5072	 [ELAPSED TIME]: 1:56:00
+0.01
+[EPISODE]: 66	[AVG. REWARD]: 1573.7222	 [ELAPSED TIME]: 1:56:21
+0.01
+[EPISODE]: 67	[AVG. REWARD]: 1548.1520	 [ELAPSED TIME]: 1:56:41
+0.01
+[EPISODE]: 68	[AVG. REWARD]: 1540.2136	 [ELAPSED TIME]: 1:57:01
+0.01
+[EPISODE]: 69	[AVG. REWARD]: 1609.4658	 [ELAPSED TIME]: 1:57:22
+0.01
+[EPISODE]: 70	[AVG. REWARD]: 1646.9982	 [ELAPSED TIME]: 1:57:43
+0.01
+[EPISODE]: 71	[AVG. REWARD]: 1808.8597	 [ELAPSED TIME]: 1:58:06
+0.01
+[EPISODE]: 72	[AVG. REWARD]: 1843.7719	 [ELAPSED TIME]: 1:58:31
+0.01
+[EPISODE]: 73	[AVG. REWARD]: 1840.1899	 [ELAPSED TIME]: 1:58:55
+0.01
+[EPISODE]: 74	[AVG. REWARD]: 1807.3601	 [ELAPSED TIME]: 1:59:19
+0.01
+[EPISODE]: 75	[AVG. REWARD]: 1969.3638	 [ELAPSED TIME]: 1:59:45
+0.01
+[EPISODE]: 76	[AVG. REWARD]: 1926.1617	 [ELAPSED TIME]: 2:00:10
+0.01
+[EPISODE]: 77	[AVG. REWARD]: 2065.8201	 [ELAPSED TIME]: 2:00:39
+0.01
+[EPISODE]: 78	[AVG. REWARD]: 2023.3723	 [ELAPSED TIME]: 2:01:07
+0.01
+[EPISODE]: 79	[AVG. REWARD]: 2024.0532	 [ELAPSED TIME]: 2:01:33
+0.01
+[EPISODE]: 80	[AVG. REWARD]: 2140.2390	 [ELAPSED TIME]: 2:02:01
+0.01
+[EPISODE]: 81	[AVG. REWARD]: 2196.0991	 [ELAPSED TIME]: 2:02:32
+0.01
+[EPISODE]: 82	[AVG. REWARD]: 2148.4429	 [ELAPSED TIME]: 2:03:01
+0.01
+[EPISODE]: 83	[AVG. REWARD]: 2162.3425	 [ELAPSED TIME]: 2:03:31
+0.01
+[EPISODE]: 84	[AVG. REWARD]: 2180.1631	 [ELAPSED TIME]: 2:04:01
+0.01
+[EPISODE]: 85	[AVG. REWARD]: 2297.3430	 [ELAPSED TIME]: 2:04:33
+0.01
+[EPISODE]: 86	[AVG. REWARD]: 2350.7346	 [ELAPSED TIME]: 2:05:05
+0.01
+[EPISODE]: 87	[AVG. REWARD]: 2098.4790	 [ELAPSED TIME]: 2:05:35
+0.01
+[EPISODE]: 88	[AVG. REWARD]: 2154.4390	 [ELAPSED TIME]: 2:06:04
+0.01
+[EPISODE]: 89	[AVG. REWARD]: 2158.6897	 [ELAPSED TIME]: 2:06:33
+0.01
+[EPISODE]: 90	[AVG. REWARD]: 2248.5127	 [ELAPSED TIME]: 2:07:04
+0.01
+[EPISODE]: 91	[AVG. REWARD]: 2261.0967	 [ELAPSED TIME]: 2:07:34
+0.01
+[EPISODE]: 92	[AVG. REWARD]: 2364.0986	 [ELAPSED TIME]: 2:08:06
+0.01
+[EPISODE]: 93	[AVG. REWARD]: 2464.6111	 [ELAPSED TIME]: 2:08:38
+0.01
+[EPISODE]: 94	[AVG. REWARD]: 2437.3323	 [ELAPSED TIME]: 2:09:12
+0.01
+[EPISODE]: 95	[AVG. REWARD]: 2412.3726	 [ELAPSED TIME]: 2:09:45
+0.01
+[EPISODE]: 96	[AVG. REWARD]: 2381.8994	 [ELAPSED TIME]: 2:10:19
+0.01
+[EPISODE]: 97	[AVG. REWARD]: 2395.3748	 [ELAPSED TIME]: 2:10:51
+0.01
+[EPISODE]: 98	[AVG. REWARD]: 2430.9534	 [ELAPSED TIME]: 2:11:24
+0.01
+[EPISODE]: 99	[AVG. REWARD]: 2436.4341	 [ELAPSED TIME]: 2:11:58
+0.01
+[EPISODE]: 100	[AVG. REWARD]: 2430.5090	 [ELAPSED TIME]: 2:12:29
+0.01
+[EPISODE]: 101	[AVG. REWARD]: 2469.6748	 [ELAPSED TIME]: 2:13:03
+0.01
+[EPISODE]: 102	[AVG. REWARD]: 2455.3835	 [ELAPSED TIME]: 2:13:37
+0.01
+[EPISODE]: 103	[AVG. REWARD]: 2485.8159	 [ELAPSED TIME]: 2:14:10
+0.01
+[EPISODE]: 104	[AVG. REWARD]: 2458.4438	 [ELAPSED TIME]: 2:14:43
+0.01
+[EPISODE]: 105	[AVG. REWARD]: 2581.9197	 [ELAPSED TIME]: 2:15:19
+0.01
+[EPISODE]: 106	[AVG. REWARD]: 2550.9519	 [ELAPSED TIME]: 2:15:53
+0.01
+[EPISODE]: 107	[AVG. REWARD]: 2536.8965	 [ELAPSED TIME]: 2:16:28
+0.01
+[EPISODE]: 108	[AVG. REWARD]: 2533.8152	 [ELAPSED TIME]: 2:17:02
+0.01
+[EPISODE]: 109	[AVG. REWARD]: 2585.1306	 [ELAPSED TIME]: 2:17:37
+0.01
+[EPISODE]: 110	[AVG. REWARD]: 2634.2090	 [ELAPSED TIME]: 2:18:14
+0.01
+[EPISODE]: 111	[AVG. REWARD]: 2501.4141	 [ELAPSED TIME]: 2:18:47
+0.01
+[EPISODE]: 112	[AVG. REWARD]: 2557.2319	 [ELAPSED TIME]: 2:19:20
+0.01
+[EPISODE]: 113	[AVG. REWARD]: 2609.7163	 [ELAPSED TIME]: 2:19:56
+0.01
+[EPISODE]: 114	[AVG. REWARD]: 2602.0159	 [ELAPSED TIME]: 2:20:32
+0.01
+[EPISODE]: 115	[AVG. REWARD]: 2688.6343	 [ELAPSED TIME]: 2:21:08
+0.01
+[EPISODE]: 116	[AVG. REWARD]: 2654.1284	 [ELAPSED TIME]: 2:21:45
+0.01
+[EPISODE]: 117	[AVG. REWARD]: 2664.5459	 [ELAPSED TIME]: 2:22:21
+0.01
+[EPISODE]: 118	[AVG. REWARD]: 2618.3596	 [ELAPSED TIME]: 2:22:55
+0.01
+[EPISODE]: 119	[AVG. REWARD]: 2649.9785	 [ELAPSED TIME]: 2:23:31
+0.01
+[EPISODE]: 120	[AVG. REWARD]: 2716.2039	 [ELAPSED TIME]: 2:24:07
+0.01
+[EPISODE]: 121	[AVG. REWARD]: 2466.4292	 [ELAPSED TIME]: 2:24:40
+0.01
+[EPISODE]: 122	[AVG. REWARD]: 2645.2546	 [ELAPSED TIME]: 2:25:14
+0.01
+[EPISODE]: 123	[AVG. REWARD]: 2609.4905	 [ELAPSED TIME]: 2:25:49
+0.01
+[EPISODE]: 124	[AVG. REWARD]: 2617.8613	 [ELAPSED TIME]: 2:26:24
+0.01
+[EPISODE]: 125	[AVG. REWARD]: 2730.0164	 [ELAPSED TIME]: 2:27:01
+0.01
+[EPISODE]: 126	[AVG. REWARD]: 2778.6743	 [ELAPSED TIME]: 2:27:38
+0.01
+[EPISODE]: 127	[AVG. REWARD]: 2637.2275	 [ELAPSED TIME]: 2:28:12
+0.01
+[EPISODE]: 128	[AVG. REWARD]: 2756.4077	 [ELAPSED TIME]: 2:28:48
+0.01
+[EPISODE]: 129	[AVG. REWARD]: 2714.2131	 [ELAPSED TIME]: 2:29:25
+0.01
+[EPISODE]: 130	[AVG. REWARD]: 2748.7698	 [ELAPSED TIME]: 2:30:02
+0.01
+[EPISODE]: 131	[AVG. REWARD]: 2745.8032	 [ELAPSED TIME]: 2:30:39
+0.01
+[EPISODE]: 132	[AVG. REWARD]: 2727.6577	 [ELAPSED TIME]: 2:31:15
+0.01
+[EPISODE]: 133	[AVG. REWARD]: 2700.7200	 [ELAPSED TIME]: 2:31:51
+0.01
+[EPISODE]: 134	[AVG. REWARD]: 2873.5972	 [ELAPSED TIME]: 2:32:30
+0.01
+[EPISODE]: 135	[AVG. REWARD]: 2741.8625	 [ELAPSED TIME]: 2:33:06
+0.01
+[EPISODE]: 136	[AVG. REWARD]: 2735.0701	 [ELAPSED TIME]: 2:33:43
+0.01
+[EPISODE]: 137	[AVG. REWARD]: 2822.1443	 [ELAPSED TIME]: 2:34:19
+0.01
+[EPISODE]: 138	[AVG. REWARD]: 2633.5078	 [ELAPSED TIME]: 2:34:55
+0.01
+[EPISODE]: 139	[AVG. REWARD]: 2768.3250	 [ELAPSED TIME]: 2:35:31
+0.01
+[EPISODE]: 140	[AVG. REWARD]: 2841.1917	 [ELAPSED TIME]: 2:36:08
+0.01
+[EPISODE]: 141	[AVG. REWARD]: 2683.8401	 [ELAPSED TIME]: 2:36:43
+0.01
+[EPISODE]: 142	[AVG. REWARD]: 2802.1162	 [ELAPSED TIME]: 2:37:19
+0.01
+[EPISODE]: 143	[AVG. REWARD]: 2824.3848	 [ELAPSED TIME]: 2:37:57
+0.01
+[EPISODE]: 144	[AVG. REWARD]: 2713.3523	 [ELAPSED TIME]: 2:38:33
+0.01
+[EPISODE]: 145	[AVG. REWARD]: 2754.1272	 [ELAPSED TIME]: 2:39:08
+0.01
+[EPISODE]: 146	[AVG. REWARD]: 2774.4788	 [ELAPSED TIME]: 2:39:44
+0.01
+[EPISODE]: 147	[AVG. REWARD]: 2727.2336	 [ELAPSED TIME]: 2:40:20
+0.01
+[EPISODE]: 148	[AVG. REWARD]: 2870.0601	 [ELAPSED TIME]: 2:40:58
+0.01
+[EPISODE]: 149	[AVG. REWARD]: 2823.2051	 [ELAPSED TIME]: 2:41:34
+0.01
+[EPISODE]: 150	[AVG. REWARD]: 2794.6960	 [ELAPSED TIME]: 2:42:11
+0.01
+[EPISODE]: 151	[AVG. REWARD]: 2884.5681	 [ELAPSED TIME]: 2:42:49
+0.01
+[EPISODE]: 152	[AVG. REWARD]: 2743.5422	 [ELAPSED TIME]: 2:43:25
+0.01
+[EPISODE]: 153	[AVG. REWARD]: 2875.3909	 [ELAPSED TIME]: 2:44:03
+0.01
+[EPISODE]: 154	[AVG. REWARD]: 2897.4673	 [ELAPSED TIME]: 2:44:41
+0.01
+[EPISODE]: 155	[AVG. REWARD]: 2850.7095	 [ELAPSED TIME]: 2:45:19
+0.01
+[EPISODE]: 156	[AVG. REWARD]: 2853.0532	 [ELAPSED TIME]: 2:45:57
+0.01
+[EPISODE]: 157	[AVG. REWARD]: 2846.0593	 [ELAPSED TIME]: 2:46:34
+0.01
+[EPISODE]: 158	[AVG. REWARD]: 2860.7109	 [ELAPSED TIME]: 2:47:11
+0.01
+[EPISODE]: 159	[AVG. REWARD]: 2841.4287	 [ELAPSED TIME]: 2:47:47
+0.01
+[EPISODE]: 160	[AVG. REWARD]: 2823.6677	 [ELAPSED TIME]: 2:48:23
+0.01
+[EPISODE]: 161	[AVG. REWARD]: 2915.4263	 [ELAPSED TIME]: 2:49:01
+0.01
+[EPISODE]: 162	[AVG. REWARD]: 2928.0540	 [ELAPSED TIME]: 2:49:39
+0.01
+[EPISODE]: 163	[AVG. REWARD]: 2708.5056	 [ELAPSED TIME]: 2:50:14
+0.01
+[EPISODE]: 164	[AVG. REWARD]: 2933.9802	 [ELAPSED TIME]: 2:50:51
+0.01
+[EPISODE]: 165	[AVG. REWARD]: 2982.7766	 [ELAPSED TIME]: 2:51:30
+0.01
+[EPISODE]: 166	[AVG. REWARD]: 2958.0984	 [ELAPSED TIME]: 2:52:09
+0.01
+[EPISODE]: 167	[AVG. REWARD]: 2937.0701	 [ELAPSED TIME]: 2:52:46
+0.01
+[EPISODE]: 168	[AVG. REWARD]: 2918.9785	 [ELAPSED TIME]: 2:53:25
+0.01
+[EPISODE]: 169	[AVG. REWARD]: 2840.3704	 [ELAPSED TIME]: 2:54:01
+0.01
+[EPISODE]: 170	[AVG. REWARD]: 2912.4807	 [ELAPSED TIME]: 2:54:38
+0.01
+[EPISODE]: 171	[AVG. REWARD]: 2991.4854	 [ELAPSED TIME]: 2:55:17
+0.01
+[EPISODE]: 172	[AVG. REWARD]: 2845.1201	 [ELAPSED TIME]: 2:55:53
+0.01
+[EPISODE]: 173	[AVG. REWARD]: 2923.4316	 [ELAPSED TIME]: 2:56:31
+0.01
+[EPISODE]: 174	[AVG. REWARD]: 2971.9028	 [ELAPSED TIME]: 2:57:08
+0.01
+[EPISODE]: 175	[AVG. REWARD]: 2996.2566	 [ELAPSED TIME]: 2:57:47
+0.01
+[EPISODE]: 176	[AVG. REWARD]: 3002.7959	 [ELAPSED TIME]: 2:58:26
+0.01
+[EPISODE]: 177	[AVG. REWARD]: 3033.7800	 [ELAPSED TIME]: 2:59:04
+0.01
+[EPISODE]: 178	[AVG. REWARD]: 2960.8982	 [ELAPSED TIME]: 2:59:42
+0.01
+[EPISODE]: 179	[AVG. REWARD]: 2992.3188	 [ELAPSED TIME]: 3:00:20
+0.01
+[EPISODE]: 180	[AVG. REWARD]: 3032.4189	 [ELAPSED TIME]: 3:00:59
+0.01
+[EPISODE]: 181	[AVG. REWARD]: 3057.8816	 [ELAPSED TIME]: 3:01:39
+0.01
+[EPISODE]: 182	[AVG. REWARD]: 3013.5603	 [ELAPSED TIME]: 3:02:17
+0.01
+[EPISODE]: 183	[AVG. REWARD]: 3040.5164	 [ELAPSED TIME]: 3:02:56
+0.01
+[EPISODE]: 184	[AVG. REWARD]: 2988.8267	 [ELAPSED TIME]: 3:03:34
+0.01
+[EPISODE]: 185	[AVG. REWARD]: 3014.9988	 [ELAPSED TIME]: 3:04:12
+0.01
+[EPISODE]: 186	[AVG. REWARD]: 2961.5093	 [ELAPSED TIME]: 3:04:49
+0.01
+[EPISODE]: 187	[AVG. REWARD]: 3046.1179	 [ELAPSED TIME]: 3:05:28
+0.01
+[EPISODE]: 188	[AVG. REWARD]: 3033.9810	 [ELAPSED TIME]: 3:06:06
+0.01
+[EPISODE]: 189	[AVG. REWARD]: 3000.7915	 [ELAPSED TIME]: 3:06:44
+0.01
+[EPISODE]: 190	[AVG. REWARD]: 3031.3501	 [ELAPSED TIME]: 3:07:22
+0.01
+[EPISODE]: 191	[AVG. REWARD]: 2921.2344	 [ELAPSED TIME]: 3:08:00
+0.01
+[EPISODE]: 192	[AVG. REWARD]: 2980.8352	 [ELAPSED TIME]: 3:08:37
+0.01
+[EPISODE]: 193	[AVG. REWARD]: 3046.3237	 [ELAPSED TIME]: 3:09:16
+0.01
+[EPISODE]: 194	[AVG. REWARD]: 2966.1228	 [ELAPSED TIME]: 3:09:54
+0.01
+[EPISODE]: 195	[AVG. REWARD]: 3055.2988	 [ELAPSED TIME]: 3:10:33
+0.01
+[EPISODE]: 196	[AVG. REWARD]: 3072.4944	 [ELAPSED TIME]: 3:11:11
+0.01
+[EPISODE]: 197	[AVG. REWARD]: 3070.0500	 [ELAPSED TIME]: 3:11:51
+0.01
+[EPISODE]: 198	[AVG. REWARD]: 3035.2400	 [ELAPSED TIME]: 3:12:30
+0.01
+[EPISODE]: 199	[AVG. REWARD]: 3037.4265	 [ELAPSED TIME]: 3:13:08
+0.01
+[EPISODE]: 200	[AVG. REWARD]: 3001.9573	 [ELAPSED TIME]: 3:13:47
+
+Training complete.
+
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy hopper on Hopper-v3 environment...
+
+0.01
+[EPISODE]: 1	[AVG. REWARD]: 14.8192	 [ELAPSED TIME]: 0:00:01
+0.01
+[EPISODE]: 2	[AVG. REWARD]: 18.8958	 [ELAPSED TIME]: 0:00:02
+0.01
+[EPISODE]: 3	[AVG. REWARD]: 18.1706	 [ELAPSED TIME]: 0:00:04
+0.01
+[EPISODE]: 4	[AVG. REWARD]: 29.3325	 [ELAPSED TIME]: 0:00:05
+0.01
+[EPISODE]: 5	[AVG. REWARD]: 27.4939	 [ELAPSED TIME]: 0:00:07
+0.01
+[EPISODE]: 6	[AVG. REWARD]: 38.0329	 [ELAPSED TIME]: 0:00:09
+0.01
+[EPISODE]: 7	[AVG. REWARD]: 51.7490	 [ELAPSED TIME]: 0:00:11
+0.01
+[EPISODE]: 8	[AVG. REWARD]: 57.9453	 [ELAPSED TIME]: 0:00:13
+0.01
+[EPISODE]: 9	[AVG. REWARD]: 63.4087	 [ELAPSED TIME]: 0:00:15
+0.01
+[EPISODE]: 10	[AVG. REWARD]: 79.2243	 [ELAPSED TIME]: 0:00:18
+0.01
+[EPISODE]: 11	[AVG. REWARD]: 90.5730	 [ELAPSED TIME]: 0:00:20
+0.01
+[EPISODE]: 12	[AVG. REWARD]: 93.7962	 [ELAPSED TIME]: 0:00:23
+0.01
+[EPISODE]: 13	[AVG. REWARD]: 102.4841	 [ELAPSED TIME]: 0:00:25
+0.01
+[EPISODE]: 14	[AVG. REWARD]: 106.5741	 [ELAPSED TIME]: 0:00:28
+0.01
+[EPISODE]: 15	[AVG. REWARD]: 131.8140	 [ELAPSED TIME]: 0:00:31
+0.01
+[EPISODE]: 16	[AVG. REWARD]: 145.0147	 [ELAPSED TIME]: 0:00:34
+0.01
+[EPISODE]: 17	[AVG. REWARD]: 171.5770	 [ELAPSED TIME]: 0:00:39
+0.01
+[EPISODE]: 18	[AVG. REWARD]: 185.9510	 [ELAPSED TIME]: 0:00:43
+0.01
+[EPISODE]: 19	[AVG. REWARD]: 197.7965	 [ELAPSED TIME]: 0:00:47
+0.01
+[EPISODE]: 20	[AVG. REWARD]: 200.0748	 [ELAPSED TIME]: 0:00:51
+0.01
+[EPISODE]: 21	[AVG. REWARD]: 203.0319	 [ELAPSED TIME]: 0:00:55
+0.01
+[EPISODE]: 22	[AVG. REWARD]: 208.1933	 [ELAPSED TIME]: 0:00:59
+0.01
+[EPISODE]: 23	[AVG. REWARD]: 206.6578	 [ELAPSED TIME]: 0:01:03
+0.01
+[EPISODE]: 24	[AVG. REWARD]: 210.8540	 [ELAPSED TIME]: 0:01:07
+0.01
+[EPISODE]: 25	[AVG. REWARD]: 205.5798	 [ELAPSED TIME]: 0:01:11
+0.01
+[EPISODE]: 26	[AVG. REWARD]: 208.6770	 [ELAPSED TIME]: 0:01:15
+0.01
+[EPISODE]: 27	[AVG. REWARD]: 214.5838	 [ELAPSED TIME]: 0:01:20
+0.01
+[EPISODE]: 28	[AVG. REWARD]: 222.7072	 [ELAPSED TIME]: 0:01:24
+0.01
+[EPISODE]: 29	[AVG. REWARD]: 225.0942	 [ELAPSED TIME]: 0:01:29
+0.01
+[EPISODE]: 30	[AVG. REWARD]: 224.3972	 [ELAPSED TIME]: 0:01:33
+0.01
+[EPISODE]: 31	[AVG. REWARD]: 227.9804	 [ELAPSED TIME]: 0:01:38
+0.01
+[EPISODE]: 32	[AVG. REWARD]: 224.1389	 [ELAPSED TIME]: 0:01:44
+0.01
+[EPISODE]: 33	[AVG. REWARD]: 225.8633	 [ELAPSED TIME]: 0:01:48
+0.01
+[EPISODE]: 34	[AVG. REWARD]: 236.7183	 [ELAPSED TIME]: 0:01:53
+0.01
+[EPISODE]: 35	[AVG. REWARD]: 237.1197	 [ELAPSED TIME]: 0:01:58
+0.01
+[EPISODE]: 36	[AVG. REWARD]: 239.0111	 [ELAPSED TIME]: 0:02:03
+0.01
+[EPISODE]: 37	[AVG. REWARD]: 244.7029	 [ELAPSED TIME]: 0:02:08
+0.01
+[EPISODE]: 38	[AVG. REWARD]: 251.6825	 [ELAPSED TIME]: 0:02:13
+0.01
+[EPISODE]: 39	[AVG. REWARD]: 258.4463	 [ELAPSED TIME]: 0:02:18
+0.01
+[EPISODE]: 40	[AVG. REWARD]: 247.8993	 [ELAPSED TIME]: 0:02:23
+0.01
+[EPISODE]: 41	[AVG. REWARD]: 245.6390	 [ELAPSED TIME]: 0:02:28
+0.01
+[EPISODE]: 42	[AVG. REWARD]: 245.7640	 [ELAPSED TIME]: 0:02:33
+0.01
+[EPISODE]: 43	[AVG. REWARD]: 243.3933	 [ELAPSED TIME]: 0:02:37
+0.01
+[EPISODE]: 44	[AVG. REWARD]: 254.8922	 [ELAPSED TIME]: 0:02:44
+0.01
+[EPISODE]: 45	[AVG. REWARD]: 264.6130	 [ELAPSED TIME]: 0:02:50
+0.01
+[EPISODE]: 46	[AVG. REWARD]: 272.1833	 [ELAPSED TIME]: 0:02:55
+0.01
+[EPISODE]: 47	[AVG. REWARD]: 281.6974	 [ELAPSED TIME]: 0:03:00
+0.01
+[EPISODE]: 48	[AVG. REWARD]: 291.1192	 [ELAPSED TIME]: 0:03:06
+0.01
+[EPISODE]: 49	[AVG. REWARD]: 300.5263	 [ELAPSED TIME]: 0:03:12
+0.01
+[EPISODE]: 50	[AVG. REWARD]: 317.0081	 [ELAPSED TIME]: 0:03:18
+0.01
+[EPISODE]: 51	[AVG. REWARD]: 325.5412	 [ELAPSED TIME]: 0:03:24
+0.01
+[EPISODE]: 52	[AVG. REWARD]: 344.8549	 [ELAPSED TIME]: 0:03:31
+0.01
+[EPISODE]: 53	[AVG. REWARD]: 363.9333	 [ELAPSED TIME]: 0:03:38
+0.01
+[EPISODE]: 54	[AVG. REWARD]: 375.7888	 [ELAPSED TIME]: 0:03:45
+0.01
+[EPISODE]: 55	[AVG. REWARD]: 387.8122	 [ELAPSED TIME]: 0:03:53
+0.01
+[EPISODE]: 56	[AVG. REWARD]: 407.4146	 [ELAPSED TIME]: 0:04:37
+0.01
+[EPISODE]: 57	[AVG. REWARD]: 441.3784	 [ELAPSED TIME]: 0:06:51
+0.01
+[EPISODE]: 58	[AVG. REWARD]: 440.4577	 [ELAPSED TIME]: 0:08:35
+0.01
+[EPISODE]: 59	[AVG. REWARD]: 458.5804	 [ELAPSED TIME]: 0:10:51
+0.01
+[EPISODE]: 60	[AVG. REWARD]: 482.9912	 [ELAPSED TIME]: 0:12:53
+0.01
+[EPISODE]: 61	[AVG. REWARD]: 473.3052	 [ELAPSED TIME]: 0:14:54
+0.01
+[EPISODE]: 62	[AVG. REWARD]: 494.8575	 [ELAPSED TIME]: 0:16:49
+0.01
+[EPISODE]: 63	[AVG. REWARD]: 554.6916	 [ELAPSED TIME]: 0:19:13
+0.01
+[EPISODE]: 64	[AVG. REWARD]: 672.9730	 [ELAPSED TIME]: 0:21:59
+0.01
+[EPISODE]: 65	[AVG. REWARD]: 803.7344	 [ELAPSED TIME]: 0:25:28
+0.01
+[EPISODE]: 66	[AVG. REWARD]: 930.1824	 [ELAPSED TIME]: 0:29:12
+0.01
+[EPISODE]: 67	[AVG. REWARD]: 1021.2972	 [ELAPSED TIME]: 0:33:08
+0.01
+[EPISODE]: 68	[AVG. REWARD]: 952.7747	 [ELAPSED TIME]: 0:36:59
+0.01
+[EPISODE]: 69	[AVG. REWARD]: 1161.4469	 [ELAPSED TIME]: 0:40:49
+0.01
+[EPISODE]: 70	[AVG. REWARD]: 1054.9742	 [ELAPSED TIME]: 0:44:43
+0.01
+[EPISODE]: 71	[AVG. REWARD]: 967.7885	 [ELAPSED TIME]: 0:48:31
+0.01
+[EPISODE]: 72	[AVG. REWARD]: 909.8423	 [ELAPSED TIME]: 0:52:00
+0.01
+[EPISODE]: 73	[AVG. REWARD]: 1059.6620	 [ELAPSED TIME]: 0:55:45
+0.01
+[EPISODE]: 74	[AVG. REWARD]: 1185.8351	 [ELAPSED TIME]: 0:59:40
+0.01
+[EPISODE]: 75	[AVG. REWARD]: 1281.6023	 [ELAPSED TIME]: 1:03:36
+0.01
+[EPISODE]: 76	[AVG. REWARD]: 1194.8412	 [ELAPSED TIME]: 1:07:43
+0.01
+[EPISODE]: 77	[AVG. REWARD]: 1368.4602	 [ELAPSED TIME]: 1:11:48
+0.01
+[EPISODE]: 78	[AVG. REWARD]: 1390.2272	 [ELAPSED TIME]: 1:16:02
+0.01
+[EPISODE]: 79	[AVG. REWARD]: 1326.3071	 [ELAPSED TIME]: 1:20:04
+0.01
+[EPISODE]: 80	[AVG. REWARD]: 1328.0356	 [ELAPSED TIME]: 1:23:58
+0.01
+[EPISODE]: 81	[AVG. REWARD]: 1361.5184	 [ELAPSED TIME]: 1:28:00
+0.01
+[EPISODE]: 82	[AVG. REWARD]: 1301.8843	 [ELAPSED TIME]: 1:31:37
+0.01
+[EPISODE]: 83	[AVG. REWARD]: 1478.1388	 [ELAPSED TIME]: 1:35:28
+0.01
+[EPISODE]: 84	[AVG. REWARD]: 1591.3257	 [ELAPSED TIME]: 1:39:39
+0.01
+[EPISODE]: 85	[AVG. REWARD]: 1821.1047	 [ELAPSED TIME]: 1:43:43
+0.01
+[EPISODE]: 86	[AVG. REWARD]: 1805.2225	 [ELAPSED TIME]: 1:48:06
+0.01
+[EPISODE]: 87	[AVG. REWARD]: 1552.6416	 [ELAPSED TIME]: 1:51:58
+0.01
+[EPISODE]: 88	[AVG. REWARD]: 1750.9656	 [ELAPSED TIME]: 1:56:03
+0.01
+[EPISODE]: 89	[AVG. REWARD]: 1971.2091	 [ELAPSED TIME]: 2:00:15
+0.01
+[EPISODE]: 90	[AVG. REWARD]: 1986.2489	 [ELAPSED TIME]: 2:04:20
+0.01
+[EPISODE]: 91	[AVG. REWARD]: 1923.0927	 [ELAPSED TIME]: 2:08:37
+0.01
+[EPISODE]: 92	[AVG. REWARD]: 2124.5879	 [ELAPSED TIME]: 2:12:45
+0.01
+[EPISODE]: 93	[AVG. REWARD]: 2102.3921	 [ELAPSED TIME]: 2:16:59
+0.01
+[EPISODE]: 94	[AVG. REWARD]: 1814.7203	 [ELAPSED TIME]: 2:20:59
+0.01
+[EPISODE]: 95	[AVG. REWARD]: 2102.9246	 [ELAPSED TIME]: 2:25:00
+0.01
+[EPISODE]: 96	[AVG. REWARD]: 2032.4486	 [ELAPSED TIME]: 2:29:10
+0.01
+[EPISODE]: 97	[AVG. REWARD]: 2184.5232	 [ELAPSED TIME]: 2:33:18
+0.01
+[EPISODE]: 98	[AVG. REWARD]: 2156.3877	 [ELAPSED TIME]: 2:37:27
+0.01
+[EPISODE]: 99	[AVG. REWARD]: 2012.3141	 [ELAPSED TIME]: 2:41:23
+0.01
+[EPISODE]: 100	[AVG. REWARD]: 2176.2871	 [ELAPSED TIME]: 2:45:29
+0.01
+[EPISODE]: 101	[AVG. REWARD]: 2281.9343	 [ELAPSED TIME]: 2:49:33
+0.01
+[EPISODE]: 102	[AVG. REWARD]: 2110.1455	 [ELAPSED TIME]: 2:53:45
+0.01
+[EPISODE]: 103	[AVG. REWARD]: 2063.6147	 [ELAPSED TIME]: 2:57:47
+0.01
+[EPISODE]: 104	[AVG. REWARD]: 2341.1611	 [ELAPSED TIME]: 3:02:02
+0.01
+[EPISODE]: 105	[AVG. REWARD]: 2186.8977	 [ELAPSED TIME]: 3:06:14
+0.01
+[EPISODE]: 106	[AVG. REWARD]: 2392.1616	 [ELAPSED TIME]: 3:10:23
+0.01
+[EPISODE]: 107	[AVG. REWARD]: 2107.8342	 [ELAPSED TIME]: 3:14:32
+0.01
+[EPISODE]: 108	[AVG. REWARD]: 2319.4412	 [ELAPSED TIME]: 3:18:49
+0.01
+[EPISODE]: 109	[AVG. REWARD]: 2284.5537	 [ELAPSED TIME]: 3:23:10
+0.01
+[EPISODE]: 110	[AVG. REWARD]: 2203.0684	 [ELAPSED TIME]: 3:27:24
+0.01
+[EPISODE]: 111	[AVG. REWARD]: 2396.3713	 [ELAPSED TIME]: 3:31:33
+0.01
+[EPISODE]: 112	[AVG. REWARD]: 2374.7273	 [ELAPSED TIME]: 3:35:34
+0.01
+[EPISODE]: 113	[AVG. REWARD]: 2351.4094	 [ELAPSED TIME]: 3:39:47
+0.01
+[EPISODE]: 114	[AVG. REWARD]: 2305.5325	 [ELAPSED TIME]: 3:43:51
+0.01
+[EPISODE]: 115	[AVG. REWARD]: 2539.1101	 [ELAPSED TIME]: 3:48:02
+0.01
+[EPISODE]: 116	[AVG. REWARD]: 2432.7651	 [ELAPSED TIME]: 3:52:11
+0.01
+[EPISODE]: 117	[AVG. REWARD]: 2085.1545	 [ELAPSED TIME]: 3:56:17
+0.01
+[EPISODE]: 118	[AVG. REWARD]: 2224.9956	 [ELAPSED TIME]: 4:00:17
+0.01
+Version is : blockwise_ng
+Training policy swimmer on Swimmer-v3 environment...
+
+0.01
+[EPISODE]: 1	[AVG. REWARD]: -0.6256	 [ELAPSED TIME]: 0:02:43
+0.01
+[EPISODE]: 2	[AVG. REWARD]: 1.7681	 [ELAPSED TIME]: 0:05:35
+0.01
+[EPISODE]: 3	[AVG. REWARD]: 1.4243	 [ELAPSED TIME]: 0:08:16
+0.01
+[EPISODE]: 4	[AVG. REWARD]: 5.5475	 [ELAPSED TIME]: 0:10:58
+0.01
+[EPISODE]: 5	[AVG. REWARD]: 9.8156	 [ELAPSED TIME]: 0:13:43
+0.01
+[EPISODE]: 6	[AVG. REWARD]: 14.5780	 [ELAPSED TIME]: 0:16:25
+0.01
+[EPISODE]: 7	[AVG. REWARD]: 17.0025	 [ELAPSED TIME]: 0:19:06
+0.01
+[EPISODE]: 8	[AVG. REWARD]: 20.2760	 [ELAPSED TIME]: 0:21:53
+0.01
+[EPISODE]: 9	[AVG. REWARD]: 19.9916	 [ELAPSED TIME]: 0:24:31
+0.01
+[EPISODE]: 10	[AVG. REWARD]: 20.5367	 [ELAPSED TIME]: 0:27:19
+0.01
+[EPISODE]: 11	[AVG. REWARD]: 22.8003	 [ELAPSED TIME]: 0:30:14
+0.01
+[EPISODE]: 12	[AVG. REWARD]: 22.2557	 [ELAPSED TIME]: 0:32:48
+0.01
+[EPISODE]: 13	[AVG. REWARD]: 18.2368	 [ELAPSED TIME]: 0:35:22
+0.01
+[EPISODE]: 14	[AVG. REWARD]: 18.8068	 [ELAPSED TIME]: 0:38:08
+0.01
+[EPISODE]: 15	[AVG. REWARD]: 20.7423	 [ELAPSED TIME]: 0:40:59
+0.01
+[EPISODE]: 16	[AVG. REWARD]: 20.5402	 [ELAPSED TIME]: 0:43:36
+0.01
+[EPISODE]: 17	[AVG. REWARD]: 22.0968	 [ELAPSED TIME]: 0:46:20
+0.01
+[EPISODE]: 18	[AVG. REWARD]: 23.7075	 [ELAPSED TIME]: 0:48:54
+0.01
+[EPISODE]: 19	[AVG. REWARD]: 22.9153	 [ELAPSED TIME]: 0:51:43
+0.01
+[EPISODE]: 20	[AVG. REWARD]: 24.2584	 [ELAPSED TIME]: 0:54:22
+0.01
+[EPISODE]: 21	[AVG. REWARD]: 25.7495	 [ELAPSED TIME]: 0:56:56
+0.01
+[EPISODE]: 22	[AVG. REWARD]: 27.6955	 [ELAPSED TIME]: 0:59:48
+0.01
+[EPISODE]: 23	[AVG. REWARD]: 30.8061	 [ELAPSED TIME]: 1:02:22
+0.01
+[EPISODE]: 24	[AVG. REWARD]: 31.6161	 [ELAPSED TIME]: 1:04:55
+0.01
+[EPISODE]: 25	[AVG. REWARD]: 33.0197	 [ELAPSED TIME]: 1:07:48
+0.01
+[EPISODE]: 26	[AVG. REWARD]: 29.8837	 [ELAPSED TIME]: 1:10:23
+0.01
+[EPISODE]: 27	[AVG. REWARD]: 32.0542	 [ELAPSED TIME]: 1:13:09
+0.01
+[EPISODE]: 28	[AVG. REWARD]: 30.7659	 [ELAPSED TIME]: 1:15:57
+0.01
+[EPISODE]: 29	[AVG. REWARD]: 32.1274	 [ELAPSED TIME]: 1:18:44
+0.01
+[EPISODE]: 30	[AVG. REWARD]: 30.8066	 [ELAPSED TIME]: 1:21:36
+0.01
+[EPISODE]: 31	[AVG. REWARD]: 33.4841	 [ELAPSED TIME]: 1:24:18
+0.01
+[EPISODE]: 32	[AVG. REWARD]: 32.7809	 [ELAPSED TIME]: 1:26:59
+0.01
+[EPISODE]: 33	[AVG. REWARD]: 31.3064	 [ELAPSED TIME]: 1:29:46
+0.01
+[EPISODE]: 34	[AVG. REWARD]: 31.8967	 [ELAPSED TIME]: 1:32:22
+0.01
+[EPISODE]: 35	[AVG. REWARD]: 28.1319	 [ELAPSED TIME]: 1:35:06
+0.01
+[EPISODE]: 36	[AVG. REWARD]: 30.6333	 [ELAPSED TIME]: 1:37:58
+0.01
+[EPISODE]: 37	[AVG. REWARD]: 32.6856	 [ELAPSED TIME]: 1:40:40
+0.01
+[EPISODE]: 38	[AVG. REWARD]: 31.2235	 [ELAPSED TIME]: 1:43:25
+0.01
+[EPISODE]: 39	[AVG. REWARD]: 32.9406	 [ELAPSED TIME]: 1:45:57
+0.01
+[EPISODE]: 40	[AVG. REWARD]: 34.9107	 [ELAPSED TIME]: 1:48:35
+0.01
+[EPISODE]: 41	[AVG. REWARD]: 33.3937	 [ELAPSED TIME]: 1:51:09
+0.01
+[EPISODE]: 42	[AVG. REWARD]: 31.9069	 [ELAPSED TIME]: 1:53:47
+0.01
+[EPISODE]: 43	[AVG. REWARD]: 33.1530	 [ELAPSED TIME]: 1:56:33
+0.01
+[EPISODE]: 44	[AVG. REWARD]: 34.7382	 [ELAPSED TIME]: 1:59:33
+0.01
+[EPISODE]: 45	[AVG. REWARD]: 33.1722	 [ELAPSED TIME]: 2:02:19
+0.01
+[EPISODE]: 46	[AVG. REWARD]: 35.5153	 [ELAPSED TIME]: 2:05:04
+0.01
+[EPISODE]: 47	[AVG. REWARD]: 34.7607	 [ELAPSED TIME]: 2:07:50
+0.01
+[EPISODE]: 48	[AVG. REWARD]: 33.9258	 [ELAPSED TIME]: 2:10:29
+0.01
+[EPISODE]: 49	[AVG. REWARD]: 32.3592	 [ELAPSED TIME]: 2:13:20
+0.01
+[EPISODE]: 50	[AVG. REWARD]: 34.5962	 [ELAPSED TIME]: 2:16:05
+0.01
+[EPISODE]: 51	[AVG. REWARD]: 33.1381	 [ELAPSED TIME]: 2:18:42
+0.01
+[EPISODE]: 52	[AVG. REWARD]: 35.2133	 [ELAPSED TIME]: 2:21:26
+0.01
+[EPISODE]: 53	[AVG. REWARD]: 32.9448	 [ELAPSED TIME]: 2:24:00
+0.01
+[EPISODE]: 54	[AVG. REWARD]: 34.8353	 [ELAPSED TIME]: 2:26:34
+0.01
+[EPISODE]: 55	[AVG. REWARD]: 32.0721	 [ELAPSED TIME]: 2:29:24
+0.01
+[EPISODE]: 56	[AVG. REWARD]: 33.2019	 [ELAPSED TIME]: 2:32:13
+0.01
+[EPISODE]: 57	[AVG. REWARD]: 34.4557	 [ELAPSED TIME]: 2:34:49
+0.01
+[EPISODE]: 58	[AVG. REWARD]: 34.7318	 [ELAPSED TIME]: 2:37:39
+0.01
+[EPISODE]: 59	[AVG. REWARD]: 33.9447	 [ELAPSED TIME]: 2:40:14
+0.01
+[EPISODE]: 60	[AVG. REWARD]: 34.1545	 [ELAPSED TIME]: 2:43:10
+0.01
+[EPISODE]: 61	[AVG. REWARD]: 33.8886	 [ELAPSED TIME]: 2:45:53
+0.01
+[EPISODE]: 62	[AVG. REWARD]: 33.0599	 [ELAPSED TIME]: 2:48:37
+0.01
+[EPISODE]: 63	[AVG. REWARD]: 33.8482	 [ELAPSED TIME]: 2:51:25
+0.01
+[EPISODE]: 64	[AVG. REWARD]: 34.2040	 [ELAPSED TIME]: 2:54:07
+0.01
+[EPISODE]: 65	[AVG. REWARD]: 34.5149	 [ELAPSED TIME]: 2:56:48
+0.01
+[EPISODE]: 66	[AVG. REWARD]: 33.7427	 [ELAPSED TIME]: 2:59:28
+0.01
+[EPISODE]: 67	[AVG. REWARD]: 34.7757	 [ELAPSED TIME]: 3:02:25
+0.01
+[EPISODE]: 68	[AVG. REWARD]: 34.4229	 [ELAPSED TIME]: 3:04:57
+0.01
+[EPISODE]: 69	[AVG. REWARD]: 34.5323	 [ELAPSED TIME]: 3:07:48
+0.01
+[EPISODE]: 70	[AVG. REWARD]: 34.8267	 [ELAPSED TIME]: 3:10:43
+0.01
+[EPISODE]: 71	[AVG. REWARD]: 35.2579	 [ELAPSED TIME]: 3:13:32
+0.01
+[EPISODE]: 72	[AVG. REWARD]: 34.7115	 [ELAPSED TIME]: 3:16:20
+0.01
+[EPISODE]: 73	[AVG. REWARD]: 35.2936	 [ELAPSED TIME]: 3:19:00
+0.01
+[EPISODE]: 74	[AVG. REWARD]: 35.1252	 [ELAPSED TIME]: 3:21:40
+0.01
+[EPISODE]: 75	[AVG. REWARD]: 35.3850	 [ELAPSED TIME]: 3:24:20
+0.01
+[EPISODE]: 76	[AVG. REWARD]: 35.6256	 [ELAPSED TIME]: 3:27:14
+0.01
+[EPISODE]: 77	[AVG. REWARD]: 36.0594	 [ELAPSED TIME]: 3:29:51
+0.01
+[EPISODE]: 78	[AVG. REWARD]: 35.3010	 [ELAPSED TIME]: 3:32:30
+0.01
+[EPISODE]: 79	[AVG. REWARD]: 36.4431	 [ELAPSED TIME]: 3:35:18
+0.01
+[EPISODE]: 80	[AVG. REWARD]: 35.4391	 [ELAPSED TIME]: 3:38:10
+0.01
+[EPISODE]: 81	[AVG. REWARD]: 35.8076	 [ELAPSED TIME]: 3:40:47
+0.01
+[EPISODE]: 82	[AVG. REWARD]: 36.7239	 [ELAPSED TIME]: 3:43:44
+0.01
+[EPISODE]: 83	[AVG. REWARD]: 35.7589	 [ELAPSED TIME]: 3:46:24
+0.01
+[EPISODE]: 84	[AVG. REWARD]: 36.1729	 [ELAPSED TIME]: 3:49:06
+0.01
+[EPISODE]: 85	[AVG. REWARD]: 36.3513	 [ELAPSED TIME]: 3:51:49
+0.01
+[EPISODE]: 86	[AVG. REWARD]: 36.4726	 [ELAPSED TIME]: 3:55:01
+0.01
+[EPISODE]: 87	[AVG. REWARD]: 36.8326	 [ELAPSED TIME]: 3:57:40
+0.01
+[EPISODE]: 88	[AVG. REWARD]: 36.7482	 [ELAPSED TIME]: 4:00:27
+0.01
+[EPISODE]: 89	[AVG. REWARD]: 36.9887	 [ELAPSED TIME]: 4:03:01
+0.01
+[EPISODE]: 90	[AVG. REWARD]: 36.8980	 [ELAPSED TIME]: 4:05:40
+0.01
+[EPISODE]: 91	[AVG. REWARD]: 37.2951	 [ELAPSED TIME]: 4:08:23
+0.01
+[EPISODE]: 92	[AVG. REWARD]: 37.1909	 [ELAPSED TIME]: 4:11:01
+0.01
+[EPISODE]: 93	[AVG. REWARD]: 37.6774	 [ELAPSED TIME]: 4:13:50
+0.01
+[EPISODE]: 94	[AVG. REWARD]: 37.1026	 [ELAPSED TIME]: 4:16:41
+0.01
+[EPISODE]: 95	[AVG. REWARD]: 38.3433	 [ELAPSED TIME]: 4:19:15
+0.01
+[EPISODE]: 96	[AVG. REWARD]: 38.4984	 [ELAPSED TIME]: 4:22:03
+0.01
+[EPISODE]: 97	[AVG. REWARD]: 38.0728	 [ELAPSED TIME]: 4:24:46
+0.01
+[EPISODE]: 98	[AVG. REWARD]: 37.7241	 [ELAPSED TIME]: 4:27:31
+0.01
+[EPISODE]: 99	[AVG. REWARD]: 38.4024	 [ELAPSED TIME]: 4:30:09
+0.01
+[EPISODE]: 100	[AVG. REWARD]: 38.4351	 [ELAPSED TIME]: 4:32:46
+0.01
+[EPISODE]: 101	[AVG. REWARD]: 38.7876	 [ELAPSED TIME]: 4:35:33
+0.01
+[EPISODE]: 102	[AVG. REWARD]: 38.7412	 [ELAPSED TIME]: 4:38:21
+0.01
+[EPISODE]: 103	[AVG. REWARD]: 38.9597	 [ELAPSED TIME]: 4:41:09
+0.01
+[EPISODE]: 104	[AVG. REWARD]: 38.6926	 [ELAPSED TIME]: 4:44:03
+0.01
+[EPISODE]: 105	[AVG. REWARD]: 38.8409	 [ELAPSED TIME]: 4:46:49
+0.01
+[EPISODE]: 106	[AVG. REWARD]: 39.3966	 [ELAPSED TIME]: 4:49:30
+0.01
+[EPISODE]: 107	[AVG. REWARD]: 39.1800	 [ELAPSED TIME]: 4:52:17
+0.01
+[EPISODE]: 108	[AVG. REWARD]: 39.7188	 [ELAPSED TIME]: 4:54:59
+0.01
+[EPISODE]: 109	[AVG. REWARD]: 40.2698	 [ELAPSED TIME]: 4:57:33
+0.01
+[EPISODE]: 110	[AVG. REWARD]: 40.2548	 [ELAPSED TIME]: 5:00:18
+0.01
+[EPISODE]: 111	[AVG. REWARD]: 39.0150	 [ELAPSED TIME]: 5:03:03
+0.01
+[EPISODE]: 112	[AVG. REWARD]: 39.9640	 [ELAPSED TIME]: 5:05:47
+0.01
+[EPISODE]: 113	[AVG. REWARD]: 38.9052	 [ELAPSED TIME]: 5:08:23
+0.01
+[EPISODE]: 114	[AVG. REWARD]: 40.1428	 [ELAPSED TIME]: 5:11:01
+0.01
+[EPISODE]: 115	[AVG. REWARD]: 39.7296	 [ELAPSED TIME]: 5:13:45
+0.01
+[EPISODE]: 116	[AVG. REWARD]: 40.1592	 [ELAPSED TIME]: 5:16:27
+0.01
+[EPISODE]: 117	[AVG. REWARD]: 40.1566	 [ELAPSED TIME]: 5:19:11
+0.01
+[EPISODE]: 118	[AVG. REWARD]: 39.5870	 [ELAPSED TIME]: 5:21:59
+0.01
+[EPISODE]: 119	[AVG. REWARD]: 40.1457	 [ELAPSED TIME]: 5:24:36
+0.01
+[EPISODE]: 120	[AVG. REWARD]: 40.8589	 [ELAPSED TIME]: 5:27:23
+0.01
+Version is : blockwise_ng
+Training policy swimmer on Swimmer-v3 environment...
+
+0.01
+[EPISODE]: 1	[AVG. REWARD]: -1.1466	 [ELAPSED TIME]: 0:02:47
+0.01
+[EPISODE]: 2	[AVG. REWARD]: 0.1738	 [ELAPSED TIME]: 0:05:44
+0.01
+[EPISODE]: 3	[AVG. REWARD]: 1.0962	 [ELAPSED TIME]: 0:08:27
+0.01
+[EPISODE]: 4	[AVG. REWARD]: 7.7543	 [ELAPSED TIME]: 0:11:04
+0.01
+[EPISODE]: 5	[AVG. REWARD]: 8.7197	 [ELAPSED TIME]: 0:13:51
+0.01
+[EPISODE]: 6	[AVG. REWARD]: 11.4592	 [ELAPSED TIME]: 0:16:25
+0.01
+[EPISODE]: 7	[AVG. REWARD]: 14.6810	 [ELAPSED TIME]: 0:19:36
+0.01
+[EPISODE]: 8	[AVG. REWARD]: 20.0781	 [ELAPSED TIME]: 0:22:24
+0.01
+[EPISODE]: 9	[AVG. REWARD]: 16.8733	 [ELAPSED TIME]: 0:25:11
+0.01
+[EPISODE]: 10	[AVG. REWARD]: 23.9442	 [ELAPSED TIME]: 0:27:51
+0.01
+[EPISODE]: 11	[AVG. REWARD]: 21.4621	 [ELAPSED TIME]: 0:30:32
+0.01
+[EPISODE]: 12	[AVG. REWARD]: 20.3700	 [ELAPSED TIME]: 0:33:05
+0.01
+[EPISODE]: 13	[AVG. REWARD]: 23.3363	 [ELAPSED TIME]: 0:35:38
+0.01
+[EPISODE]: 14	[AVG. REWARD]: 21.6420	 [ELAPSED TIME]: 0:38:29
+0.01
+[EPISODE]: 15	[AVG. REWARD]: 21.3393	 [ELAPSED TIME]: 0:41:16
+0.01
+[EPISODE]: 16	[AVG. REWARD]: 21.6115	 [ELAPSED TIME]: 0:44:00
+0.01
+[EPISODE]: 17	[AVG. REWARD]: 22.3433	 [ELAPSED TIME]: 0:46:46
+0.01
+[EPISODE]: 18	[AVG. REWARD]: 20.7077	 [ELAPSED TIME]: 0:49:28
+0.01
+[EPISODE]: 19	[AVG. REWARD]: 21.9672	 [ELAPSED TIME]: 0:52:16
+0.01
+[EPISODE]: 20	[AVG. REWARD]: 24.0894	 [ELAPSED TIME]: 0:55:06
+0.01
+[EPISODE]: 21	[AVG. REWARD]: 24.8535	 [ELAPSED TIME]: 0:57:39
+0.01
+[EPISODE]: 22	[AVG. REWARD]: 26.5286	 [ELAPSED TIME]: 1:00:34
+0.01
+[EPISODE]: 23	[AVG. REWARD]: 29.7117	 [ELAPSED TIME]: 1:03:23
+0.01
+[EPISODE]: 24	[AVG. REWARD]: 32.5752	 [ELAPSED TIME]: 1:06:11
+0.01
+[EPISODE]: 25	[AVG. REWARD]: 29.3300	 [ELAPSED TIME]: 1:08:57
+0.01
+[EPISODE]: 26	[AVG. REWARD]: 31.9554	 [ELAPSED TIME]: 1:11:47
+0.01
+[EPISODE]: 27	[AVG. REWARD]: 29.9900	 [ELAPSED TIME]: 1:14:37
+0.01
+[EPISODE]: 28	[AVG. REWARD]: 33.6602	 [ELAPSED TIME]: 1:17:12
+0.01
+[EPISODE]: 29	[AVG. REWARD]: 32.2256	 [ELAPSED TIME]: 1:20:10
+0.01
+[EPISODE]: 30	[AVG. REWARD]: 33.9590	 [ELAPSED TIME]: 1:22:51
+0.01
+[EPISODE]: 31	[AVG. REWARD]: 32.4995	 [ELAPSED TIME]: 1:25:37
+0.01
+[EPISODE]: 32	[AVG. REWARD]: 30.7281	 [ELAPSED TIME]: 1:28:11
+0.01
+[EPISODE]: 33	[AVG. REWARD]: 28.9141	 [ELAPSED TIME]: 1:30:50
+0.01
+[EPISODE]: 34	[AVG. REWARD]: 31.7105	 [ELAPSED TIME]: 1:33:30
+0.01
+[EPISODE]: 35	[AVG. REWARD]: 29.6628	 [ELAPSED TIME]: 1:36:08
+0.01
+[EPISODE]: 36	[AVG. REWARD]: 30.5174	 [ELAPSED TIME]: 1:38:46
+0.01
+[EPISODE]: 37	[AVG. REWARD]: 32.3655	 [ELAPSED TIME]: 1:41:34
+0.01
+[EPISODE]: 38	[AVG. REWARD]: 34.7630	 [ELAPSED TIME]: 1:44:20
+0.01
+[EPISODE]: 39	[AVG. REWARD]: 34.3538	 [ELAPSED TIME]: 1:46:58
+0.01
+[EPISODE]: 40	[AVG. REWARD]: 33.0835	 [ELAPSED TIME]: 1:49:36
+0.01
+[EPISODE]: 41	[AVG. REWARD]: 34.3373	 [ELAPSED TIME]: 1:52:17
+0.01
+[EPISODE]: 42	[AVG. REWARD]: 32.5491	 [ELAPSED TIME]: 1:54:51
+0.01
+[EPISODE]: 43	[AVG. REWARD]: 33.8419	 [ELAPSED TIME]: 1:57:46
+0.01
+[EPISODE]: 44	[AVG. REWARD]: 32.4357	 [ELAPSED TIME]: 2:00:34
+0.01
+[EPISODE]: 45	[AVG. REWARD]: 34.0096	 [ELAPSED TIME]: 2:03:18
+0.01
+[EPISODE]: 46	[AVG. REWARD]: 32.7891	 [ELAPSED TIME]: 2:06:20
+0.01
+[EPISODE]: 47	[AVG. REWARD]: 33.6162	 [ELAPSED TIME]: 2:09:03
+0.01
+[EPISODE]: 48	[AVG. REWARD]: 33.1819	 [ELAPSED TIME]: 2:11:42
+0.01
+[EPISODE]: 49	[AVG. REWARD]: 34.6900	 [ELAPSED TIME]: 2:14:32
+0.01
+[EPISODE]: 50	[AVG. REWARD]: 33.4707	 [ELAPSED TIME]: 2:17:17
+0.01
+[EPISODE]: 51	[AVG. REWARD]: 34.1201	 [ELAPSED TIME]: 2:20:04
+0.01
+[EPISODE]: 52	[AVG. REWARD]: 34.8656	 [ELAPSED TIME]: 2:22:42
+0.01
+[EPISODE]: 53	[AVG. REWARD]: 34.7363	 [ELAPSED TIME]: 2:25:18
+0.01
+[EPISODE]: 54	[AVG. REWARD]: 35.2041	 [ELAPSED TIME]: 2:28:03
+0.01
+[EPISODE]: 55	[AVG. REWARD]: 34.9411	 [ELAPSED TIME]: 2:30:40
+0.01
+[EPISODE]: 56	[AVG. REWARD]: 34.5382	 [ELAPSED TIME]: 2:33:31
+0.01
+[EPISODE]: 57	[AVG. REWARD]: 33.0493	 [ELAPSED TIME]: 2:36:15
+0.01
+[EPISODE]: 58	[AVG. REWARD]: 35.2193	 [ELAPSED TIME]: 2:39:15
+0.01
+[EPISODE]: 59	[AVG. REWARD]: 35.0567	 [ELAPSED TIME]: 2:42:03
+0.01
+[EPISODE]: 60	[AVG. REWARD]: 35.6941	 [ELAPSED TIME]: 2:44:38
+0.01
+[EPISODE]: 61	[AVG. REWARD]: 34.9683	 [ELAPSED TIME]: 2:47:16
+0.01
+[EPISODE]: 62	[AVG. REWARD]: 33.7569	 [ELAPSED TIME]: 2:50:08
+0.01
+[EPISODE]: 63	[AVG. REWARD]: 34.7998	 [ELAPSED TIME]: 2:52:48
+0.01
+[EPISODE]: 64	[AVG. REWARD]: 35.8116	 [ELAPSED TIME]: 2:55:30
+0.01
+[EPISODE]: 65	[AVG. REWARD]: 35.6166	 [ELAPSED TIME]: 2:58:20
+0.01
+[EPISODE]: 66	[AVG. REWARD]: 35.8092	 [ELAPSED TIME]: 3:00:56
+0.01
+[EPISODE]: 67	[AVG. REWARD]: 36.1983	 [ELAPSED TIME]: 3:03:41
+0.01
+[EPISODE]: 68	[AVG. REWARD]: 35.9583	 [ELAPSED TIME]: 3:06:27
+0.01
+[EPISODE]: 69	[AVG. REWARD]: 34.8999	 [ELAPSED TIME]: 3:09:06
+0.01
+[EPISODE]: 70	[AVG. REWARD]: 35.9056	 [ELAPSED TIME]: 3:11:53
+0.01
+[EPISODE]: 71	[AVG. REWARD]: 36.5545	 [ELAPSED TIME]: 3:14:45
+0.01
+[EPISODE]: 72	[AVG. REWARD]: 35.9701	 [ELAPSED TIME]: 3:17:27
+0.01
+[EPISODE]: 73	[AVG. REWARD]: 36.3273	 [ELAPSED TIME]: 3:20:07
+0.01
+[EPISODE]: 74	[AVG. REWARD]: 36.4335	 [ELAPSED TIME]: 3:22:47
+0.01
+[EPISODE]: 75	[AVG. REWARD]: 37.0846	 [ELAPSED TIME]: 3:25:23
+0.01
+[EPISODE]: 76	[AVG. REWARD]: 36.1385	 [ELAPSED TIME]: 3:28:04
+0.01
+[EPISODE]: 77	[AVG. REWARD]: 33.9915	 [ELAPSED TIME]: 3:30:38
+0.01
+[EPISODE]: 78	[AVG. REWARD]: 35.9193	 [ELAPSED TIME]: 3:33:24
+0.01
+[EPISODE]: 79	[AVG. REWARD]: 35.5684	 [ELAPSED TIME]: 3:36:08
+0.01
+[EPISODE]: 80	[AVG. REWARD]: 35.8946	 [ELAPSED TIME]: 3:38:55
+0.01
+[EPISODE]: 81	[AVG. REWARD]: 36.6651	 [ELAPSED TIME]: 3:41:45
+0.01
+[EPISODE]: 82	[AVG. REWARD]: 35.8688	 [ELAPSED TIME]: 3:44:32
+0.01
+[EPISODE]: 83	[AVG. REWARD]: 36.3745	 [ELAPSED TIME]: 3:47:05
+0.01
+[EPISODE]: 84	[AVG. REWARD]: 36.9515	 [ELAPSED TIME]: 3:49:46
+0.01
+[EPISODE]: 85	[AVG. REWARD]: 36.1835	 [ELAPSED TIME]: 3:52:30
+0.01
+[EPISODE]: 86	[AVG. REWARD]: 36.9316	 [ELAPSED TIME]: 3:55:07
+0.01
+[EPISODE]: 87	[AVG. REWARD]: 36.0521	 [ELAPSED TIME]: 3:57:41
+0.01
+[EPISODE]: 88	[AVG. REWARD]: 36.6635	 [ELAPSED TIME]: 4:00:21
+0.01
+[EPISODE]: 89	[AVG. REWARD]: 36.6468	 [ELAPSED TIME]: 4:02:54
+0.01
+[EPISODE]: 90	[AVG. REWARD]: 35.1335	 [ELAPSED TIME]: 4:05:43
+0.01
+[EPISODE]: 91	[AVG. REWARD]: 35.5465	 [ELAPSED TIME]: 4:08:31
+0.01
+[EPISODE]: 92	[AVG. REWARD]: 36.2386	 [ELAPSED TIME]: 4:11:14
+0.01
+[EPISODE]: 93	[AVG. REWARD]: 36.2966	 [ELAPSED TIME]: 4:13:51
+0.01
+[EPISODE]: 94	[AVG. REWARD]: 36.4773	 [ELAPSED TIME]: 4:16:34
+0.01
+[EPISODE]: 95	[AVG. REWARD]: 36.8916	 [ELAPSED TIME]: 4:19:21
+0.01
+[EPISODE]: 96	[AVG. REWARD]: 35.7851	 [ELAPSED TIME]: 4:22:08
+0.01
+[EPISODE]: 97	[AVG. REWARD]: 36.8780	 [ELAPSED TIME]: 4:24:53
+0.01
+[EPISODE]: 98	[AVG. REWARD]: 36.8390	 [ELAPSED TIME]: 4:27:37
+0.01
+[EPISODE]: 99	[AVG. REWARD]: 37.2433	 [ELAPSED TIME]: 4:30:17
+0.01
+[EPISODE]: 100	[AVG. REWARD]: 37.0578	 [ELAPSED TIME]: 4:32:49
+0.01
+[EPISODE]: 101	[AVG. REWARD]: 36.2348	 [ELAPSED TIME]: 4:35:34
+0.01
+[EPISODE]: 102	[AVG. REWARD]: 36.8596	 [ELAPSED TIME]: 4:38:21
+0.01
+[EPISODE]: 103	[AVG. REWARD]: 36.6469	 [ELAPSED TIME]: 4:41:11
+0.01
+[EPISODE]: 104	[AVG. REWARD]: 37.4947	 [ELAPSED TIME]: 4:43:57
+0.01
+[EPISODE]: 105	[AVG. REWARD]: 36.5311	 [ELAPSED TIME]: 4:46:46
+0.01
+[EPISODE]: 106	[AVG. REWARD]: 36.9442	 [ELAPSED TIME]: 4:49:22
+0.01
+[EPISODE]: 107	[AVG. REWARD]: 36.8281	 [ELAPSED TIME]: 4:52:05
+0.01
+[EPISODE]: 108	[AVG. REWARD]: 37.7096	 [ELAPSED TIME]: 4:54:51
+0.01
+[EPISODE]: 109	[AVG. REWARD]: 37.4829	 [ELAPSED TIME]: 4:57:27
+0.01
+[EPISODE]: 110	[AVG. REWARD]: 37.2197	 [ELAPSED TIME]: 5:00:12
+0.01
+[EPISODE]: 111	[AVG. REWARD]: 36.9431	 [ELAPSED TIME]: 5:03:04
+0.01
+[EPISODE]: 112	[AVG. REWARD]: 37.3906	 [ELAPSED TIME]: 5:05:46
+0.01
+[EPISODE]: 113	[AVG. REWARD]: 37.2380	 [ELAPSED TIME]: 5:08:37
+0.01
+[EPISODE]: 114	[AVG. REWARD]: 37.0223	 [ELAPSED TIME]: 5:11:27
+0.01
+[EPISODE]: 115	[AVG. REWARD]: 37.4321	 [ELAPSED TIME]: 5:14:14
+0.01
+[EPISODE]: 116	[AVG. REWARD]: 36.7264	 [ELAPSED TIME]: 5:16:53
+0.01
+[EPISODE]: 117	[AVG. REWARD]: 36.9377	 [ELAPSED TIME]: 5:19:46
+0.01
+[EPISODE]: 118	[AVG. REWARD]: 36.8488	 [ELAPSED TIME]: 5:22:42
+0.01
+[EPISODE]: 119	[AVG. REWARD]: 37.7448	 [ELAPSED TIME]: 5:25:30
+0.01
+[EPISODE]: 120	[AVG. REWARD]: 37.4465	 [ELAPSED TIME]: 5:28:10
+0.01
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : filtering
+Training policy swimmer on Swimmer-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_v1.py", line 269, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_v1.py", line 417, in update_policy
+    self.writer.add_scalar("Policy/MeanLearningRate", opt_step, self.episode_num)
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/utils/tensorboard/writer.py", line 388, in add_scalar
+    summary = scalar(
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/utils/tensorboard/summary.py", line 282, in scalar
+    tensor.ndim == 0
+AssertionError: Tensor should contain one element (0 dimensions). Was given size: 356 and 1 dimensions.
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy swimmer on Swimmer-v3 environment...
+
+0.01
+[EPISODE]: 1	[AVG. REWARD]: -1.6581	 [ELAPSED TIME]: 0:00:12
+0.01
+[EPISODE]: 2	[AVG. REWARD]: 4.1273	 [ELAPSED TIME]: 0:00:26
+0.01
+[EPISODE]: 3	[AVG. REWARD]: 7.1771	 [ELAPSED TIME]: 0:00:40
+0.01
+[EPISODE]: 4	[AVG. REWARD]: 9.0257	 [ELAPSED TIME]: 0:00:54
+0.01
+[EPISODE]: 5	[AVG. REWARD]: 13.2653	 [ELAPSED TIME]: 0:01:08
+0.01
+[EPISODE]: 6	[AVG. REWARD]: 15.5616	 [ELAPSED TIME]: 0:01:22
+0.01
+[EPISODE]: 7	[AVG. REWARD]: 16.4148	 [ELAPSED TIME]: 0:01:36
+0.01
+[EPISODE]: 8	[AVG. REWARD]: 19.3009	 [ELAPSED TIME]: 0:01:50
+0.01
+[EPISODE]: 9	[AVG. REWARD]: 16.5269	 [ELAPSED TIME]: 0:02:04
+0.01
+[EPISODE]: 10	[AVG. REWARD]: 13.9229	 [ELAPSED TIME]: 0:02:18
+0.01
+[EPISODE]: 11	[AVG. REWARD]: 17.4543	 [ELAPSED TIME]: 0:02:33
+0.01
+[EPISODE]: 12	[AVG. REWARD]: 20.8912	 [ELAPSED TIME]: 0:02:47
+0.01
+[EPISODE]: 13	[AVG. REWARD]: 17.6415	 [ELAPSED TIME]: 0:03:02
+0.01
+[EPISODE]: 14	[AVG. REWARD]: 17.7927	 [ELAPSED TIME]: 0:03:16
+0.01
+[EPISODE]: 15	[AVG. REWARD]: 19.8080	 [ELAPSED TIME]: 0:03:31
+0.01
+[EPISODE]: 16	[AVG. REWARD]: 19.4703	 [ELAPSED TIME]: 0:03:46
+0.01
+[EPISODE]: 17	[AVG. REWARD]: 20.6719	 [ELAPSED TIME]: 0:04:01
+0.01
+[EPISODE]: 18	[AVG. REWARD]: 21.1646	 [ELAPSED TIME]: 0:04:16
+0.01
+[EPISODE]: 19	[AVG. REWARD]: 19.9765	 [ELAPSED TIME]: 0:04:31
+0.01
+[EPISODE]: 20	[AVG. REWARD]: 21.8835	 [ELAPSED TIME]: 0:04:46
+0.01
+[EPISODE]: 21	[AVG. REWARD]: 22.5169	 [ELAPSED TIME]: 0:05:01
+0.01
+[EPISODE]: 22	[AVG. REWARD]: 24.3502	 [ELAPSED TIME]: 0:05:16
+0.01
+[EPISODE]: 23	[AVG. REWARD]: 25.9846	 [ELAPSED TIME]: 0:05:31
+0.01
+[EPISODE]: 24	[AVG. REWARD]: 29.5948	 [ELAPSED TIME]: 0:05:46
+0.01
+[EPISODE]: 25	[AVG. REWARD]: 31.9983	 [ELAPSED TIME]: 0:06:00
+0.01
+[EPISODE]: 26	[AVG. REWARD]: 29.6157	 [ELAPSED TIME]: 0:06:15
+0.01
+[EPISODE]: 27	[AVG. REWARD]: 32.5462	 [ELAPSED TIME]: 0:06:29
+0.01
+[EPISODE]: 28	[AVG. REWARD]: 28.1099	 [ELAPSED TIME]: 0:06:44
+0.01
+[EPISODE]: 29	[AVG. REWARD]: 31.6546	 [ELAPSED TIME]: 0:06:59
+0.01
+[EPISODE]: 30	[AVG. REWARD]: 28.1353	 [ELAPSED TIME]: 0:07:14
+0.01
+[EPISODE]: 31	[AVG. REWARD]: 31.5451	 [ELAPSED TIME]: 0:07:29
+0.01
+[EPISODE]: 32	[AVG. REWARD]: 31.4072	 [ELAPSED TIME]: 0:07:44
+0.01
+[EPISODE]: 33	[AVG. REWARD]: 34.0831	 [ELAPSED TIME]: 0:07:59
+0.01
+[EPISODE]: 34	[AVG. REWARD]: 32.3621	 [ELAPSED TIME]: 0:08:14
+0.01
+[EPISODE]: 35	[AVG. REWARD]: 34.0744	 [ELAPSED TIME]: 0:08:29
+0.01
+[EPISODE]: 36	[AVG. REWARD]: 33.7220	 [ELAPSED TIME]: 0:08:43
+0.01
+[EPISODE]: 37	[AVG. REWARD]: 32.8950	 [ELAPSED TIME]: 0:08:58
+0.01
+[EPISODE]: 38	[AVG. REWARD]: 29.1819	 [ELAPSED TIME]: 0:09:13
+0.01
+[EPISODE]: 39	[AVG. REWARD]: 32.4755	 [ELAPSED TIME]: 0:09:28
+0.01
+[EPISODE]: 40	[AVG. REWARD]: 34.9207	 [ELAPSED TIME]: 0:09:43
+0.01
+[EPISODE]: 41	[AVG. REWARD]: 31.9562	 [ELAPSED TIME]: 0:09:58
+0.01
+[EPISODE]: 42	[AVG. REWARD]: 34.0551	 [ELAPSED TIME]: 0:10:13
+0.01
+[EPISODE]: 43	[AVG. REWARD]: 32.5577	 [ELAPSED TIME]: 0:10:28
+0.01
+[EPISODE]: 44	[AVG. REWARD]: 33.6704	 [ELAPSED TIME]: 0:10:43
+0.01
+[EPISODE]: 45	[AVG. REWARD]: 31.3692	 [ELAPSED TIME]: 0:10:58
+0.01
+[EPISODE]: 46	[AVG. REWARD]: 34.0070	 [ELAPSED TIME]: 0:11:13
+0.01
+[EPISODE]: 47	[AVG. REWARD]: 34.6812	 [ELAPSED TIME]: 0:11:28
+0.01
+[EPISODE]: 48	[AVG. REWARD]: 33.9694	 [ELAPSED TIME]: 0:11:43
+0.01
+[EPISODE]: 49	[AVG. REWARD]: 35.5015	 [ELAPSED TIME]: 0:11:58
+0.01
+[EPISODE]: 50	[AVG. REWARD]: 34.8356	 [ELAPSED TIME]: 0:12:13
+0.01
+[EPISODE]: 51	[AVG. REWARD]: 31.8208	 [ELAPSED TIME]: 0:12:28
+0.01
+[EPISODE]: 52	[AVG. REWARD]: 34.3944	 [ELAPSED TIME]: 0:12:43
+0.01
+[EPISODE]: 53	[AVG. REWARD]: 35.6589	 [ELAPSED TIME]: 0:12:58
+0.01
+[EPISODE]: 54	[AVG. REWARD]: 35.1268	 [ELAPSED TIME]: 0:13:13
+0.01
+[EPISODE]: 55	[AVG. REWARD]: 32.8000	 [ELAPSED TIME]: 0:13:28
+0.01
+[EPISODE]: 56	[AVG. REWARD]: 33.7399	 [ELAPSED TIME]: 0:13:44
+0.01
+[EPISODE]: 57	[AVG. REWARD]: 33.9142	 [ELAPSED TIME]: 0:13:59
+0.01
+[EPISODE]: 58	[AVG. REWARD]: 35.7934	 [ELAPSED TIME]: 0:14:14
+0.01
+[EPISODE]: 59	[AVG. REWARD]: 34.0806	 [ELAPSED TIME]: 0:14:29
+0.01
+[EPISODE]: 60	[AVG. REWARD]: 34.7704	 [ELAPSED TIME]: 0:14:44
+0.01
+[EPISODE]: 61	[AVG. REWARD]: 33.6191	 [ELAPSED TIME]: 0:14:59
+0.01
+[EPISODE]: 62	[AVG. REWARD]: 35.3437	 [ELAPSED TIME]: 0:15:14
+0.01
+[EPISODE]: 63	[AVG. REWARD]: 34.1774	 [ELAPSED TIME]: 0:15:30
+0.01
+[EPISODE]: 64	[AVG. REWARD]: 35.2847	 [ELAPSED TIME]: 0:15:45
+0.01
+[EPISODE]: 65	[AVG. REWARD]: 34.2192	 [ELAPSED TIME]: 0:16:00
+0.01
+[EPISODE]: 66	[AVG. REWARD]: 34.3923	 [ELAPSED TIME]: 0:16:16
+0.01
+[EPISODE]: 67	[AVG. REWARD]: 35.1863	 [ELAPSED TIME]: 0:16:31
+0.01
+[EPISODE]: 68	[AVG. REWARD]: 34.6718	 [ELAPSED TIME]: 0:16:46
+0.01
+[EPISODE]: 69	[AVG. REWARD]: 34.2487	 [ELAPSED TIME]: 0:17:01
+0.01
+[EPISODE]: 70	[AVG. REWARD]: 34.6853	 [ELAPSED TIME]: 0:17:16
+0.01
+[EPISODE]: 71	[AVG. REWARD]: 34.4625	 [ELAPSED TIME]: 0:17:31
+0.01
+[EPISODE]: 72	[AVG. REWARD]: 35.4509	 [ELAPSED TIME]: 0:17:47
+0.01
+[EPISODE]: 73	[AVG. REWARD]: 35.2939	 [ELAPSED TIME]: 0:18:02
+0.01
+[EPISODE]: 74	[AVG. REWARD]: 34.7373	 [ELAPSED TIME]: 0:18:17
+0.01
+[EPISODE]: 75	[AVG. REWARD]: 36.1252	 [ELAPSED TIME]: 0:18:32
+0.01
+[EPISODE]: 76	[AVG. REWARD]: 34.8988	 [ELAPSED TIME]: 0:18:48
+0.01
+[EPISODE]: 77	[AVG. REWARD]: 35.7243	 [ELAPSED TIME]: 0:19:03
+0.01
+[EPISODE]: 78	[AVG. REWARD]: 36.1595	 [ELAPSED TIME]: 0:19:19
+0.01
+[EPISODE]: 79	[AVG. REWARD]: 35.1594	 [ELAPSED TIME]: 0:19:34
+0.01
+[EPISODE]: 80	[AVG. REWARD]: 35.5156	 [ELAPSED TIME]: 0:19:49
+0.01
+[EPISODE]: 81	[AVG. REWARD]: 35.7037	 [ELAPSED TIME]: 0:20:04
+0.01
+[EPISODE]: 82	[AVG. REWARD]: 36.3075	 [ELAPSED TIME]: 0:20:19
+0.01
+[EPISODE]: 83	[AVG. REWARD]: 35.6624	 [ELAPSED TIME]: 0:20:34
+0.01
+[EPISODE]: 84	[AVG. REWARD]: 35.8195	 [ELAPSED TIME]: 0:20:50
+0.01
+[EPISODE]: 85	[AVG. REWARD]: 36.5145	 [ELAPSED TIME]: 0:21:05
+0.01
+[EPISODE]: 86	[AVG. REWARD]: 36.5758	 [ELAPSED TIME]: 0:21:21
+0.01
+[EPISODE]: 87	[AVG. REWARD]: 37.1768	 [ELAPSED TIME]: 0:21:36
+0.01
+[EPISODE]: 88	[AVG. REWARD]: 36.6990	 [ELAPSED TIME]: 0:21:51
+0.01
+[EPISODE]: 89	[AVG. REWARD]: 35.9181	 [ELAPSED TIME]: 0:22:07
+0.01
+[EPISODE]: 90	[AVG. REWARD]: 36.7361	 [ELAPSED TIME]: 0:22:22
+0.01
+[EPISODE]: 91	[AVG. REWARD]: 36.4485	 [ELAPSED TIME]: 0:22:38
+0.01
+[EPISODE]: 92	[AVG. REWARD]: 36.4911	 [ELAPSED TIME]: 0:22:53
+0.01
+[EPISODE]: 93	[AVG. REWARD]: 36.9807	 [ELAPSED TIME]: 0:23:08
+0.01
+[EPISODE]: 94	[AVG. REWARD]: 37.7071	 [ELAPSED TIME]: 0:23:24
+0.01
+[EPISODE]: 95	[AVG. REWARD]: 37.2900	 [ELAPSED TIME]: 0:23:39
+0.01
+[EPISODE]: 96	[AVG. REWARD]: 36.8232	 [ELAPSED TIME]: 0:23:55
+0.01
+[EPISODE]: 97	[AVG. REWARD]: 34.2883	 [ELAPSED TIME]: 0:24:10
+0.01
+[EPISODE]: 98	[AVG. REWARD]: 37.1809	 [ELAPSED TIME]: 0:24:25
+0.01
+[EPISODE]: 99	[AVG. REWARD]: 36.4830	 [ELAPSED TIME]: 0:24:41
+0.01
+[EPISODE]: 100	[AVG. REWARD]: 37.2294	 [ELAPSED TIME]: 0:24:56
+0.01
+[EPISODE]: 101	[AVG. REWARD]: 37.4550	 [ELAPSED TIME]: 0:25:12
+0.01
+[EPISODE]: 102	[AVG. REWARD]: 37.6364	 [ELAPSED TIME]: 0:25:27
+0.01
+[EPISODE]: 103	[AVG. REWARD]: 36.4105	 [ELAPSED TIME]: 0:25:42
+0.01
+[EPISODE]: 104	[AVG. REWARD]: 37.0175	 [ELAPSED TIME]: 0:25:57
+0.01
+[EPISODE]: 105	[AVG. REWARD]: 36.8742	 [ELAPSED TIME]: 0:26:13
+0.01
+[EPISODE]: 106	[AVG. REWARD]: 36.9926	 [ELAPSED TIME]: 0:26:29
+0.01
+[EPISODE]: 107	[AVG. REWARD]: 37.5689	 [ELAPSED TIME]: 0:26:44
+0.01
+[EPISODE]: 108	[AVG. REWARD]: 37.1491	 [ELAPSED TIME]: 0:26:59
+0.01
+[EPISODE]: 109	[AVG. REWARD]: 37.0031	 [ELAPSED TIME]: 0:27:15
+0.01
+[EPISODE]: 110	[AVG. REWARD]: 36.9362	 [ELAPSED TIME]: 0:27:31
+0.01
+[EPISODE]: 111	[AVG. REWARD]: 36.4931	 [ELAPSED TIME]: 0:27:46
+0.01
+[EPISODE]: 112	[AVG. REWARD]: 36.3761	 [ELAPSED TIME]: 0:28:02
+0.01
+[EPISODE]: 113	[AVG. REWARD]: 36.5230	 [ELAPSED TIME]: 0:28:17
+0.01
+[EPISODE]: 114	[AVG. REWARD]: 36.7267	 [ELAPSED TIME]: 0:28:33
+0.01
+[EPISODE]: 115	[AVG. REWARD]: 38.2010	 [ELAPSED TIME]: 0:28:48
+0.01
+[EPISODE]: 116	[AVG. REWARD]: 37.9448	 [ELAPSED TIME]: 0:29:03
+0.01
+[EPISODE]: 117	[AVG. REWARD]: 37.5766	 [ELAPSED TIME]: 0:29:19
+0.01
+[EPISODE]: 118	[AVG. REWARD]: 38.3063	 [ELAPSED TIME]: 0:29:34
+0.01
+[EPISODE]: 119	[AVG. REWARD]: 37.6068	 [ELAPSED TIME]: 0:29:50
+0.01
+[EPISODE]: 120	[AVG. REWARD]: 38.3482	 [ELAPSED TIME]: 0:30:05
+0.01
+[EPISODE]: 121	[AVG. REWARD]: 37.8448	 [ELAPSED TIME]: 0:30:21
+0.01
+[EPISODE]: 122	[AVG. REWARD]: 37.2244	 [ELAPSED TIME]: 0:30:36
+0.01
+[EPISODE]: 123	[AVG. REWARD]: 36.6977	 [ELAPSED TIME]: 0:30:52
+0.01
+[EPISODE]: 124	[AVG. REWARD]: 37.3307	 [ELAPSED TIME]: 0:31:07
+0.01
+[EPISODE]: 125	[AVG. REWARD]: 38.2018	 [ELAPSED TIME]: 0:31:23
+0.01
+[EPISODE]: 126	[AVG. REWARD]: 37.6239	 [ELAPSED TIME]: 0:31:38
+0.01
+[EPISODE]: 127	[AVG. REWARD]: 37.1563	 [ELAPSED TIME]: 0:31:54
+0.01
+[EPISODE]: 128	[AVG. REWARD]: 37.3819	 [ELAPSED TIME]: 0:32:09
+0.01
+[EPISODE]: 129	[AVG. REWARD]: 38.0351	 [ELAPSED TIME]: 0:32:25
+0.01
+[EPISODE]: 130	[AVG. REWARD]: 36.1946	 [ELAPSED TIME]: 0:32:40
+0.01
+[EPISODE]: 131	[AVG. REWARD]: 37.3497	 [ELAPSED TIME]: 0:32:56
+0.01
+[EPISODE]: 132	[AVG. REWARD]: 37.1506	 [ELAPSED TIME]: 0:33:11
+0.01
+[EPISODE]: 133	[AVG. REWARD]: 36.5385	 [ELAPSED TIME]: 0:33:27
+0.01
+[EPISODE]: 134	[AVG. REWARD]: 37.9119	 [ELAPSED TIME]: 0:33:42
+0.01
+[EPISODE]: 135	[AVG. REWARD]: 37.7352	 [ELAPSED TIME]: 0:33:58
+0.01
+[EPISODE]: 136	[AVG. REWARD]: 37.9951	 [ELAPSED TIME]: 0:34:14
+0.01
+[EPISODE]: 137	[AVG. REWARD]: 37.7273	 [ELAPSED TIME]: 0:34:29
+0.01
+[EPISODE]: 138	[AVG. REWARD]: 37.2156	 [ELAPSED TIME]: 0:34:44
+0.01
+[EPISODE]: 139	[AVG. REWARD]: 37.3623	 [ELAPSED TIME]: 0:35:00
+0.01
+[EPISODE]: 140	[AVG. REWARD]: 38.3347	 [ELAPSED TIME]: 0:35:15
+0.01
+[EPISODE]: 141	[AVG. REWARD]: 37.8301	 [ELAPSED TIME]: 0:35:31
+0.01
+[EPISODE]: 142	[AVG. REWARD]: 37.9731	 [ELAPSED TIME]: 0:35:46
+0.01
+[EPISODE]: 143	[AVG. REWARD]: 37.7347	 [ELAPSED TIME]: 0:36:02
+0.01
+[EPISODE]: 144	[AVG. REWARD]: 37.3952	 [ELAPSED TIME]: 0:36:17
+0.01
+[EPISODE]: 145	[AVG. REWARD]: 37.3866	 [ELAPSED TIME]: 0:36:33
+0.01
+[EPISODE]: 146	[AVG. REWARD]: 37.9197	 [ELAPSED TIME]: 0:36:48
+0.01
+[EPISODE]: 147	[AVG. REWARD]: 37.6451	 [ELAPSED TIME]: 0:37:04
+0.01
+[EPISODE]: 148	[AVG. REWARD]: 38.0859	 [ELAPSED TIME]: 0:37:19
+0.01
+[EPISODE]: 149	[AVG. REWARD]: 37.6136	 [ELAPSED TIME]: 0:37:35
+0.01
+[EPISODE]: 150	[AVG. REWARD]: 38.0622	 [ELAPSED TIME]: 0:37:51
+0.01
+[EPISODE]: 151	[AVG. REWARD]: 37.6001	 [ELAPSED TIME]: 0:38:06
+0.01
+[EPISODE]: 152	[AVG. REWARD]: 38.1074	 [ELAPSED TIME]: 0:38:22
+0.01
+[EPISODE]: 153	[AVG. REWARD]: 38.3945	 [ELAPSED TIME]: 0:38:38
+0.01
+[EPISODE]: 154	[AVG. REWARD]: 38.7585	 [ELAPSED TIME]: 0:38:53
+0.01
+[EPISODE]: 155	[AVG. REWARD]: 38.0152	 [ELAPSED TIME]: 0:39:09
+0.01
+[EPISODE]: 156	[AVG. REWARD]: 38.3033	 [ELAPSED TIME]: 0:39:25
+0.01
+[EPISODE]: 157	[AVG. REWARD]: 38.5453	 [ELAPSED TIME]: 0:39:40
+0.01
+[EPISODE]: 158	[AVG. REWARD]: 38.7179	 [ELAPSED TIME]: 0:39:56
+0.01
+[EPISODE]: 159	[AVG. REWARD]: 38.4750	 [ELAPSED TIME]: 0:40:11
+0.01
+[EPISODE]: 160	[AVG. REWARD]: 38.0769	 [ELAPSED TIME]: 0:40:26
+0.01
+[EPISODE]: 161	[AVG. REWARD]: 38.2391	 [ELAPSED TIME]: 0:40:42
+0.01
+[EPISODE]: 162	[AVG. REWARD]: 37.9318	 [ELAPSED TIME]: 0:40:58
+0.01
+[EPISODE]: 163	[AVG. REWARD]: 37.4442	 [ELAPSED TIME]: 0:41:13
+0.01
+[EPISODE]: 164	[AVG. REWARD]: 37.0326	 [ELAPSED TIME]: 0:41:28
+0.01
+[EPISODE]: 165	[AVG. REWARD]: 37.4361	 [ELAPSED TIME]: 0:41:44
+0.01
+[EPISODE]: 166	[AVG. REWARD]: 38.1072	 [ELAPSED TIME]: 0:41:59
+0.01
+[EPISODE]: 167	[AVG. REWARD]: 37.7843	 [ELAPSED TIME]: 0:42:15
+0.01
+[EPISODE]: 168	[AVG. REWARD]: 37.5537	 [ELAPSED TIME]: 0:42:31
+0.01
+[EPISODE]: 169	[AVG. REWARD]: 37.8227	 [ELAPSED TIME]: 0:42:46
+0.01
+[EPISODE]: 170	[AVG. REWARD]: 37.6665	 [ELAPSED TIME]: 0:43:02
+0.01
+[EPISODE]: 171	[AVG. REWARD]: 37.9804	 [ELAPSED TIME]: 0:43:17
+0.01
+[EPISODE]: 172	[AVG. REWARD]: 38.1472	 [ELAPSED TIME]: 0:43:33
+0.01
+[EPISODE]: 173	[AVG. REWARD]: 37.9002	 [ELAPSED TIME]: 0:43:48
+0.01
+[EPISODE]: 174	[AVG. REWARD]: 37.5272	 [ELAPSED TIME]: 0:44:04
+0.01
+[EPISODE]: 175	[AVG. REWARD]: 38.2737	 [ELAPSED TIME]: 0:44:19
+0.01
+[EPISODE]: 176	[AVG. REWARD]: 37.0157	 [ELAPSED TIME]: 0:44:35
+0.01
+[EPISODE]: 177	[AVG. REWARD]: 36.9913	 [ELAPSED TIME]: 0:44:50
+0.01
+[EPISODE]: 178	[AVG. REWARD]: 38.0433	 [ELAPSED TIME]: 0:45:06
+0.01
+[EPISODE]: 179	[AVG. REWARD]: 38.7073	 [ELAPSED TIME]: 0:45:22
+0.01
+[EPISODE]: 180	[AVG. REWARD]: 38.1037	 [ELAPSED TIME]: 0:45:37
+0.01
+[EPISODE]: 181	[AVG. REWARD]: 39.0099	 [ELAPSED TIME]: 0:45:53
+0.01
+[EPISODE]: 182	[AVG. REWARD]: 38.2698	 [ELAPSED TIME]: 0:46:09
+0.01
+[EPISODE]: 183	[AVG. REWARD]: 38.0289	 [ELAPSED TIME]: 0:46:24
+0.01
+[EPISODE]: 184	[AVG. REWARD]: 38.2526	 [ELAPSED TIME]: 0:46:39
+0.01
+[EPISODE]: 185	[AVG. REWARD]: 38.7301	 [ELAPSED TIME]: 0:46:55
+0.01
+[EPISODE]: 186	[AVG. REWARD]: 38.5053	 [ELAPSED TIME]: 0:47:10
+0.01
+[EPISODE]: 187	[AVG. REWARD]: 38.7446	 [ELAPSED TIME]: 0:47:26
+0.01
+[EPISODE]: 188	[AVG. REWARD]: 38.1007	 [ELAPSED TIME]: 0:47:42
+0.01
+[EPISODE]: 189	[AVG. REWARD]: 38.8718	 [ELAPSED TIME]: 0:47:57
+0.01
+[EPISODE]: 190	[AVG. REWARD]: 38.4012	 [ELAPSED TIME]: 0:48:13
+0.01
+[EPISODE]: 191	[AVG. REWARD]: 38.2410	 [ELAPSED TIME]: 0:48:29
+0.01
+[EPISODE]: 192	[AVG. REWARD]: 38.4711	 [ELAPSED TIME]: 0:48:44
+0.01
+[EPISODE]: 193	[AVG. REWARD]: 38.7490	 [ELAPSED TIME]: 0:49:00
+0.01
+[EPISODE]: 194	[AVG. REWARD]: 39.1273	 [ELAPSED TIME]: 0:49:15
+0.01
+[EPISODE]: 195	[AVG. REWARD]: 39.0264	 [ELAPSED TIME]: 0:49:30
+0.01
+[EPISODE]: 196	[AVG. REWARD]: 38.9541	 [ELAPSED TIME]: 0:49:45
+0.01
+[EPISODE]: 197	[AVG. REWARD]: 38.3466	 [ELAPSED TIME]: 0:50:01
+0.01
+[EPISODE]: 198	[AVG. REWARD]: 38.6123	 [ELAPSED TIME]: 0:50:16
+0.01
+[EPISODE]: 199	[AVG. REWARD]: 38.8940	 [ELAPSED TIME]: 0:50:32
+0.01
+[EPISODE]: 200	[AVG. REWARD]: 37.7489	 [ELAPSED TIME]: 0:50:47
+
+Training complete.
+
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy swimmer on Swimmer-v3 environment...
+
+[EPISODE]: 1	[AVG. REWARD]: -0.9615	 [ELAPSED TIME]: 0:00:12
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_blockwise_gradient.py", line 261, in train
+    samples = self.simulator.sample_trajectories()
+  File "/home/bamdad/rl/trpo-pytorch/simulators.py", line 62, in sample_trajectories
+    state, reward, done, info = env.step(action.numpy())
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/gym/wrappers/time_limit.py", line 31, in step
+    observation, reward, done, info = self.env.step(action)
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/gym/envs/mujoco/swimmer_v3.py", line 35, in step
+    self.do_simulation(action, self.frame_skip)
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/gym/envs/mujoco/mujoco_env.py", line 102, in do_simulation
+    self.sim.step()
+  File "mjsim.pyx", line 126, in mujoco_py.cymj.MjSim.step
+  File "cymj.pyx", line 156, in mujoco_py.cymj.wrap_mujoco_warning.__exit__
+  File "cymj.pyx", line 77, in mujoco_py.cymj.c_warning_callback
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/mujoco_py/builder.py", line 368, in user_warning_raise_exception
+    raise MujocoException(warn + 'Check for NaN in simulation.')
+mujoco_py.builder.MujocoException: Unknown warning type Time = 0.0000.Check for NaN in simulation.
+/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/cuda/__init__.py:107: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 101: invalid device ordinal (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:109.)
+  return torch._C._cuda_getDeviceCount() > 0
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : blockwise_ng
+Training policy swimmer on Swimmer-v3 environment...
+
+[EPISODE]: 1	[AVG. REWARD]: -0.6650	 [ELAPSED TIME]: 0:00:12
+[EPISODE]: 2	[AVG. REWARD]: 2.3632	 [ELAPSED TIME]: 0:00:26
+[EPISODE]: 3	[AVG. REWARD]: 2.4272	 [ELAPSED TIME]: 0:00:40
+[EPISODE]: 4	[AVG. REWARD]: 4.2918	 [ELAPSED TIME]: 0:00:54
+[EPISODE]: 5	[AVG. REWARD]: 10.8904	 [ELAPSED TIME]: 0:01:07
+[EPISODE]: 6	[AVG. REWARD]: 12.1587	 [ELAPSED TIME]: 0:01:21
+[EPISODE]: 7	[AVG. REWARD]: 11.7136	 [ELAPSED TIME]: 0:01:35
+[EPISODE]: 8	[AVG. REWARD]: 12.9185	 [ELAPSED TIME]: 0:01:49
+[EPISODE]: 9	[AVG. REWARD]: 17.4588	 [ELAPSED TIME]: 0:02:03
+[EPISODE]: 10	[AVG. REWARD]: 17.5118	 [ELAPSED TIME]: 0:02:17
+[EPISODE]: 11	[AVG. REWARD]: 18.5522	 [ELAPSED TIME]: 0:02:31
+[EPISODE]: 12	[AVG. REWARD]: 20.6674	 [ELAPSED TIME]: 0:02:45
+[EPISODE]: 13	[AVG. REWARD]: 19.7258	 [ELAPSED TIME]: 0:02:59
+[EPISODE]: 14	[AVG. REWARD]: 17.5766	 [ELAPSED TIME]: 0:03:14
+[EPISODE]: 15	[AVG. REWARD]: 19.8095	 [ELAPSED TIME]: 0:03:28
+[EPISODE]: 16	[AVG. REWARD]: 17.8210	 [ELAPSED TIME]: 0:03:43
+[EPISODE]: 17	[AVG. REWARD]: 21.2401	 [ELAPSED TIME]: 0:03:58
+[EPISODE]: 18	[AVG. REWARD]: 20.5392	 [ELAPSED TIME]: 0:04:12
+[EPISODE]: 19	[AVG. REWARD]: 20.1305	 [ELAPSED TIME]: 0:04:42
+[EPISODE]: 20	[AVG. REWARD]: 21.0686	 [ELAPSED TIME]: 0:04:59
+[EPISODE]: 21	[AVG. REWARD]: 21.4250	 [ELAPSED TIME]: 0:05:15
+[EPISODE]: 22	[AVG. REWARD]: 23.7101	 [ELAPSED TIME]: 0:05:30
+[EPISODE]: 23	[AVG. REWARD]: 24.1193	 [ELAPSED TIME]: 0:05:46
+[EPISODE]: 24	[AVG. REWARD]: 26.0040	 [ELAPSED TIME]: 0:06:00
+[EPISODE]: 25	[AVG. REWARD]: 28.0553	 [ELAPSED TIME]: 0:06:16
+[EPISODE]: 26	[AVG. REWARD]: 29.1368	 [ELAPSED TIME]: 0:06:32
+[EPISODE]: 27	[AVG. REWARD]: 31.3954	 [ELAPSED TIME]: 0:06:47
+[EPISODE]: 28	[AVG. REWARD]: 33.4369	 [ELAPSED TIME]: 0:07:02
+[EPISODE]: 29	[AVG. REWARD]: 31.3657	 [ELAPSED TIME]: 0:07:16
+[EPISODE]: 30	[AVG. REWARD]: 27.9142	 [ELAPSED TIME]: 0:07:31
+[EPISODE]: 31	[AVG. REWARD]: 30.3625	 [ELAPSED TIME]: 0:07:46
+[EPISODE]: 32	[AVG. REWARD]: 33.4734	 [ELAPSED TIME]: 0:08:01
+[EPISODE]: 33	[AVG. REWARD]: 31.5441	 [ELAPSED TIME]: 0:08:16
+[EPISODE]: 34	[AVG. REWARD]: 33.4184	 [ELAPSED TIME]: 0:08:30
+[EPISODE]: 35	[AVG. REWARD]: 33.1944	 [ELAPSED TIME]: 0:08:46
+[EPISODE]: 36	[AVG. REWARD]: 30.2852	 [ELAPSED TIME]: 0:09:01
+[EPISODE]: 37	[AVG. REWARD]: 31.8554	 [ELAPSED TIME]: 0:09:17
+[EPISODE]: 38	[AVG. REWARD]: 28.6662	 [ELAPSED TIME]: 0:09:32
+[EPISODE]: 39	[AVG. REWARD]: 30.8162	 [ELAPSED TIME]: 0:09:47
+[EPISODE]: 40	[AVG. REWARD]: 33.9099	 [ELAPSED TIME]: 0:10:02
+[EPISODE]: 41	[AVG. REWARD]: 32.4492	 [ELAPSED TIME]: 0:10:27
+[EPISODE]: 42	[AVG. REWARD]: 31.1953	 [ELAPSED TIME]: 0:10:42
+[EPISODE]: 43	[AVG. REWARD]: 33.8744	 [ELAPSED TIME]: 0:10:57
+[EPISODE]: 44	[AVG. REWARD]: 31.6116	 [ELAPSED TIME]: 0:11:12
+[EPISODE]: 45	[AVG. REWARD]: 34.4123	 [ELAPSED TIME]: 0:11:27
+[EPISODE]: 46	[AVG. REWARD]: 32.7619	 [ELAPSED TIME]: 0:11:43
+[EPISODE]: 47	[AVG. REWARD]: 33.4496	 [ELAPSED TIME]: 0:11:57
+[EPISODE]: 48	[AVG. REWARD]: 32.6445	 [ELAPSED TIME]: 0:12:12
+[EPISODE]: 49	[AVG. REWARD]: 33.9595	 [ELAPSED TIME]: 0:12:28
+[EPISODE]: 50	[AVG. REWARD]: 31.8892	 [ELAPSED TIME]: 0:12:43
+[EPISODE]: 51	[AVG. REWARD]: 34.1612	 [ELAPSED TIME]: 0:13:00
+[EPISODE]: 52	[AVG. REWARD]: 34.7173	 [ELAPSED TIME]: 0:13:17
+[EPISODE]: 53	[AVG. REWARD]: 34.4277	 [ELAPSED TIME]: 0:13:33
+[EPISODE]: 54	[AVG. REWARD]: 35.2249	 [ELAPSED TIME]: 0:13:48
+[EPISODE]: 55	[AVG. REWARD]: 34.4396	 [ELAPSED TIME]: 0:14:03
+[EPISODE]: 56	[AVG. REWARD]: 34.6791	 [ELAPSED TIME]: 0:14:37
+[EPISODE]: 57	[AVG. REWARD]: 33.7327	 [ELAPSED TIME]: 0:15:13
+[EPISODE]: 58	[AVG. REWARD]: 35.5922	 [ELAPSED TIME]: 0:15:52
+[EPISODE]: 59	[AVG. REWARD]: 34.8230	 [ELAPSED TIME]: 0:16:25
+[EPISODE]: 60	[AVG. REWARD]: 35.3596	 [ELAPSED TIME]: 0:17:02
+[EPISODE]: 61	[AVG. REWARD]: 33.5424	 [ELAPSED TIME]: 0:17:35
+[EPISODE]: 62	[AVG. REWARD]: 32.9711	 [ELAPSED TIME]: 0:18:14
+[EPISODE]: 63	[AVG. REWARD]: 35.0752	 [ELAPSED TIME]: 0:18:51
+[EPISODE]: 64	[AVG. REWARD]: 34.9447	 [ELAPSED TIME]: 0:19:31
+[EPISODE]: 65	[AVG. REWARD]: 35.3688	 [ELAPSED TIME]: 0:20:06
+[EPISODE]: 66	[AVG. REWARD]: 35.3865	 [ELAPSED TIME]: 0:20:41
+[EPISODE]: 67	[AVG. REWARD]: 34.4334	 [ELAPSED TIME]: 0:21:18
+[EPISODE]: 68	[AVG. REWARD]: 34.7707	 [ELAPSED TIME]: 0:21:56
+[EPISODE]: 69	[AVG. REWARD]: 34.3284	 [ELAPSED TIME]: 0:22:32
+[EPISODE]: 70	[AVG. REWARD]: 35.8802	 [ELAPSED TIME]: 0:23:09
+[EPISODE]: 71	[AVG. REWARD]: 35.2402	 [ELAPSED TIME]: 0:23:43
+[EPISODE]: 72	[AVG. REWARD]: 35.3018	 [ELAPSED TIME]: 0:24:20
+[EPISODE]: 73	[AVG. REWARD]: 35.2138	 [ELAPSED TIME]: 0:24:55
+[EPISODE]: 74	[AVG. REWARD]: 35.1709	 [ELAPSED TIME]: 0:25:30
+[EPISODE]: 75	[AVG. REWARD]: 34.4627	 [ELAPSED TIME]: 0:26:08
+[EPISODE]: 76	[AVG. REWARD]: 35.2352	 [ELAPSED TIME]: 0:26:42
+[EPISODE]: 77	[AVG. REWARD]: 35.6594	 [ELAPSED TIME]: 0:27:20
+[EPISODE]: 78	[AVG. REWARD]: 34.6422	 [ELAPSED TIME]: 0:28:00
+[EPISODE]: 79	[AVG. REWARD]: 36.1071	 [ELAPSED TIME]: 0:28:40
+[EPISODE]: 80	[AVG. REWARD]: 34.8653	 [ELAPSED TIME]: 0:29:18
+[EPISODE]: 81	[AVG. REWARD]: 36.6254	 [ELAPSED TIME]: 0:29:56
+[EPISODE]: 82	[AVG. REWARD]: 35.6141	 [ELAPSED TIME]: 0:30:36
+[EPISODE]: 83	[AVG. REWARD]: 36.2899	 [ELAPSED TIME]: 0:31:12
+[EPISODE]: 84	[AVG. REWARD]: 35.0475	 [ELAPSED TIME]: 0:31:47
+[EPISODE]: 85	[AVG. REWARD]: 36.5399	 [ELAPSED TIME]: 0:32:24
+[EPISODE]: 86	[AVG. REWARD]: 35.9863	 [ELAPSED TIME]: 0:32:59
+[EPISODE]: 87	[AVG. REWARD]: 36.9337	 [ELAPSED TIME]: 0:33:35
+[EPISODE]: 88	[AVG. REWARD]: 36.1593	 [ELAPSED TIME]: 0:34:15
+[EPISODE]: 89	[AVG. REWARD]: 36.8452	 [ELAPSED TIME]: 0:34:50
+[EPISODE]: 90	[AVG. REWARD]: 36.9483	 [ELAPSED TIME]: 0:35:29
+[EPISODE]: 91	[AVG. REWARD]: 36.9640	 [ELAPSED TIME]: 0:36:04
+[EPISODE]: 92	[AVG. REWARD]: 37.4442	 [ELAPSED TIME]: 0:36:42
+[EPISODE]: 93	[AVG. REWARD]: 36.8871	 [ELAPSED TIME]: 0:37:22
+[EPISODE]: 94	[AVG. REWARD]: 37.1633	 [ELAPSED TIME]: 0:38:02
+[EPISODE]: 95	[AVG. REWARD]: 36.9085	 [ELAPSED TIME]: 0:38:44
+[EPISODE]: 96	[AVG. REWARD]: 37.0336	 [ELAPSED TIME]: 0:39:24
+[EPISODE]: 97	[AVG. REWARD]: 35.6478	 [ELAPSED TIME]: 0:40:02
+[EPISODE]: 98	[AVG. REWARD]: 36.4241	 [ELAPSED TIME]: 0:40:39
+[EPISODE]: 99	[AVG. REWARD]: 35.3297	 [ELAPSED TIME]: 0:41:15
+[EPISODE]: 100	[AVG. REWARD]: 36.8949	 [ELAPSED TIME]: 0:41:51
+[EPISODE]: 101	[AVG. REWARD]: 35.7978	 [ELAPSED TIME]: 0:42:27
+[EPISODE]: 102	[AVG. REWARD]: 35.1374	 [ELAPSED TIME]: 0:43:06
+[EPISODE]: 103	[AVG. REWARD]: 35.4813	 [ELAPSED TIME]: 0:43:45
+[EPISODE]: 104	[AVG. REWARD]: 34.2371	 [ELAPSED TIME]: 0:44:24
+[EPISODE]: 105	[AVG. REWARD]: 33.9277	 [ELAPSED TIME]: 0:45:02
+[EPISODE]: 106	[AVG. REWARD]: 34.8582	 [ELAPSED TIME]: 0:45:36
+[EPISODE]: 107	[AVG. REWARD]: 34.2065	 [ELAPSED TIME]: 0:46:14
+[EPISODE]: 108	[AVG. REWARD]: 35.1367	 [ELAPSED TIME]: 0:46:47
+[EPISODE]: 109	[AVG. REWARD]: 34.2898	 [ELAPSED TIME]: 0:47:20
+[EPISODE]: 110	[AVG. REWARD]: 35.5096	 [ELAPSED TIME]: 0:47:58
+[EPISODE]: 111	[AVG. REWARD]: 34.4616	 [ELAPSED TIME]: 0:48:33
+[EPISODE]: 112	[AVG. REWARD]: 34.5391	 [ELAPSED TIME]: 0:49:07
+[EPISODE]: 113	[AVG. REWARD]: 35.9837	 [ELAPSED TIME]: 0:49:46
+[EPISODE]: 114	[AVG. REWARD]: 35.0003	 [ELAPSED TIME]: 0:50:24
+[EPISODE]: 115	[AVG. REWARD]: 36.6467	 [ELAPSED TIME]: 0:50:59
+[EPISODE]: 116	[AVG. REWARD]: 37.2037	 [ELAPSED TIME]: 0:51:37
+[EPISODE]: 117	[AVG. REWARD]: 36.6668	 [ELAPSED TIME]: 0:52:10
+[EPISODE]: 118	[AVG. REWARD]: 37.1030	 [ELAPSED TIME]: 0:52:46
+[EPISODE]: 119	[AVG. REWARD]: 37.2593	 [ELAPSED TIME]: 0:53:22
+[EPISODE]: 120	[AVG. REWARD]: 37.0856	 [ELAPSED TIME]: 0:53:57
+[EPISODE]: 121	[AVG. REWARD]: 36.9708	 [ELAPSED TIME]: 0:54:26
+[EPISODE]: 122	[AVG. REWARD]: 37.5017	 [ELAPSED TIME]: 0:55:01
+[EPISODE]: 123	[AVG. REWARD]: 37.7964	 [ELAPSED TIME]: 0:55:35
+[EPISODE]: 124	[AVG. REWARD]: 37.4272	 [ELAPSED TIME]: 0:56:07
+[EPISODE]: 125	[AVG. REWARD]: 38.1483	 [ELAPSED TIME]: 0:56:43
+[EPISODE]: 126	[AVG. REWARD]: 37.7157	 [ELAPSED TIME]: 0:57:19
+[EPISODE]: 127	[AVG. REWARD]: 37.2100	 [ELAPSED TIME]: 0:57:53
+[EPISODE]: 128	[AVG. REWARD]: 37.2583	 [ELAPSED TIME]: 0:58:27
+[EPISODE]: 129	[AVG. REWARD]: 37.8879	 [ELAPSED TIME]: 0:59:05
+[EPISODE]: 130	[AVG. REWARD]: 37.6802	 [ELAPSED TIME]: 0:59:45

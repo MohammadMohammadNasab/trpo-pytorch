@@ -412,8 +412,10 @@ class TRPO:
         step_len = self.line_search(search_dir, max_step_len, constraints_satisfied)
 
         opt_step = step_len * search_dir
+        
         apply_update(self.policy, opt_step)
-        self.writer.add_scalar("Max samples damped", max(damped_nums), self.episode_num)
+        self.writer.add_scalar("Policy/MeanLearningRate", step_len, self.episode_num)
+        self.writer.add_scalar("Mean samples damped", np.mean(damped_nums), self.episode_num)
 
     def surrogate_loss(self, log_action_probs, imp_sample_probs, advantages):
         """

@@ -7,7 +7,4 @@ source ~/ocr/parseq/.env/bin/activate
 cd ~/rl/trpo-pytorch
 
 # Run the training script with nohup to keep it running after the terminal is closed
-nohup python train.py --model-name hopper --ver diagonal_fisher --seed 10 &
-
-# Exit the script
-exit
+nohup python train.py --model-name hopper --ver diagonal_fisher --seed 58 & exit
