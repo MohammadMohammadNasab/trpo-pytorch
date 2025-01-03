@@ -422,7 +422,7 @@ class TRPO:
 
             grad_log_probs = torch.cat([
                 grad.view(-1) for grad in torch.autograd.grad(
-                    log_action_probs.sum(), layer_params, retain_graph=True
+                    log_action_probs.mean(), layer_params, retain_graph=True
                 )
             ])
             
