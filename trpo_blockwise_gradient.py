@@ -456,7 +456,7 @@ class TRPO:
                 )
 
             # Revert update if constraint violated
-            if kl_div > self.max_kl_div or new_loss < loss:
+            if kl_div > self.max_kl_div:
                 start_idx = 0
                 for info in params_info:
                     layer_size = sum(info['sizes'])
@@ -469,7 +469,7 @@ class TRPO:
                     layer_natural_grad = layer_natural_grad[size:]
                     start_idx += layer_size
                 
-                scaling_factor *= 0.8
+                scaling_factor *= 0.5
                 scaled_natural_gradient = scaling_factor * full_natural_gradient
             else:
                 success = True
