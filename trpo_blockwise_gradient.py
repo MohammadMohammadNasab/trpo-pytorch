@@ -366,7 +366,28 @@ class TRPO:
     def surrogate_loss(self, log_action_probs, imp_sample_probs, advantages):
         return torch.mean(torch.exp(log_action_probs - imp_sample_probs) * advantages)
 
-    
+    def compute_fim_block(self, states, grad_vector, layer_params):
+        batch_size = states.shape[0]
+        n_params = grad_vector.size(0)
+        fim_block = torch.zeros((n_params, n_params), device=self.device)
+        
+        # Compute KL divergence gradients for each state
+        for i in range(batch_size):
+            state = states[i:i+1]
+            dist = self.policy(state)
+            kl = torch.mean(dist.entropy())
+            
+            # Compute gradient of KL
+            grads = torch.autograd.grad(kl, layer_params, create_graph=True)
+            flat_grad = torch.cat([g.view(-1) for g in grads])
+            
+            # Accumulate FIM
+            fim_block += torch.outer(flat_grad, flat_grad)
+        
+        # Average and add damping
+        fim_block /= batch_size
+        damping = 1e-3 * torch.eye(n_params, device=self.device)
+        return fim_block + damping
     def update_policy(self, states, actions, advantages):
         self.policy.train()
 
@@ -386,7 +407,7 @@ class TRPO:
         layers_info = []
         inv_fim_blocks = []
         grads = []
-
+        mean_kl = mean_kl_first_fixed(action_dists, action_dists)
         # Loop through layers for blockwise updates
         for layer in self.policy.children():
             # Ensure the layer has parameters that require gradients
@@ -397,7 +418,7 @@ class TRPO:
             # Compute gradients for the current layer
             grad_vector = torch.cat([
                 grad.view(-1) for grad in torch.autograd.grad(
-                    loss, layer_params, retain_graph=True
+                    mean_kl, layer_params, retain_graph=True
                 )
             ])
             grads.append(grad_vector)
@@ -423,7 +444,6 @@ class TRPO:
         # Compute natural gradient
         natural_gradient = torch.mv(inv_fim_matrix,grad_vector_concat)
         learning_rate = (2 * self.max_kl_div / (grad_vector_concat @ natural_gradient)).sqrt()
-        print('inital lr :', learning_rate)
         # Update parameters
         # Check KL divergence
         max_updates = 500
@@ -461,7 +481,7 @@ class TRPO:
                 with torch.no_grad():
                     for param, ng in zip(params, torch.split(layer_natural_gradient, [p.numel() for p in params])):
                         param -= learning_rate * ng.view(param.size())
-            learning_rate *= 0.8
+            learning_rate *= 0.6
 
         if not update_successful:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
