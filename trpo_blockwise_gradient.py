@@ -366,35 +366,24 @@ class TRPO:
     def surrogate_loss(self, log_action_probs, imp_sample_probs, advantages):
         return torch.mean(torch.exp(log_action_probs - imp_sample_probs) * advantages)
 
-
+    
     def update_policy(self, states, actions, advantages):
         self.policy.train()
+
+        # Move data to the device
         states = states.to(self.device)
         actions = actions.to(self.device)
         advantages = advantages.to(self.device)
 
-        # Get initial distributions
+        # Compute initial action distributions and log probabilities
         action_dists = self.policy(states)
         log_action_probs = action_dists.log_prob(actions)
-        # Initialize storage
-        blocks_info = []
-        inv_fim_blocks = []
-        layerwise_gradients = []
 
-<<<<<<< HEAD
-        # Compute per-layer quantities
-        for module in self.policy.modules():
-            if not isinstance(module, torch.nn.Linear):
-                continue
-            layer_params = list(module.parameters())
-            layer = module
-            # Loss gradient for this layer
-            g = torch.cat([
-=======
         # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
 
         # Save the current parameters
+        old_params = get_flat_params(self.policy).detach()
         layers_info = []
         # Loop through layers for blockwise updates
         for layer in self.policy.children():
@@ -405,54 +394,25 @@ class TRPO:
 
             # Compute gradients for the current layer
             grad_vector = torch.cat([
->>>>>>> f44f001 (Adjust learning rate scaling in blockwise updates)
                 grad.view(-1) for grad in torch.autograd.grad(
-                    self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages), layer_params, retain_graph=True
+                    loss, layer_params, retain_graph=True, create_graph=False
                 )
             ])
-            
-            layerwise_gradients.append(g)
 
-            grad_log_probs = torch.cat([
-                grad.view(-1) for grad in torch.autograd.grad(
-                    log_action_probs.mean(), layer_params, retain_graph=True
-                )
-            ])
-            
-            # Compute layer's FIM block
-            fim_block = torch.outer(grad_log_probs, grad_log_probs)
-            damping = 1e-3 * torch.eye(fim_block.size(0), device=self.device)
-            fim_block += damping
-            
-            # Compute inverse
+            # Compute FIM block
+            fim_block = torch.ger(grad_vector, grad_vector)
+            damping_factor = 1e-4 * torch.eye(fim_block.size(0), device=self.device)
+            fim_block = fim_block + damping_factor  # Add damping
+
+            # Compute inverse FIM block and natural gradient
             inv_fim_block = torch.linalg.inv(fim_block)
-            nat_grad = inv_fim_block @ g
-            inv_fim_blocks.append(inv_fim_block)
-            blocks_info.append({
-                'nat_grad': nat_grad,
-                'inv_fim': inv_fim_block,
-                'loss_grad': g,
-                'layer': layer,
+            natural_gradient = inv_fim_block @ grad_vector
+            learning_rate = ((2 * self.max_kl_div) / (grad_vector @ natural_gradient)).sqrt()
+            layers_info.append({
+                'params': layer_params,
+                'natural_gradient': natural_gradient,
+                'learning_rate': learning_rate,
             })
-<<<<<<< HEAD
-        # Line search
-        #make full matrix of inverse fim
-        inv_fim = torch.block_diag(*inv_fim_blocks)
-        #make full matrix of layerwise gradients
-        layerwise_grads = torch.cat(layerwise_gradients)
-        #make full matrix of natural gradients
-        natural_grad = inv_fim @ layerwise_grads
-        #comput max step size with natural grad and layerwise grads
-        max_step = torch.sqrt(2 * self.max_kl_div / (layerwise_grads @ natural_grad + 1e-8))
-        success = self.line_search(blocks_info, max_step, states, action_dists)
-        if success:
-            new_dists = self.policy(states)
-            actions = new_dists.sample()
-            new_log_action_probs = new_dists.log_prob(actions)
-            loss = self.surrogate_loss(new_log_action_probs, log_action_probs.detach(), advantages)
-            self.writer.add_scalar("Policy/Loss", loss.item(), self.episode_num)
-        return success
-=======
 
         # Update parameters
         # Check KL divergence
@@ -470,7 +430,7 @@ class TRPO:
                 break
             self.layerwise_update(layers_info=layers_info, revert=True)
             for layer_info in layers_info:
-                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.7
+                layer_info['learning_rate'] = layer_info['learning_rate'] * 0.4
         if not flag:
             self.writer.add_scalar("Policy/MeanLearningRate", 0, self.episode_num)
         self.writer.add_scalar("Policy/MeanKL", kl_div, self.episode_num)
@@ -489,7 +449,6 @@ class TRPO:
                 
                 for param, ng in zip(params, torch.split(natural_gradient, [p.numel() for p in params])):
                     param += learning_rate * ng.view(param.size())
->>>>>>> f44f001 (Adjust learning rate scaling in blockwise updates)
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
@@ -506,30 +465,10 @@ class TRPO:
             ckpt['state_filter'] = self.simulator.state_filter
 
         torch.save(ckpt, save_path)
-    def line_search(self, blocks_info, max_step, states, old_dists):
-        """Perform line search for best step size"""
-        step_size = max_step
-        for _ in range(10):
-            proposed_steps = []
-            for i, block_info in enumerate(blocks_info):
-                proposed_step = step_size * block_info['nat_grad']
-                proposed_steps.append(proposed_step)
-                apply_update(block_info['layer'], proposed_step)
-            
-            # Check KL constraint
-            new_dists = self.policy(states)
-            kl_div = mean_kl_first_fixed(old_dists, new_dists)
-            
-            if kl_div <= self.max_kl_div:
-                self.writer.add_scalar("Policy/MeanKL", kl_div.item(), self.episode_num)
-                self.writer.add_scalar("Policy/MeanLearningRate", step_size, self.episode_num)
-                return True
-            
-            for i, block_info in enumerate(blocks_info):
-                apply_update(block_info['layer'], -proposed_steps[i])  # Revert update
-            step_size *= self.line_search_coef
-            
-        return False
+
+        # Log checkpoint
+        self.writer.add_scalar("Checkpoint/Episode", self.episode_num, self.episode_num)
+
     def load_session(self):
         load_path = os.path.join(self.save_dir, self.model_name + '.pt')
         ckpt = torch.load(load_path)
@@ -550,3 +489,4 @@ class TRPO:
         elapsed_time_str = ''.join(str(self.elapsed_time).split('.')[0])
         format_args = (self.episode_num, self.mean_rewards[-1], elapsed_time_str)
         print(update_message.format(*format_args))
+        self.writer.flush()
