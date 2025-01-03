@@ -449,7 +449,7 @@ class TRPO:
 
         # Line search
         success = False
-        for beta in [step_size * (0.8 ** i) for i in range(10)]:
+        for beta in [step_size * (0.8 ** i) for i in range(100)]:
             # Try update
             start_idx = 0
             for block in blocks_info:
