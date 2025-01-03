@@ -53,10 +53,10 @@ class DiagGaussianLayer(Module):
             self.log_std = Parameter(torch.zeros(output_dim), requires_grad=True)
 
     def __call__(self, mean):
-        std = torch.exp(self.log_std)
-        std = torch.clamp(std, min=1e-6)  # Ensure std is positive and non-zero
+        # Improved numerical stability
+        std = torch.exp(torch.clamp(self.log_std, min=-20, max=2))
+        std = torch.clamp(std, min=1e-6, max=10.0)
         normal_dist = Independent(Normal(loc=mean, scale=std), 1)
-
         return normal_dist
 
 
