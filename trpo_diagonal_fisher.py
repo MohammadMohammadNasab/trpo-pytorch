@@ -363,7 +363,6 @@ class TRPO:
             self.writer.add_scalar("ValueFunction/Loss", mse().item(), self.episode_num)
     def surrogate_loss(self, log_action_probs, imp_sample_probs, advantages):
         return torch.mean(torch.exp(log_action_probs - imp_sample_probs) * advantages)
-
     def update_policy(self, states, actions, advantages):
         self.policy.train()
 
@@ -371,67 +370,56 @@ class TRPO:
         actions = actions.to(self.device)
         advantages = advantages.to(self.device)
 
-        # Compute action distributions and log probabilities
+        # Get action distributions and log probabilities
         action_dists = self.policy(states)
         log_action_probs = action_dists.log_prob(actions)
 
-        # Compute surrogate loss and gradient
+        # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
-        
-        # Compute flattened gradients of the loss
         loss_grad = flat_grad(loss, self.policy.parameters(), retain_graph=True)
-        # Compute Fisher diagonal approximation using squared loss gradients
-        fisher_diag = loss_grad**2 + self.cg_damping
 
-        # Compute natural gradient using diagonal Fisher approximation
-        natural_gradient = loss_grad / fisher_diag
-        # Scale the natural gradient to satisfy the KL constraint
-        predicted_kl = 0.5 * torch.sum(loss_grad * natural_gradient)
-        scaling_factor = torch.sqrt(2 * self.max_kl_div / predicted_kl)
-        # Perform line search to adaptively scale the natural gradient
-        def line_search(policy, states, natural_gradient, max_kl_div, max_iterations=10):
-            step_size = scaling_factor # Start with a max proposed step_size
-            min_step_size = 1e-5
-            increase_factor = 1.1
-            decrease_factor = 0.9
-            iteration = max_iterations
-            while step_size >= min_step_size:
-                iteration-=1
-                apply_update(policy, step_size * natural_gradient)
-                with torch.no_grad():
-                    new_action_dists = policy(states)
-                    new_action_log_probs = new_action_dists.log_prob(actions)
-                    actual_kl = mean_kl_first_fixed(action_dists, new_action_dists)
-                    new_loss = self.surrogate_loss(new_action_log_probs, log_action_probs, advantages)
-                    loss_improvement = (new_loss - loss).item()
-                apply_update(policy, -step_size * natural_gradient)  # Revert update
-                if actual_kl <= max_kl_div:
-                    print('kl less')
-                    # If KL is too small, try increasing the step size
-                    if actual_kl < max_kl_div * 0.1:
-                        print('so much low kl')
-                        step_size *= increase_factor
-                        continue
-                    if loss_improvement > 0:
-                        return step_size  # Return the step size if KL is within bounds
-                    else:
-                        print('no loss improvemnt ')
-                step_size *= decrease_factor  # Reduce step size if KL exceeds max
-            return 0.0  # No acceptable step size found
-
-        # Use line search to find the optimal scaling factor
-        scaling_factor = line_search(self.policy, states, natural_gradient, self.max_kl_div)
-        print(f'scaling factor: {scaling_factor}')
-        natural_gradient_scaled = scaling_factor * natural_gradient
-
-        # Apply the scaled natural gradient update to the policy
-        apply_update(self.policy, natural_gradient_scaled)
-
-        # Log the KL divergence
+        # Compute diagonal Fisher Information Matrix (FIM)
         with torch.no_grad():
-            new_action_dists = self.policy(states)
-            actual_kl = mean_kl_first_fixed(action_dists, new_action_dists)
-            self.writer.add_scalar("Policy/ActualKL", actual_kl.item(), self.episode_num)
+            # Compute gradient of log probabilities
+            log_prob_grads = torch.autograd.grad(log_action_probs.sum(), self.policy.parameters(), retain_graph=True)
+            log_prob_grads = torch.cat([g.view(-1) for g in log_prob_grads])  # Flatten gradients
+
+            # Compute diagonal FIM: F_ii = E[ (d log π / d θ_i)^2 ]
+            F_diagonal = torch.square(log_prob_grads).mean(dim=0)  # Mean over samples
+
+        # Compute update direction using diagonal FIM approximation
+        update_direction = loss_grad / (F_diagonal + 1e-8)  # Add small epsilon for numerical stability
+
+        # Scale update direction to enforce KL constraint
+        def constraints_satisfied(step, beta):
+            apply_update(self.policy, step)
+
+            with torch.no_grad():
+                new_action_dists = self.policy(states)
+                new_log_action_probs = new_action_dists.log_prob(actions)
+
+                new_loss = self.surrogate_loss(new_log_action_probs, log_action_probs, advantages)
+
+                mean_kl = mean_kl_first_fixed(action_dists, new_action_dists)
+                self.writer.add_scalar("Policy/MeanKL", mean_kl.item(), self.episode_num)
+
+            actual_improvement = new_loss - loss
+            improvement_ratio = actual_improvement / (torch.dot(loss_grad, step) * beta)
+
+            apply_update(self.policy, -step)
+
+            surrogate_cond = improvement_ratio >= self.line_search_accept_ratio and actual_improvement > 0.0
+            kl_cond = mean_kl <= self.max_kl_div
+
+            return surrogate_cond and kl_cond
+
+        # Compute maximum step length based on KL constraint
+        max_step_len = torch.sqrt(2 * self.max_kl_div / torch.dot(update_direction, F_diagonal * update_direction))
+        step_len = self.line_search(update_direction, max_step_len, constraints_satisfied)
+
+        # Apply the final update
+        opt_step = step_len * update_direction
+        apply_update(self.policy, opt_step)
     def save_session(self):
         if not os.path.exists(self.save_dir):
             os.mkdir(self.save_dir)
