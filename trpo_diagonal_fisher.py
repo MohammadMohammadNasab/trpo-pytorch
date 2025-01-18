@@ -374,14 +374,21 @@ class TRPO:
         action_dists = self.policy(states)
         log_action_probs = action_dists.log_prob(actions)
 
+        # Filter parameters that require gradients
+        params = [p for p in self.policy.parameters() if p.requires_grad]
+
+        # Check if there are any parameters that require gradients
+        if not params:
+            raise RuntimeError("No parameters require gradients. Check your model architecture.")
+
         # Compute surrogate loss
         loss = self.surrogate_loss(log_action_probs, log_action_probs.detach(), advantages)
-        loss_grad = flat_grad(loss, self.policy.parameters(), retain_graph=True)
+        loss_grad = flat_grad(loss, params, retain_graph=True)  # Only pass parameters that require gradients
 
-        # Compute diagonal Fisher Information Matrix (FIM)
+        # Compute diagonal Fisher Information Matrix (FIM) for parameters that require gradients
         with torch.no_grad():
-            # Compute gradient of log probabilities
-            log_prob_grads = torch.autograd.grad(log_action_probs.sum(), self.policy.parameters(), retain_graph=True)
+            # Compute gradient of log probabilities for parameters that require gradients
+            log_prob_grads = torch.autograd.grad(log_action_probs.sum(), params, retain_graph=True)
             log_prob_grads = torch.cat([g.view(-1) for g in log_prob_grads])  # Flatten gradients
 
             # Compute diagonal FIM: F_ii = E[ (d log π / d θ_i)^2 ]

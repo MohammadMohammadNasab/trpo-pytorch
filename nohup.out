@@ -416,3 +416,18 @@ Traceback (most recent call last):
   File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 303, in grad
     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
 RuntimeError: Trying to backward through the graph a second time (or directly access saved tensors after they have already been freed). Saved intermediate values of the graph are freed when you call .backward() or autograd.grad(). Specify retain_graph=True if you need to backward through the graph a second time or if you need to access saved tensors after calling backward.
+/home/bamdad/rl/trpo-pytorch/simulators.py:54: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  policy_input = torch.stack([torch.tensor(trajectory['states'][-1]).to(self.device)
+Version is : diagonal_fisher
+Training policy hopper on Hopper-v3 environment...
+
+Traceback (most recent call last):
+  File "/home/bamdad/rl/trpo-pytorch/train.py", line 165, in <module>
+    trpo.train(config['n_episodes'])
+  File "/home/bamdad/rl/trpo-pytorch/trpo_diagonal_fisher.py", line 266, in train
+    self.update_policy(states, actions, advantages)
+  File "/home/bamdad/rl/trpo-pytorch/trpo_diagonal_fisher.py", line 384, in update_policy
+    log_prob_grads = torch.autograd.grad(log_action_probs.sum(), self.policy.parameters(), retain_graph=True)
+  File "/home/bamdad/ocr/parseq/.env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 303, in grad
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn
